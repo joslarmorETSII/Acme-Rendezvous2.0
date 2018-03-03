@@ -1,6 +1,7 @@
 package domain;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -23,13 +24,16 @@ public class Manager extends Actor {
 
     private  String vat;
 
-    public String getVat() {
-        return vat;
-    }
 
     @Column(unique = true)
     @NotBlank
     @Pattern(regexp = "^(\\d{3})\\-([A-Z]{3})$")
+    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+    public String getVat() {
+        return vat;
+    }
+
+
     public void setVat(String vat) {
         this.vat = vat;
     }
