@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles_es.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+      
+<tiles-definitions>
+
+	<definition name="rendezvous/edit" extends="master.page">
+		<put-attribute name="title" value="Editar una cita" />
+		<put-attribute name="body" value="/views/rendezvous/edit.jsp" />
+	</definition>
+
+	<definition name="rendezvous/display" extends="master.page">
+		<put-attribute name="title" value="Mostrar rendezvous" />
+		<put-attribute name="body" value="/views/rendezvous/display.jsp" />
+	</definition>
+
+	<definition name="rendezvous/list" extends="master.page">
+		<put-attribute name="title" value="Listar citas" />
+		<put-attribute name="body" value="/views/rendezvous/list.jsp" />
+	</definition>
+
+	<definition name="rendezvous/answerQuestion" extends="master.page">
+		<put-attribute name="title" value="Responde las preguntas" />
+		<put-attribute name="body" value="/views/rendezvous/answerQuestion.jsp" />
+	</definition>
+
+	<definition name="rendezvous/listAll" extends="master.page">
+		<put-attribute name="title" value="Lista de rendezvous" />
+		<put-attribute name="body" value="/views/rendezvous/listAll.jsp" />
+	</definition>
+
+	<definition name="rendezvous/associate" extends="master.page">
+		<put-attribute name="title" value="Lista de rendezvous" />
+		<put-attribute name="body" value="/views/rendezvous/associate.jsp" />
+	</definition>
+
+
+	<definition name="rendezvous/participated" extends="master.page">
+		<put-attribute name="title" value="Respuestas de las preguntas del Rendezvous" />
+		<put-attribute name="body" value="/views/rendezvous/participated.jsp" />
+	</definition>
+</tiles-definitions>

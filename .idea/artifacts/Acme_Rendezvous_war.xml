@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Acme-Rendezvous:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="Acme-Rendezvous2.0-1.13.war">
+      <element id="artifact" artifact-name="Acme-Rendezvous:war exploded" />
+    </root>
+  </artifact>
+</component>
