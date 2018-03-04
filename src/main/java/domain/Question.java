@@ -20,12 +20,12 @@ public class Question extends DomainEntity {
     }
 
 
-    // Attributes -------------------------------------------------------------
+    // Constructors -----------------------------------------------------------
 
     private String text;
 
-    @SafeHtml
     @NotBlank
+    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getText() {
         return text;
     }
@@ -34,7 +34,7 @@ public class Question extends DomainEntity {
         this.text = text;
     }
 
-// Relationships ----------------------------------------------------------
+    // Constructors -----------------------------------------------------------
 
     private Collection<Answer> answers;
     private Rendezvous rendezvous;

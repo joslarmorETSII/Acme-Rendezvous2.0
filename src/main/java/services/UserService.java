@@ -57,6 +57,7 @@ public class UserService {
         result.setRendezvouses(new ArrayList<Rendezvous>());
         result.setAnswers(new ArrayList<Answer>());
         result.setUserAccount(this.userAccountService.create("USER"));
+        result.setRequests(new ArrayList<Request>());
 
         return result;
     }

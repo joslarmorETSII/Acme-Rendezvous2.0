@@ -42,6 +42,7 @@ public class User extends Actor {
     private Collection<Participate> participates;
     private Collection<Rendezvous> rendezvouses;
     private Collection<Answer> answers;
+    private Collection<Request> requests;
 
     @Valid
     @NotNull
@@ -82,5 +83,16 @@ public class User extends Actor {
 
     public void setRendezvouses(Collection<Rendezvous> rendezvouses) {
         this.rendezvouses = rendezvouses;
+    }
+
+    @Valid
+    @NotNull
+    @OneToMany
+    public Collection<Request> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(Collection<Request> requests) {
+        this.requests = requests;
     }
 }
