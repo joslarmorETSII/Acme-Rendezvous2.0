@@ -35,6 +35,8 @@
 		<bean class="converters.AdministratorToStringConverter"/>
 		<bean class="converters.ActorToStringConverter"/>
 		<bean class="converters.UserAccountToStringConverter"/>
+		<bean class="converters.RequestToStringConverter"/>
+
 
 		<bean class="converters.StringToAnswerConverter"/>
 		<bean class="converters.StringToCommentConverter"/>
@@ -48,6 +50,8 @@
 		<bean class="converters.StringToAdministratorConverter"/>
 		<bean class="converters.StringToActorConverter"/>
 		<bean class="converters.StringToUserAccountConverter"/>
+		<bean class="converters.StringToRequestConverter"/>
+
 
 	</util:list>
 	

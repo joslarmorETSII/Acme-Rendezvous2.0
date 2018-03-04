@@ -1,25 +1,24 @@
 package converters;
 
-import domain.Question;
+import domain.Request;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import repositories.QuestionRepository;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
+import repositories.RequestRepository;
 
 @Component
 @Transactional
-public class StringToQuestionConverter implements Converter<String,Question> {
+public class StringToRequestConverter implements Converter<String, Request> {
 
     @Autowired
-    private QuestionRepository questionRepository;
+    private RequestRepository requestRepository;
 
 
     @Override
-    public Question convert(final String text) {
-        Question result;
+    public Request convert(final String text) {
+        Request result;
         int id;
 
         try {
@@ -27,7 +26,7 @@ public class StringToQuestionConverter implements Converter<String,Question> {
                 result = null;
             else {
                 id = Integer.valueOf(text);
-                result = questionRepository.findOne(id);
+                result = requestRepository.findOne(id);
             }
         } catch (final Throwable oops) {
             throw new IllegalArgumentException(oops);
