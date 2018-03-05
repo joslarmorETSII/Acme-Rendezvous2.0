@@ -54,6 +54,29 @@
         </property>
     </bean>
 
+    <bean id="userAccount4" class="security.UserAccount">
+        <property name="username" value="manager1"/>
+        <property name="password" value="c240642ddef994358c96da82c0361a58"/>
+        <property name="authorities">
+            <list>
+                <bean class="security.Authority">
+                    <property name="authority" value="MANAGER"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+    <bean id="userAccount5" class="security.UserAccount">
+        <property name="username" value="manager2"/>
+        <property name="password" value="8df5127cd164b5bc2d2b78410a7eea0c"/>
+        <property name="authorities">
+            <list>
+                <bean class="security.Authority">
+                    <property name="authority" value="MANAGER"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
     <!-- Admins -->
 
     <bean id="admin1" class="domain.Administrator">
@@ -85,7 +108,7 @@
                 <null/>
             </list>
         </property>
-        <property name="Participates">
+        <property name="participates">
             <list>
                 <null/>
             </list>
@@ -94,6 +117,11 @@
             <list>
                 <ref bean="answer1"/>
                 <ref bean="answer2"/>
+            </list>
+        </property>
+        <property name="requests">
+            <list>
+                <null/>
             </list>
         </property>
     </bean>
@@ -121,12 +149,48 @@
 
             </list>
         </property>
-        <property name="Participates">
+        <property name="participates">
             <list>
                 <ref bean="participate1"/>
             </list>
         </property>
         <property name="answers">
+            <list>
+                <null/>
+            </list>
+        </property>
+        <property name="requests">
+            <list>
+                <null/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Managers -->
+    <bean id="manager1" class="domain.Manager">
+        <property name="name" value="manager1"/>
+        <property name="surname" value="manager1"/>
+        <property name="email" value="manager1@acme.com"/>
+        <property name="phone" value="+34 666666666"/>
+        <property name="postalAddresses" value="C\ Reina Mercerdez N11"/>
+        <property name="userAccount" ref="userAccount4"/>
+        <property name="vat" value="222-BBB"/>
+        <property name="services">
+            <list>
+                <null/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="manager2" class="domain.Manager">
+        <property name="name" value="manager2"/>
+        <property name="surname" value="manager2"/>
+        <property name="email" value="manager2@acme.com"/>
+        <property name="phone" value="+34 666666666"/>
+        <property name="postalAddresses" value="C\ Reina Mercerdez N11"/>
+        <property name="userAccount" ref="userAccount5"/>
+        <property name="vat" value="111-AAA"/>
+        <property name="services">
             <list>
                 <null/>
             </list>
