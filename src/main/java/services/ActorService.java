@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import repositories.ActorRepository;
+import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 
@@ -75,6 +76,43 @@ public class ActorService {
         result = this.actorRepository.findByUserAccountId(userAccountId);
         return result;
     }
+
+    public boolean checkRole(final String role) {
+        boolean result;
+        Collection<Authority> authorities;
+
+        result = false;
+        authorities = LoginService.getPrincipal().getAuthorities();
+        for (final Authority a : authorities)
+            result = result || a.getAuthority().equals(role);
+
+        return result;
+    }
+
+    public boolean isAdministrator() {
+        boolean result;
+
+        result = this.checkRole(Authority.ADMIN);
+
+        return result;
+    }
+
+    public boolean isManager() {
+        boolean result;
+
+        result = this.checkRole(Authority.MANAGER);
+
+        return result;
+    }
+
+    public boolean isUser() {
+        boolean result;
+
+        result = this.checkRole(Authority.USER);
+
+        return result;
+    }
+
 
 
 
