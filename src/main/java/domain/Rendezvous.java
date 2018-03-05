@@ -115,6 +115,7 @@ public class Rendezvous extends DomainEntity{
     private Collection<Comment> comments;
     private Collection<Question> questions;
     private Collection<Rendezvous> parentRendezvous;
+    private Servise servise;
 
     @Valid
     @NotNull
@@ -184,6 +185,7 @@ public class Rendezvous extends DomainEntity{
     }
 
     @Valid
+    @NotNull
     @ManyToMany
     public Collection<Rendezvous> getParentRendezvous() {
         return parentRendezvous;
@@ -191,5 +193,15 @@ public class Rendezvous extends DomainEntity{
 
     public void setParentRendezvous(Collection<Rendezvous> parentRendezvous) {
         this.parentRendezvous = parentRendezvous;
+    }
+
+    @Valid
+    @ManyToOne(optional = true)
+    public Servise getServise() {
+        return servise;
+    }
+
+    public void setServise(Servise servise) {
+        this.servise = servise;
     }
 }

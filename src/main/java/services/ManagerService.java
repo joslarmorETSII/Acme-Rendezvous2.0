@@ -1,11 +1,7 @@
 package services;
 
-import domain.Answer;
-import domain.Manager;
-import domain.Participate;
-import domain.Rendezvous;
+import domain.*;
 import forms.ManagerForm;
-import forms.UserForm;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -14,7 +10,6 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import repositories.ManagerRepository;
-import repositories.UserRepository;
 import security.LoginService;
 import security.UserAccount;
 
@@ -56,7 +51,7 @@ public class ManagerService {
 
         final String vat = this.generateVat();
         result.setVat(vat);
-        result.setServices(new ArrayList<domain.Service>());
+        result.setServices(new ArrayList<Servise>());
         result.setUserAccount(this.userAccountService.create("MANAGER"));
         return result;
     }

@@ -2,7 +2,6 @@ package domain;
 
 
 import org.hibernate.validator.constraints.SafeHtml;
-import org.springframework.util.Assert;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -49,15 +48,15 @@ public class Request extends DomainEntity{
 
     // Relationships -----------------------------------------------------------
 
-    private Service service;
+    private Servise service;
 
 
     @ManyToOne(optional = false)
-    public Service getService() {
+    public Servise getService() {
         return service;
     }
 
-    public void setService(Service service) {
+    public void setService(Servise service) {
         this.service = service;
     }
 

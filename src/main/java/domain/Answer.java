@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Answer extends DomainEntity {
+public class  Answer extends DomainEntity {
 
     // Constructors -----------------------------------------------------------
 
