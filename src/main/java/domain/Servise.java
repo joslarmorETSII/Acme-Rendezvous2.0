@@ -25,7 +25,7 @@ public class Servise extends DomainEntity {
     private String description;
     private String picture;
     private boolean assigned;
-    private boolean appropiate;
+    private boolean inappropriate;
 
 
     @NotBlank
@@ -67,12 +67,12 @@ public class Servise extends DomainEntity {
     }
 
     @NotNull
-    public boolean getAppropiate() {
-        return appropiate;
+    public boolean getInappropriate() {
+        return inappropriate;
     }
 
-    public void setAppropiate(boolean appropiate) {
-        this.appropiate = appropiate;
+    public void setInappropriate(boolean inappropriate) {
+        this.inappropriate = inappropriate;
     }
 
     // Relationships ----------------------------------------------------------

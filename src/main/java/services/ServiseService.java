@@ -47,7 +47,7 @@ public class ServiseService {
         Manager manager = this.managerService.findByPrincipal();
         Collection<Rendezvous> rendezvouses = new ArrayList<Rendezvous>();
 
-        result.setAppropiate(false);
+        result.setInappropriate(false);
         result.setAssigned(false);
         result.setManager(manager);
         result.setRendezvouses(rendezvouses);
@@ -67,10 +67,13 @@ public class ServiseService {
         Assert.isTrue(this.actorService.isManager());
         Assert.notNull(servise);
 
-        manager = managerService.findByPrincipal();
-        result =serviseRepository.save(servise);
-        manager.getServices().add(result);
-        managerService.save(manager);
+        if(servise.getId()==0) {
+            manager = managerService.findByPrincipal();
+            result = serviseRepository.save(servise);
+            manager.getServices().add(result);
+            managerService.save(manager);
+        }
+        result = this.serviseRepository.save(servise);
 
         return result;
     }
@@ -95,6 +98,16 @@ public class ServiseService {
         Servise res = this.serviseRepository.findOne(serviseId);
         Assert.isTrue(this.actorService.isManager());
         return res;
+    }
+
+    public void inappropriateDontRequest(final int serviseId){
+
+        Servise servise;
+
+        servise = this.serviseRepository.findOne(serviseId);
+        servise.setInappropriate(true);
+        this.serviseRepository.save(servise);
+
     }
 
 }
