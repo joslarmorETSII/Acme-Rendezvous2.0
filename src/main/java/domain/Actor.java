@@ -82,6 +82,7 @@ public abstract class Actor extends DomainEntity {
     // Relationships ----------------------------------------------------------
 
     private UserAccount userAccount;
+    private CreditCard creditCard;
 
     @NotNull
     @OneToOne(cascade = CascadeType.ALL, optional = false)
@@ -93,4 +94,12 @@ public abstract class Actor extends DomainEntity {
         this.userAccount = userAccount;
     }
 
+    @OneToOne(optional = true)
+    public CreditCard getCreditCard() {
+        return creditCard;
+    }
+
+    public void setCreditCard(CreditCard creditCard) {
+        this.creditCard = creditCard;
+    }
 }

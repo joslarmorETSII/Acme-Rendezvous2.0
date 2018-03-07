@@ -119,11 +119,6 @@
                 <ref bean="answer2"/>
             </list>
         </property>
-        <property name="requests">
-            <list>
-                <null/>
-            </list>
-        </property>
     </bean>
 
     <bean id="user2" class="domain.User">
@@ -159,11 +154,7 @@
                 <null/>
             </list>
         </property>
-        <property name="requests">
-            <list>
-                <null/>
-            </list>
-        </property>
+
     </bean>
 
     <!-- Managers -->
@@ -177,7 +168,7 @@
         <property name="vat" value="222-BBB"/>
         <property name="services">
             <list>
-                <null/>
+                <ref bean="servise1"/>
             </list>
         </property>
     </bean>
@@ -236,6 +227,11 @@
             </list>
         </property>
         <property name="creator" ref="user1"/>
+        <property name="parentRendezvous" >
+            <list>
+                <null/>
+            </list>
+        </property>
 
     </bean>
 
@@ -277,6 +273,11 @@
             </list>
         </property>
         <property name="creator" ref="user1"/>
+        <property name="parentRendezvous" >
+            <list>
+                <null/>
+            </list>
+        </property>
     </bean>
 
 
@@ -316,6 +317,11 @@
             </list>
         </property>
         <property name="creator" ref="user2"/>
+        <property name="parentRendezvous" >
+            <list>
+                <null/>
+            </list>
+        </property>
     </bean>
 
     <!-- Announcements -->
@@ -590,6 +596,20 @@
     <bean id="gpsCoordinates2" class="domain.GPSCoordinates">
         <property name="longitude" value="74.15000"/>
         <property name="latitude" value="68.40000"/>
+    </bean>
+
+    <bean id="servise1" class="domain.Servise">
+        <property name="name" value="Servise1"/>
+        <property name="description" value="Description1"/>
+        <property name="picture" value="http://www.foto-acme.com"/>
+        <property name="rendezvouses">
+            <list>
+                <null/>
+            </list>
+        </property>
+        <property name="manager" ref="manager1"/>
+        <property name="assigned" value="false"/>
+        <property name="inappropriate" value="false"/>
     </bean>
 
 

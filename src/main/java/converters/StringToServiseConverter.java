@@ -1,24 +1,24 @@
 package converters;
 
-import domain.Requestt;
+import domain.Servise;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
-import repositories.RequesttRepository;
+import repositories.ServiseRepository;
+
+import javax.transaction.Transactional;
 
 @Component
 @Transactional
-public class StringToRequestConverter implements Converter<String, Requestt> {
+public class StringToServiseConverter implements Converter<String, Servise> {
 
     @Autowired
-    private RequesttRepository requestRepository;
-
+    private ServiseRepository serviseRepository;
 
     @Override
-    public Requestt convert(final String text) {
-        Requestt result;
+    public Servise convert(final String text) {
+        Servise result;
         int id;
 
         try {
@@ -26,7 +26,7 @@ public class StringToRequestConverter implements Converter<String, Requestt> {
                 result = null;
             else {
                 id = Integer.valueOf(text);
-                result = requestRepository.findOne(id);
+                result = serviseRepository.findOne(id);
             }
         } catch (final Throwable oops) {
             throw new IllegalArgumentException(oops);

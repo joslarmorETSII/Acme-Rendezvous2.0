@@ -36,6 +36,8 @@
 		<bean class="converters.ActorToStringConverter"/>
 		<bean class="converters.UserAccountToStringConverter"/>
 		<bean class="converters.RequestToStringConverter"/>
+		<bean class="converters.ServiseToStringConverter"/>
+
 
 
 		<bean class="converters.StringToAnswerConverter"/>
@@ -51,6 +53,8 @@
 		<bean class="converters.StringToActorConverter"/>
 		<bean class="converters.StringToUserAccountConverter"/>
 		<bean class="converters.StringToRequestConverter"/>
+		<bean class="converters.StringToServiseConverter"/>
+
 
 
 	</util:list>

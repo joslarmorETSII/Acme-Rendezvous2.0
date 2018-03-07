@@ -14,7 +14,6 @@ import security.LoginService;
 import security.UserAccount;
 
 import javax.transaction.Transactional;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -57,7 +56,6 @@ public class UserService {
         result.setRendezvouses(new ArrayList<Rendezvous>());
         result.setAnswers(new ArrayList<Answer>());
         result.setUserAccount(this.userAccountService.create("USER"));
-        result.setRequests(new ArrayList<Request>());
 
         return result;
     }

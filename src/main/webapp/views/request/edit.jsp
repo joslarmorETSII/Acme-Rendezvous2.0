@@ -18,34 +18,35 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 
-<form:form action="request/user/edit.do" modelAttribute="request">
+<form:form action="requestt/user/edit.do" modelAttribute="requestt">
 
     <form:hidden path="id"/>
     <form:hidden path="version"/>
-    <form:hidden path="user"/>
 
 
-    <acme:select path="services" code="request.service" items="${serviceCollection}" itemLabel="name"/>
-    <acme:textarea path="comment" code="request.comment"/>
+    <acme:select path="servise" code="requestt.servise" items="${servises}" itemLabel="name"/>
+    <acme:select path="rendezvous" code="requestt.rendezvous" items="${userRendezvous}" itemLabel="name"/>
+
+    <acme:textarea path="comment" code="requestt.comment"/>
 
     <fieldset>
         <legend><b><spring:message code="creditCard.legend" var="legend"/><jstl:out value="${legend}"/>
             :&nbsp;</b></legend>
 
-        <acme:textbox path="creditCard.holder" code="creditCard.holder"/>
-        <acme:textbox path="creditCard.brand" code="creditCard.brand"/>
-        <acme:textbox path="creditCard.number" code="creditCard.number"/>
-        <acme:textbox path="creditCard.expirationMonth" code="creditCard.expirationMonth" placeHolder="XX"/>
-        <acme:textbox path="creditCard.expirationYear" code="creditCard.expirationYear" placeHolder=""/>
-        <acme:textbox path="creditCard.ccv" code="creditCard.ccv"/>
+        <acme:textbox path="${user.creditCard.holder}" code="creditCard.holder"/>
+        <acme:textbox path="${user.creditCard.brand}" code="creditCard.brand"/>
+        <acme:textbox path="${user.creditCard.number}" code="creditCard.number"/>
+        <acme:textbox path="${user.creditCard.expirationMonth}" code="creditCard.expirationMonth" placeHolder="XX"/>
+        <acme:textbox path="${user.creditCard.expirationYear}" code="creditCard.expirationYear" placeHolder="XXXX"/>
+        <acme:textbox path="${user.creditCard.cvv}" code="creditCard.cvv"/>
 
     </fieldset>
 
-    <acme:submit name="save" code="request.save"/>
+    <acme:submit name="save" code="button.save"/>
   <%--  <jstl:if test="${request.id!=0}">
         <acme:submit name="delete" code="request.delete"/>
     </jstl:if>--%>
-    <acme:cancel code="request.cancel" url="${cancelUri}"/>
+    <acme:cancel code="button.cancel" url="servises/list.do"/>
 
 </form:form>
 

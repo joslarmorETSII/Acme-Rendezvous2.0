@@ -46,6 +46,7 @@
                 </ul>
 			</li>
 			<li><a class="fNiv" href="rendezvous/listAll.do"><spring:message code="master.page.rendezvous.listAll-2" /></a></li>
+			<li><a class="fNiv" href="servise/listAll.do"><spring:message code="master.page.servise.listAll" /></a></li>
 			<li><a class="fNiv" href="announcement/user/listAllUser.do"><spring:message code="master.page.announcement.listAll" /></a></li>
 
 		</security:authorize>

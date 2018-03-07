@@ -41,7 +41,7 @@ public class CreditCardService {
         CreditCard result;
 
         result = new CreditCard();
-        result.setActor(this.actorService.findByPrincipal());
+        //result.setActor(this.actorService.findByPrincipal());
 
         return result;
     }
@@ -50,7 +50,7 @@ public class CreditCardService {
 
         Assert.notNull(creditCard);
         Assert.isTrue(this.actorService.isUser());
-        Assert.isTrue(creditCard.getActor().equals(this.actorService.findByPrincipal()));
+      //  Assert.isTrue(creditCard.getActor().equals(this.actorService.findByPrincipal()));
 
         CreditCard result;
 
@@ -62,7 +62,7 @@ public class CreditCardService {
     public void delete(final CreditCard creditCard) {
         Assert.notNull(creditCard);
         Assert.isTrue(this.actorService.isUser());
-        Assert.isTrue(creditCard.getActor().equals(this.actorService.findByPrincipal()));
+       // Assert.isTrue(creditCard.getActor().equals(this.actorService.findByPrincipal()));
 
         this.creditCardRepository.delete(creditCard);
     }
@@ -86,7 +86,7 @@ public class CreditCardService {
     }
 
     // Other business methods
-
+/*
     public CreditCard findOneByActorId(final int actorId) {
 
         CreditCard result;
@@ -95,7 +95,7 @@ public class CreditCardService {
 
         return result;
 
-    }
+    }*/
 
 
 

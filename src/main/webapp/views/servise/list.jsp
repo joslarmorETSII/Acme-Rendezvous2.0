@@ -35,7 +35,7 @@
     </security:authorize>
 
     <security:authorize access="hasRole('MANAGER')">
-        <acme:columnButton url="servise/manager/edit.do?serviseId=${servise.id}" codeButton="servise.delete" />
+        <acme:columnButton url="servise/manager/edit.do?serviseId=${servise.id}" codeButton="button.delete" />
     </security:authorize>
 
     <security:authorize access="hasRole('ADMINISTRATOR')">
@@ -48,10 +48,10 @@
 
 <security:authorize access="hasRole('USER')">
 
-    <acme:button code="servise.create" url="servise/user/create.do" />
+    <acme:button code="button.create" url="requestt/user/create.do" />
 
 </security:authorize>
-<input type="button" value="<spring:message code="question.cancel" /> " onclick="goBack()">
+<input type="button" value="<spring:message code="button.cancel" /> " onclick="goBack()">
 
 <script>
     function goBack() {

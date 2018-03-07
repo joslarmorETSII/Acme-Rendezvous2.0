@@ -92,7 +92,7 @@ public class CreditCard extends DomainEntity {
 
     //// Relationships ----------------------------------------------------------
 
-    private Actor	actor;
+   /* private Actor	actor;
 
 
     @Valid
@@ -104,7 +104,7 @@ public class CreditCard extends DomainEntity {
 
     public void setActor(final Actor actor) {
         this.actor = actor;
-    }
+    }*/
 
 }
 

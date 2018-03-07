@@ -3,21 +3,18 @@ package domain;
 
 import org.hibernate.validator.constraints.SafeHtml;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
 
-public class Request extends DomainEntity{
+public class Requestt extends DomainEntity{
 
     // Constructors -----------------------------------------------------------
 
-    public Request() {
+    public Requestt() {
        super();
     }
 
@@ -25,7 +22,6 @@ public class Request extends DomainEntity{
     // Attributes -----------------------------------------------------------
 
     private String comment;
-    private CreditCard creditCard;
 
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getComment() {
@@ -36,28 +32,35 @@ public class Request extends DomainEntity{
         this.comment = comment;
     }
 
-    @Valid
-    @NotNull
-    public CreditCard getCreditCard() {
-        return creditCard;
-    }
 
-    public void setCreditCard(CreditCard creditCard) {
-        this.creditCard = creditCard;
-    }
 
     // Relationships -----------------------------------------------------------
 
-    private Servise service;
+    private Rendezvous rendezvous;
+    private Servise servise;
 
+    @Valid
+    @NotNull
+    @OneToOne(optional = false)
+    public Rendezvous getRendezvous() {
+        return rendezvous;
+    }
 
+    public void setRendezvous(Rendezvous rendezvous) {
+        this.rendezvous = rendezvous;
+    }
+
+    @Valid
+    @NotNull
     @ManyToOne(optional = false)
-    public Servise getService() {
-        return service;
+    public Servise getServise() {
+        return servise;
     }
 
-    public void setService(Servise service) {
-        this.service = service;
+    public void setServise(Servise service) {
+        this.servise = service;
     }
+
+
 
 }
