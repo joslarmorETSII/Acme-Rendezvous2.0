@@ -16,7 +16,6 @@ import security.UserAccount;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Random;
 
 @Service
 @Transactional
@@ -48,10 +47,7 @@ public class ManagerService {
         Manager result;
 
         result = new Manager();
-
-        final String vat = this.generateVat();
-        result.setVat(vat);
-        result.setServices(new ArrayList<Servise>());
+        result.setServises(new ArrayList<Servise>());
         result.setUserAccount(this.userAccountService.create("MANAGER"));
         return result;
     }
@@ -114,6 +110,7 @@ public class ManagerService {
         result.setPhone(managerForm.getPhone());
         result.setEmail(managerForm.getEmail());
         result.setPostalAddresses(managerForm.getPostalAddresses());
+        result.setVat(managerForm.getVat());
 
         result.getUserAccount().setPassword(new Md5PasswordEncoder().encodePassword(managerForm.getPassword(), null));
 
@@ -142,7 +139,7 @@ public class ManagerService {
         return result;
     }
 
-    public String generateVat(){
+   /* public String generateVat(){
         String result;
         Manager manager;
         final Random random = new Random();
@@ -161,7 +158,7 @@ public class ManagerService {
         }
 
         return result;
-    }
+    }*/
 
 
 }

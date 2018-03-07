@@ -166,7 +166,7 @@
         <property name="postalAddresses" value="C\ Reina Mercerdez N11"/>
         <property name="userAccount" ref="userAccount4"/>
         <property name="vat" value="222-BBB"/>
-        <property name="services">
+        <property name="servises">
             <list>
                 <ref bean="servise1"/>
             </list>
@@ -181,7 +181,7 @@
         <property name="postalAddresses" value="C\ Reina Mercerdez N11"/>
         <property name="userAccount" ref="userAccount5"/>
         <property name="vat" value="111-AAA"/>
-        <property name="services">
+        <property name="servises">
             <list>
                 <null/>
             </list>

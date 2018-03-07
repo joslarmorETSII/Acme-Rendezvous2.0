@@ -55,9 +55,18 @@
 		<security:intercept-url pattern="/user/list.do" access="permitAll" />
 		<security:intercept-url pattern="/user/editProfile.do" access="hasRole('USER')" />
 
+		<!-- Manager -->
+
+
+		<security:intercept-url pattern="/manage/register.do" access="isAnonymous()" />
+
+		<security:intercept-url pattern="/manage/editProfile.do" access="hasRole('MANAGER')" />
+
 		<!-- Term and Conditions -->
 
 		<security:intercept-url pattern="/termAndCondition/termAndCondition.do" access="permitAll()" />
+
+
 
 		<!-- Participates -->
 

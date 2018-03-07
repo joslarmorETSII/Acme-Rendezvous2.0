@@ -70,7 +70,7 @@ public class ServiseService {
         if(servise.getId()==0) {
             manager = managerService.findByPrincipal();
             result = serviseRepository.save(servise);
-            manager.getServices().add(result);
+            manager.getServises().add(result);
             managerService.save(manager);
         }
         result = this.serviseRepository.save(servise);

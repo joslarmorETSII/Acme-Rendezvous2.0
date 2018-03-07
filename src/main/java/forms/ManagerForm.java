@@ -28,6 +28,7 @@ public class ManagerForm {
     private String	phone;
     private String	email;
     private String  postalAddresses;
+    private String vat;
     private boolean	check;
 
 
@@ -107,5 +108,17 @@ public class ManagerForm {
     }
     public void setCheck(final boolean check) {
         this.check = check;
+    }
+
+    @Column(unique = true)
+    @NotBlank
+    @Pattern(regexp = "^(\\d{3})\\-([A-Z]{3})$")
+    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+    public String getVat() {
+        return vat;
+    }
+
+    public void setVat(String vat) {
+        this.vat = vat;
     }
 }
