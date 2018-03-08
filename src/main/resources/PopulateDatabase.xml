@@ -119,6 +119,7 @@
                 <ref bean="answer2"/>
             </list>
         </property>
+        <property name="creditCard" ref="creditCard1" />
     </bean>
 
     <bean id="user2" class="domain.User">
@@ -586,6 +587,7 @@
         </property>
         <property name="user" ref="user2"/>
     </bean>
+
     <!-- GPSCoordinates -->
 
     <bean id="gpsCoordinates1" class="domain.GPSCoordinates">
@@ -597,6 +599,8 @@
         <property name="longitude" value="74.15000"/>
         <property name="latitude" value="68.40000"/>
     </bean>
+
+    <!-- Services -->
 
     <bean id="servise1" class="domain.Servise">
         <property name="name" value="Servise1"/>
@@ -626,5 +630,36 @@
         <property name="inappropriate" value="false"/>
     </bean>
 
+    <!-- Requests -->
+
+    <bean id="request1" class="domain.Requestt">
+        <property name="comment" value="Comment 1"/>
+        <property name="rendezvous" ref="rendezvous1"/>
+        <property name="servise" ref="servise1"/>
+    </bean>
+
+    <bean id="request2" class="domain.Requestt">
+        <property name="comment" value="Comment 2"/>
+        <property name="rendezvous" ref="rendezvous2"/>
+        <property name="servise" ref="servise2"/>
+    </bean>
+
+    <bean id="creditCard1" class="domain.CreditCard">
+        <property name="holder" value="Holder 1" />
+        <property name="brand" value="visa" />
+        <property name="number" value="4539708415602051" />
+        <property name="expirationMonth" value="12" />
+        <property name="expirationYear" value="2017" />
+        <property name="cvv" value="243" />
+    </bean>
+
+    <bean id="creditCard2" class="domain.CreditCard">
+        <property name="holder" value="Holder 2" />
+        <property name="brand" value="visa" />
+        <property name="number" value="4024007180567801" />
+        <property name="expirationMonth" value="12" />
+        <property name="expirationYear" value="2017" />
+        <property name="cvv" value="232" />
+    </bean>
 
 </beans>
