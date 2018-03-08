@@ -64,7 +64,7 @@ public class ServiseService {
         Manager manager;
         Servise result;
 
-        Assert.isTrue(this.actorService.isManager());
+        Assert.isTrue(this.actorService.isManager() || actorService.isUser());
         Assert.notNull(servise);
 
         if(servise.getId()==0) {

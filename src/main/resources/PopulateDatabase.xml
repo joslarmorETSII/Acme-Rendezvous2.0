@@ -183,7 +183,7 @@
         <property name="vat" value="111-AAA"/>
         <property name="servises">
             <list>
-                <null/>
+                <ref bean="servise2"/>
             </list>
         </property>
     </bean>
@@ -601,13 +601,27 @@
     <bean id="servise1" class="domain.Servise">
         <property name="name" value="Servise1"/>
         <property name="description" value="Description1"/>
-        <property name="picture" value="http://www.foto-acme.com"/>
+        <property name="picture" value="http://w-mind.net/wp-content/uploads/2018/02/header-service.jpg"/>
         <property name="rendezvouses">
             <list>
                 <null/>
             </list>
         </property>
         <property name="manager" ref="manager1"/>
+        <property name="assigned" value="false"/>
+        <property name="inappropriate" value="false"/>
+    </bean>
+
+    <bean id="servise2" class="domain.Servise">
+        <property name="name" value="Servise2"/>
+        <property name="description" value="Description2"/>
+        <property name="picture" value="http://www.google.com"/>
+        <property name="rendezvouses">
+            <list>
+                <null/>
+            </list>
+        </property>
+        <property name="manager" ref="manager2"/>
         <property name="assigned" value="false"/>
         <property name="inappropriate" value="false"/>
     </bean>

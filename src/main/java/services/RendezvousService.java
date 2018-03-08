@@ -56,6 +56,7 @@ public class RendezvousService  {
         Collection<Announcement> announcements=new ArrayList<Announcement>();
         Collection<Participate> participated=new ArrayList<Participate>();
         Collection<Rendezvous> associated=new ArrayList<Rendezvous>();
+        Collection<Servise> servises = new ArrayList<>();
 
         creator= userService.findByPrincipal();
         res=new Rendezvous();
@@ -69,6 +70,7 @@ public class RendezvousService  {
         res.setQuestions(questions);
         res.setFinalMode(false);
         res.setDeleted(false);
+        res.setServises(servises);
         creator.getRendezvouses().add(res);
 
         return res;

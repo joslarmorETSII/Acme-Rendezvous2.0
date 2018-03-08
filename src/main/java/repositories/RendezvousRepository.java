@@ -31,4 +31,5 @@ public interface RendezvousRepository extends JpaRepository<Rendezvous,Integer> 
     @Query("select r from Rendezvous r where r.associated.size > (select avg(r1.associated.size)*1.1 from Rendezvous r1)")
     Collection<Rendezvous> rendezvousPlus10AvgAssociated();
 
+
 }

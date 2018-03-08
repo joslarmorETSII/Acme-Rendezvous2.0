@@ -46,8 +46,6 @@
         <acme:columnButton url="comment/user/response.do?commentId=${row.id}" codeButton="comment.response" />
     </security:authorize>
 
-
-
 </display:table>
 
 <security:authorize access="hasRole('USER')">

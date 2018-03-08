@@ -24,9 +24,14 @@
     <acme:column code="servise.name" value="${servise.name}" />
 
     <acme:column code="servise.description" value="${servise.description}"/>
-    <acme:column code="servise.picture" value="${servise.picture}"/>
-    <acme:column code="service.assigned" value ="${servise.assigned}"/>
-    <acme:column code="service.appropiate" value ="${servise.appropiate}"/>
+
+    <spring:message code="servise.picture" var="pic"/>
+
+    <display:column title="${pic}"><img src="${servise.picture}" width="130" height="100"></display:column>
+
+<%--
+    <acme:column code="servise.assigned" value ="${servise.assigned}"/>
+--%>
 
     <security:authorize access="hasRole('MANAGER')">
         <display:column>
@@ -39,18 +44,23 @@
     </security:authorize>
 
     <security:authorize access="hasRole('ADMINISTRATOR')">
-        <jstl:if test="${servise.inappropriate eq false}">
+        <jstl:if test="${row.inappropriate eq false}">
             <acme:button url="servise/administrator/edit.do?serviseId=${servise.id}" code="servise.inappropriate"/>
         </jstl:if>
     </security:authorize>
 
+    <jstl:if test="${servise.inappropriate eq false}">
+        <security:authorize access="hasRole('USER')">
+            <acme:columnButton codeButton="servise.requestt" url="requestt/user/create.do?serviseId=${servise.id}" />
+        </security:authorize>
+    </jstl:if>
+
+    <jstl:if test="${servise.inappropriate eq true}">
+        <acme:column code="servise.inappropriate" value ="${servise.inappropriate}"/>
+    </jstl:if>
 </display:table>
 
-<security:authorize access="hasRole('USER')">
 
-    <acme:button code="button.create" url="requestt/user/create.do" />
-
-</security:authorize>
 <input type="button" value="<spring:message code="button.cancel" /> " onclick="goBack()">
 
 <script>

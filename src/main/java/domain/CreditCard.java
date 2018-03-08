@@ -50,6 +50,7 @@ public class CreditCard extends DomainEntity {
         this.brand = brand;
     }
 
+    @NotBlank
     @CreditCardNumber
     @SafeHtml(whitelistType = WhiteListType.NONE)
     public String getNumber() {

@@ -1,11 +1,15 @@
 package services;
 
+import domain.CreditCard;
+import domain.Rendezvous;
 import domain.Requestt;
 import domain.User;
+import forms.RequesttForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import repositories.RequesttRepository;
 
 import java.util.Collection;
@@ -23,6 +27,9 @@ public class RequesttService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CreditCardService creditCardService;
 
 
     // Constructors -----------------------------------------------------------
@@ -69,4 +76,20 @@ public class RequesttService {
         requestRepository.delete(request);
     }
 
+    public Requestt reconstruct(RequesttForm requesttForm, BindingResult binding) {
+        Requestt result ;
+        Rendezvous rendezvous;
+
+        rendezvous = requesttForm.getRendezvous();
+        Assert.isTrue(!requesttForm.getServise().getInappropriate());
+     //   Assert.isTrue(rendezvous.getServise()==null);
+        Assert.isTrue(rendezvous.getCreator()==userService.findByPrincipal());
+
+        result = create();
+        result.setRendezvous(rendezvous);
+        result.setServise(requesttForm.getServise());
+        result.setComment(requesttForm.getComment());
+
+        return result;
+    }
 }

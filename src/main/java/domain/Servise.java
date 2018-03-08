@@ -107,7 +107,7 @@ public class Servise extends DomainEntity {
 
     @Valid
     @NotNull
-    @OneToMany(mappedBy = "servise")
+    @ManyToMany
     public Collection<Rendezvous> getRendezvouses() {
         return rendezvouses;
     }
