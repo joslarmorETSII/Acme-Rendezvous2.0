@@ -233,6 +233,11 @@
                 <null/>
             </list>
         </property>
+        <property name="servises">
+            <list>
+                <null/>
+            </list>
+        </property>
 
     </bean>
 
@@ -279,6 +284,11 @@
                 <null/>
             </list>
         </property>
+        <property name="servises">
+            <list>
+                <null/>
+            </list>
+        </property>
     </bean>
 
 
@@ -319,6 +329,11 @@
         </property>
         <property name="creator" ref="user2"/>
         <property name="parentRendezvous" >
+            <list>
+                <null/>
+            </list>
+        </property>
+        <property name="servises">
             <list>
                 <null/>
             </list>

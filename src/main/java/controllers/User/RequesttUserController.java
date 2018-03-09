@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Controller
@@ -68,6 +69,8 @@ public class RequesttUserController  extends AbstractController{
         Servise servise;
         User user;
         CreditCard creditCard;
+
+
         try {
             requestt = requesttService.reconstruct(requesttForm, binding);
 
@@ -77,24 +80,22 @@ public class RequesttUserController  extends AbstractController{
 
                 rendezvous = requesttForm.getRendezvous();
                 servise = requesttForm.getServise();
-                servise.setAssigned(true);
-                rendezvous.getServises().add(servise);
-                servise.getRendezvouses().add(rendezvous);
+                if(rendezvous.getServises().contains(servise))
+                    return createEditModelAndView(requesttForm, "requestt.duplicate.error");
+                else{
+                requesttService.save(requestt);
+
+
                 user = userService.findByPrincipal();
                 creditCard = creditCardService.save(requesttForm.getCreditCard());
                 user.setCreditCard(creditCard);
-                userService.save(user);
-                requesttService.save(requestt);
-                rendezvousService.save(rendezvous);
-                serviseService.save(servise);
+
                 result = new ModelAndView("servise/list");
                 result.addObject("servises",serviseService.findAll());
+                }
             }
             } catch( final Throwable oops){
-                if(oops.getCause().getCause().getMessage().contains("Duplicate entry"))
-                    result = createEditModelAndView(requesttForm, "requestt.duplicate.error");
-                else
-                    result = createEditModelAndView(requesttForm, "general.commit.error");
+                result = createEditModelAndView(requesttForm, "general.commit.error");
         }
         return result;
     }

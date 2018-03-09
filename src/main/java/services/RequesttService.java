@@ -1,9 +1,6 @@
 package services;
 
-import domain.CreditCard;
-import domain.Rendezvous;
-import domain.Requestt;
-import domain.User;
+import domain.*;
 import forms.RequesttForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,9 +52,18 @@ public class RequesttService {
     public Requestt save(Requestt request){
         User principal;
         Requestt request1;
+        Rendezvous rendezvous;
+        Servise servise;
 
         principal = userService.findByPrincipal();
         Assert.isTrue(principal.equals(request.getRendezvous().getCreator()),"must be the principal");
+
+        rendezvous = request.getRendezvous();
+        servise = request.getServise();
+
+        rendezvous.getServises().add(servise);
+        servise.getRendezvouses().add(rendezvous);
+
         request1 =requestRepository.save(request);
 
         return request1;

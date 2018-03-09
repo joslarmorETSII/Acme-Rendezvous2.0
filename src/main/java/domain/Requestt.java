@@ -41,7 +41,7 @@ public class Requestt extends DomainEntity{
 
     @Valid
     @NotNull
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     public Rendezvous getRendezvous() {
         return rendezvous;
     }
