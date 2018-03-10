@@ -72,6 +72,7 @@ public class RendezvousService  {
         res.setDeleted(false);
         res.setServises(servises);
         creator.getRendezvouses().add(res);
+        res.setLocation(new GPSCoordinates());
 
         return res;
     }
