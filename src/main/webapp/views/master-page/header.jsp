@@ -55,6 +55,7 @@
 			<ul>
 				<li class="arrow"></li>
 				<li><a href="manage/editProfile.do"><spring:message code="master.page.manager.edit" /></a></li>
+            </ul>
 </security:authorize>
 		
 		<security:authorize access="isAnonymous()">
