@@ -94,7 +94,9 @@ public class UserService {
 
         User result;
         final UserAccount userAccount = LoginService.getPrincipal();
+        Assert.notNull(userAccount);
         result = this.findByUserAccountId(userAccount.getId());
+        Assert.notNull(result);
         return result;
     }
 

@@ -28,6 +28,8 @@
     <form:hidden path="participated"/>
     <form:hidden path="creator"/>
     <form:hidden path="associated"/>
+    <form:hidden path="parentRendezvous"/>
+    <form:hidden path="servises"/>
 
 
     <acme:textbox path="name" code="rendezvous.name"/>

@@ -1,5 +1,6 @@
 package services;
 
+import domain.Answer;
 import domain.Question;
 import domain.Rendezvous;
 import domain.User;
@@ -9,6 +10,7 @@ import org.springframework.util.Assert;
 import repositories.QuestionRepository;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Service
@@ -34,6 +36,7 @@ public class QuestionService {
         Question question;
 
         question = new Question();
+        question.setAnswers(new ArrayList<Answer>());
 
         return question;
     }
