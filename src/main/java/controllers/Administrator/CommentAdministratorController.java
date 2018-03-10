@@ -59,26 +59,9 @@ public class CommentAdministratorController extends AbstractController {
         Comment comment;
         comment = this.commentService.findOne(commentId);
         this.commentService.delete(comment);
-        Assert.notNull(comment);
         result = new ModelAndView("redirect: list.do");
         return result;
     }
-
-    @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-    public ModelAndView save(@Valid  Comment comment, final BindingResult binding) {
-        ModelAndView result;
-        if (binding.hasErrors())
-            result = this.createEditModelAndView(comment);
-        else
-            try {
-                this.commentService.delete(comment);
-                result = new ModelAndView("redirect:list.do");
-            } catch (final Throwable oops) {
-                result = this.createEditModelAndView(comment, "comment.commit.error");
-            }
-        return result;
-    }
-
 
     // Ancillary methods ------------------------------------------------------
 

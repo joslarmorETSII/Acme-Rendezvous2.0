@@ -34,6 +34,7 @@
 		<bean class="converters.AuthorityToStringConverter"/>
 		<bean class="converters.AdministratorToStringConverter"/>
 		<bean class="converters.ActorToStringConverter"/>
+		<bean class="converters.ManagerToStringConverter"/>
 		<bean class="converters.UserAccountToStringConverter"/>
 		<bean class="converters.RequestToStringConverter"/>
 		<bean class="converters.ServiseToStringConverter"/>
@@ -53,6 +54,7 @@
 		<bean class="converters.StringToAuthorityConverter"/>
 		<bean class="converters.StringToAdministratorConverter"/>
 		<bean class="converters.StringToActorConverter"/>
+		<bean class="converters.StringToManagerConverter"/>
 		<bean class="converters.StringToUserAccountConverter"/>
 		<bean class="converters.StringToRequestConverter"/>
 		<bean class="converters.StringToServiseConverter"/>

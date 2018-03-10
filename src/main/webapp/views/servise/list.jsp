@@ -39,15 +39,18 @@
         </display:column>
     </security:authorize>
 
-    <security:authorize access="hasRole('MANAGER')">
-        <acme:columnButton url="servise/manager/edit.do?serviseId=${servise.id}" codeButton="button.delete" />
-    </security:authorize>
+    <jstl:if test="${servise.assigned eq false}">
+        <security:authorize access="hasRole('MANAGER')">
+            <acme:columnButton url="servise/manager/editDelete.do?serviseId=${servise.id}" codeButton="button.delete" />
+        </security:authorize>
+    </jstl:if>
 
     <security:authorize access="hasRole('ADMINISTRATOR')">
-        <jstl:if test="${row.inappropriate eq false}">
-            <acme:button url="servise/administrator/edit.do?serviseId=${servise.id}" code="servise.inappropriate"/>
+        <jstl:if test="${servise.inappropriate eq false}">
+             <acme:columnButton url="servise/administrator/edit.do?serviseId=${servise.id}" codeButton="servise.inappropriate"/>
         </jstl:if>
     </security:authorize>
+
 
     <jstl:if test="${servise.inappropriate eq false}">
         <security:authorize access="hasRole('USER')">
@@ -55,16 +58,12 @@
         </security:authorize>
     </jstl:if>
 
-    <jstl:if test="${servise.inappropriate eq true}">
-        <acme:column code="servise.inappropriate" value ="${servise.inappropriate}"/>
-    </jstl:if>
 </display:table>
 
+<security:authorize access="hasRole('MANAGER')">
+    <acme:button code="button.create" url="servise/manager/create.do"/>
+</security:authorize>
 
-<input type="button" value="<spring:message code="button.cancel" /> " onclick="goBack()">
-
-<script>
-    function goBack() {
-        window.history.back()
-    }
-</script>
+<security:authorize access="hasRole('MANAGER')">
+    <acme:button code="button.cancel" url="welcome/index.do"/>
+</security:authorize>
