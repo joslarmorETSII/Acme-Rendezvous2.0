@@ -196,6 +196,7 @@ public class Rendezvous extends DomainEntity{
     }
 
     @Valid
+    @NotNull
     @ManyToMany(mappedBy = "rendezvouses")
     public Collection<Servise> getServises() {
         return servises;

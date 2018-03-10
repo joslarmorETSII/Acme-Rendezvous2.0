@@ -26,11 +26,10 @@ public class ServiseService {
     // Managed services -----------------------------------------------------
 
     @Autowired
-    private ManagerService managerService;
-
-    @Autowired
     private ActorService actorService;
 
+    @Autowired
+    private ManagerService managerService;
 
 
     // Constructors -----------------------------------------------------------
@@ -44,7 +43,7 @@ public class ServiseService {
     public Servise create(){
 
         Servise result = new Servise();
-        Manager manager = this.managerService.findByPrincipal();
+        Manager manager = (Manager) this.actorService.findByPrincipal();
         Collection<Rendezvous> rendezvouses = new ArrayList<Rendezvous>();
 
         result.setInappropriate(false);
@@ -68,12 +67,12 @@ public class ServiseService {
         Assert.notNull(servise);
 
         if(servise.getId()==0) {
-            manager = managerService.findByPrincipal();
+            manager = (Manager) this.actorService.findByPrincipal();
             result = serviseRepository.save(servise);
             manager.getServises().add(result);
-            managerService.save(manager);
+        }else{
+            result = this.serviseRepository.save(servise);
         }
-        result = this.serviseRepository.save(servise);
 
         return result;
     }
@@ -108,6 +107,10 @@ public class ServiseService {
         servise.setInappropriate(true);
         this.serviseRepository.save(servise);
 
+    }
+
+    public Collection<Servise> findServiceAppropriate(){
+        return this.serviseRepository.findServiceAppropriate();
     }
 
 }

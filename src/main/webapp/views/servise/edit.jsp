@@ -17,26 +17,27 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net" %>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="${actionUri}" modelAttribute="announcement">
+<form:form action="${actionUri}" modelAttribute="servise">
 
     <form:hidden path="id"/>
     <form:hidden path="version"/>
-    <form:hidden path="moment"/>
 
-    <acme:textbox path="title" code="announcement.title"/>
+    <form:hidden path="inappropriate"/>
+    <form:hidden path="assigned"/>
+    <form:hidden path="manager"/>
+    <form:hidden path="rendezvouses"/>
 
-    <acme:textarea path="description" code="announcement.description"/>
 
-    <acme:select path="rendezvous" code="announcement.rendezvous" items="${myRendezvouses}" itemLabel="name"/>
+    <acme:textbox path="name" code="servise.name"/>
+    <acme:textarea path="description" code="servise.description"/>
+    <acme:textbox path="picture" code="servise.picture"/>
 
-    <security:authorize access="hasRole('USER')">
-        <acme:submit name="save" code="announcement.save"/>
+
+    <security:authorize access="hasRole('MANAGER')">
+        <acme:submit name="save" code="button.save"/>
     </security:authorize>
 
-    <security:authorize access="hasRole('ADMINISTRATOR')">
-        <acme:submit name="delete" code="announcement.delete"/>
-    </security:authorize>
 
-    <acme:cancel code="announcement.cancel" url="${cancelUri}"/>
+    <acme:cancel code="button.cancel" url="${cancelUri}"/>
 
 </form:form>
