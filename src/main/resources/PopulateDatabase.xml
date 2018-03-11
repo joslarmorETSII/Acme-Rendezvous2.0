@@ -115,7 +115,6 @@
         </property>
         <property name="answers">
             <list>
-                <ref bean="answer1"/>
                 <ref bean="answer2"/>
             </list>
         </property>
@@ -152,7 +151,7 @@
         </property>
         <property name="answers">
             <list>
-                <null/>
+                <ref bean="answer1"/>
             </list>
         </property>
 
@@ -235,7 +234,7 @@
         </property>
         <property name="servises">
             <list>
-                <null/>
+                <ref bean="servise1"/>
             </list>
         </property>
 
@@ -286,7 +285,7 @@
         </property>
         <property name="servises">
             <list>
-                <null/>
+                <ref bean="servise2"/>
             </list>
         </property>
     </bean>
@@ -389,7 +388,7 @@
 
     <bean id="answer1" class="domain.Answer">
         <property name="answer" value="Yes I do"/>
-        <property name="user" ref="user1"/>
+        <property name="user" ref="user2"/>
         <property name="question" ref="question1"/>
     </bean>
 
@@ -623,7 +622,7 @@
         <property name="picture" value="http://w-mind.net/wp-content/uploads/2018/02/header-service.jpg"/>
         <property name="rendezvouses">
             <list>
-                <null/>
+                <ref bean="rendezvous1"/>
             </list>
         </property>
         <property name="manager" ref="manager1"/>
@@ -637,7 +636,7 @@
         <property name="picture" value="http://www.google.com"/>
         <property name="rendezvouses">
             <list>
-                <null/>
+                <ref bean="rendezvous2"/>
             </list>
         </property>
         <property name="manager" ref="manager2"/>

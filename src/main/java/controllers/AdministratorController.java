@@ -2,7 +2,9 @@ package controllers;
 
 import controllers.AbstractController;
 import domain.Administrator;
+import domain.Manager;
 import domain.Rendezvous;
+import domain.Servise;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -42,6 +44,11 @@ public class AdministratorController extends AbstractController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ServiseService serviseService;
+
+    @Autowired
+    private ManagerService managerService;
     // Constructor -----------------------------------------
     public AdministratorController() {
         super();
@@ -92,6 +99,12 @@ public class AdministratorController extends AbstractController {
         Object[] avgDevRendezvousParticipatePerUser;
         Collection<Rendezvous> top10RendezvousParticipated;
 
+        // levelc - D09
+        Collection<Servise> topSellingServises;
+       Collection<Manager> managersWithMoreServisesThanAvg;
+        Collection<Manager> managersWithMoreServisesCancelled;
+
+
         // level b - queries
 
         Object[] avgDevAnnouncementsPerRendezvous;
@@ -117,6 +130,10 @@ public class AdministratorController extends AbstractController {
         rendezvousPlus10AvgAssociated = this.rendezvousService.rendezvousPlus10AvgAssociated();
         questionsPerRendezvous = this.questionService.questionsPerRendezvous();
         avgDevAnswersQuestionsPerRendezvous = this.answerService.avgDevAnswersQuestionsPerRendezvous();
+
+        topSellingServises = serviseService.topSellingServises();
+        managersWithMoreServisesThanAvg = managerService.managersWithMoreServisesThanAvg();
+        managersWithMoreServisesCancelled = managerService.managersWithMoreServisesCancelled();
         // Adding to result
 
         result.addObject("avgDevAnnouncementsPerRendezvous", avgDevAnnouncementsPerRendezvous);
@@ -130,6 +147,11 @@ public class AdministratorController extends AbstractController {
         result.addObject("rendezvousPlus75AvgAnnouncements", rendezvousPlus75AvgAnnouncements);
         result.addObject("questionsPerRendezvous", questionsPerRendezvous);
         result.addObject("avgDevAnswersQuestionsPerRendezvous", avgDevAnswersQuestionsPerRendezvous);
+
+        // D09
+        result.addObject("topSellingServises",topSellingServises);
+        result.addObject("managersWithMoreServisesThanAvg",managersWithMoreServisesThanAvg);
+        result.addObject("managersWithMoreServisesCancelled",managersWithMoreServisesCancelled);
 
         return result;
     }

@@ -11,6 +11,7 @@ import repositories.ServiseRepository;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class ServiseService {
@@ -111,6 +112,16 @@ public class ServiseService {
 
     public Collection<Servise> findServiceAppropriate(){
         return this.serviseRepository.findServiceAppropriate();
+    }
+
+    // top 5 Best Selling Services
+    public Collection<Servise> topSellingServises(){
+        List<Servise> result;
+
+        result = new ArrayList<>(serviseRepository.topSellingServises());
+        if(result.size()>5)
+            result.subList(0,4);
+        return result;
     }
 
 }

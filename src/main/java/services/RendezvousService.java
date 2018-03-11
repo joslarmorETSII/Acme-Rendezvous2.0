@@ -1,6 +1,5 @@
 package services;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +8,6 @@ import repositories.RendezvousRepository;
 import security.Authority;
 
 import javax.transaction.Transactional;
-import java.text.DecimalFormat;
 import java.util.*;
 
 @Service
@@ -250,4 +248,8 @@ public class RendezvousService  {
         return result;
     }
 
+
+    public Collection<Rendezvous> rendezvousWithNoquestionAnswered(int userId) {
+        return rendezvousRepository.rendezvousWithNoquestionAnswered(userId);
+    }
 }

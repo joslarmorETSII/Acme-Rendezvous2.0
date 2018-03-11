@@ -10,6 +10,10 @@ import java.util.Collection;
 @Repository
 public interface ServiseRepository extends JpaRepository<Servise, Integer> {
 
-@Query("select s from Servise s where s.inappropriate=false")
-Collection<Servise> findServiceAppropriate();
+    @Query("select s from Servise s where s.inappropriate=false")
+    Collection<Servise> findServiceAppropriate();
+
+    @Query("select s from Servise s order by s.rendezvouses.size")
+    Collection<Servise> topSellingServises();
+
 }

@@ -145,3 +145,56 @@
         <h4><jstl:out value=" STDDEV: "/><jstl:out value="${avgDevRepliesPerComment[1]}"/> <br/></h4>
     </div>
 </fieldset>
+
+<!-- D09 Queries Level C-->
+<fieldset>
+    <b><spring:message code="dashboard.topSellingServises"/></b>
+    <display:table name="topSellingServises"  id="row" pagesize="5" class="displaytag" keepStatus="true"
+                   requestURI="administrator/dashboard.do">
+
+        <spring:message code="servise.name" var="name"/>
+        <display:column property="name" title="${name}"/>
+        <spring:message code="servise.description" var="description"/>
+        <display:column property="description" title="${description}"/>
+        <spring:message code="servise.picture" var="picture"/>
+        <display:column property="picture" title="${picture}"/>
+        <spring:message code="servise.manager" var="manag"/>
+        <display:column property="manager.name" title="${manag}"/>
+
+    </display:table>
+</fieldset>
+
+<fieldset>
+    <b><spring:message code="dashboard.managersWithMoreServisesThanAvg"/></b>
+    <display:table name="managersWithMoreServisesThanAvg"  id="row" pagesize="5" class="displaytag"
+                   requestURI="administrator/dashboard.do">
+
+        <spring:message code="manager.name" var="name"/>
+        <display:column property="name" title="${name}"/>
+        <spring:message code="manager.vat" var="vat"/>
+        <display:column property="vat" title="${vat}"/>
+        <spring:message code="manager.email" var="email"/>
+        <display:column property="email" title="${email}"/>
+        <spring:message code="manager.phone" var="phone"/>
+        <display:column property="phone" title="${phone}"/>
+
+    </display:table>
+</fieldset>
+
+<fieldset>
+    <b><spring:message code="dashboard.managersWithMoreServisesCancelled"/></b>
+    <display:table name="managersWithMoreServisesCancelled"  id="row" pagesize="5" class="displaytag"
+                   requestURI="administrator/dashboard.do">
+
+        <spring:message code="manager.name" var="name"/>
+        <display:column property="name" title="${name}"/>
+        <spring:message code="manager.vat" var="vat"/>
+        <display:column property="vat" title="${vat}"/>
+        <spring:message code="manager.email" var="email"/>
+        <display:column property="email" title="${email}"/>
+        <spring:message code="manager.phone" var="phone"/>
+        <display:column property="phone" title="${phone}"/>
+
+    </display:table>
+</fieldset>
+

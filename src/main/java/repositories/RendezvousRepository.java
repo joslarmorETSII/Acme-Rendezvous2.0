@@ -32,4 +32,6 @@ public interface RendezvousRepository extends JpaRepository<Rendezvous,Integer> 
     Collection<Rendezvous> rendezvousPlus10AvgAssociated();
 
 
+    @Query("select r from Rendezvous r where r.participated.size = 1 and  r.creator.id = ?1")
+    Collection<Rendezvous> rendezvousWithNoquestionAnswered(int userId);
 }
