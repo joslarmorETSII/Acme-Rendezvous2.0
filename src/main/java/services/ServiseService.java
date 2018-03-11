@@ -82,10 +82,9 @@ public class ServiseService {
 
         Assert.isTrue(actorService.isManager());
         //TODO: Si falla eliminar request y rendezvous
-        if(!servise.getRendezvouses().isEmpty()){
-            this.rendezvousRepository.delete(servise.getRendezvouses());
+        if(servise.getRendezvouses().isEmpty()) {
+            this.serviseRepository.delete(servise);
         }
-        this.serviseRepository.delete(servise);
     }
 
     public Collection<Servise> findAll(){
@@ -96,7 +95,10 @@ public class ServiseService {
 
     public Servise findOneToEdit(final int serviseId) {
         Servise res = this.serviseRepository.findOne(serviseId);
-        Assert.isTrue(this.actorService.isManager());
+        Manager manager = res.getManager();
+
+        Assert.isTrue(manager.equals(managerService.findByPrincipal()));
+
         return res;
     }
 

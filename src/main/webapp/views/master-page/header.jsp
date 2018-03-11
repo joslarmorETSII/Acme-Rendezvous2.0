@@ -29,10 +29,12 @@
 					<li><a href="comment/administrator/list.do"><spring:message code="master.page.comment.administrator.list" /></a></li>
 					<li><a href="announcement/listAll.do"><spring:message code="master.page.announcement.listAll" /></a></li>
 					<li><a href="rendezvous/administrator/listAll.do"><spring:message code="master.page.rendezvous.administrator.list" /></a></li>
+				    <li><a href="servise/administrator/list.do"><spring:message code="master.page.servise.administrator.list" /></a></li>
                 <li><a href="administrator/dashboard.do"><spring:message
                         code="master.page.administrator.dashboard"/></a></li>
 			</ul>
 			</li>
+
 		</security:authorize>
 		
 		<security:authorize access="hasRole('USER')">
@@ -46,7 +48,6 @@
                 </ul>
 			</li>
 			<li><a class="fNiv" href="rendezvous/listAll.do"><spring:message code="master.page.rendezvous.listAll-2" /></a></li>
-			<li><a class="fNiv" href="servise/listAll.do"><spring:message code="master.page.servise.listAll" /></a></li>
 			<li><a class="fNiv" href="announcement/user/listAllUser.do"><spring:message code="master.page.announcement.listAll" /></a></li>
 
 		</security:authorize>
@@ -54,6 +55,7 @@
 		<li><a class="fNiv"><spring:message	code="master.page.manager" /></a>
 			<ul>
 				<li class="arrow"></li>
+				<li><a href="servise/manager/list.do"><spring:message code="master.page.servise.manager.list" /></a></li>
 				<li><a href="manage/editProfile.do"><spring:message code="master.page.manager.edit" /></a></li>
             </ul>
 </security:authorize>
@@ -67,8 +69,12 @@
 
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 		</security:authorize>
+
 		
 		<security:authorize access="isAuthenticated()">
+
+
+			<li><a class="fNiv" href="servise/listAll.do"><spring:message code="master.page.servise.listAll" /></a></li>
 			<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.user.list" /></a></li>
 			<li>
 				<a class="fNiv"> 

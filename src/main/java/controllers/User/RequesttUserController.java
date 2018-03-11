@@ -6,6 +6,7 @@ import domain.*;
 import forms.RequesttForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,6 +54,8 @@ public class RequesttUserController  extends AbstractController{
         RequesttForm requesttForm;
 
         servise = serviseService.findOne(serviseId);
+
+        Assert.isTrue(servise.getInappropriate()==false,"This services is inappropiate");
         requesttForm = new RequesttForm();
         requesttForm.setServise(servise);
         result = createEditModelAndView(requesttForm);

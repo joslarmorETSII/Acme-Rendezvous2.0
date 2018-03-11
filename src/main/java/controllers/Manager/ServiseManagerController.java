@@ -49,6 +49,7 @@ public class ServiseManagerController {
         result = new ModelAndView("servise/list");
         result.addObject("servises", manager.getServises());
         result.addObject("requestURI","servise/manager/list.do");
+        result.addObject("manager",manager);
 
         return result;
     }
@@ -85,9 +86,10 @@ public class ServiseManagerController {
     public ModelAndView editDelete(@RequestParam  int serviseId) {
         final ModelAndView result;
         Servise servise;
-        servise = this.serviseService.findOne(serviseId);
+        servise = this.serviseService.findOneToEdit(serviseId);
         this.serviseService.delete(servise);
         result = new ModelAndView("redirect: list.do");
+        result.addObject("manager",(Manager)actorService.findByPrincipal());
         return result;
     }
 

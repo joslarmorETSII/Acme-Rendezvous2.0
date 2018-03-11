@@ -98,12 +98,11 @@
 
 		<!--Servise -->
 
-		<security:intercept-url pattern="/servise/listAll.do" access="hasRole('USER')" />
-
 		<security:intercept-url pattern="/servise/manager/**" access="hasRole('MANAGER')" />
 
 
 		<security:intercept-url pattern="/servise/administrator/**" access="hasRole('ADMINISTRATOR')"/>
+        <security:intercept-url pattern="/servise/listAll.do" access="isAuthenticated()" />
 
 		<!-- Announcements -->
 		<security:intercept-url pattern="/announcement/**" access="permitAll()" />

@@ -19,7 +19,7 @@
 
 
 <display:table id="servise" name="servises" requestURI="${requestURI}"
-               pagesize="5">
+               pagesize="5" class = "displaytag">
 
     <acme:column code="servise.name" value="${servise.name}" />
 
@@ -33,17 +33,23 @@
     <acme:column code="servise.assigned" value ="${servise.assigned}"/>
 --%>
 
-    <security:authorize access="hasRole('MANAGER')">
-        <display:column>
-            <acme:button code="servise.edit" url="servise/manager/edit.do?serviseId=${servise.id}" />
-        </display:column>
-    </security:authorize>
 
-    <jstl:if test="${servise.assigned eq false}">
+    <jstl:if test="${manager eq servise.manager}">
         <security:authorize access="hasRole('MANAGER')">
-            <acme:columnButton url="servise/manager/editDelete.do?serviseId=${servise.id}" codeButton="button.delete" />
+            <display:column>
+                <acme:button code="servise.edit" url="servise/manager/edit.do?serviseId=${servise.id}" />
+            </display:column>
         </security:authorize>
     </jstl:if>
+
+    <jstl:if test="${servise.assigned eq false && manager eq servise.manager}">
+        <security:authorize access="hasRole('MANAGER')">
+            <display:column>
+                <acme:button url="servise/manager/editDelete.do?serviseId=${servise.id}" code="button.delete" />
+            </display:column>
+        </security:authorize>
+    </jstl:if>
+
 
     <security:authorize access="hasRole('ADMINISTRATOR')">
         <jstl:if test="${servise.inappropriate eq false}">
@@ -54,8 +60,14 @@
 
     <jstl:if test="${servise.inappropriate eq false}">
         <security:authorize access="hasRole('USER')">
-            <acme:columnButton codeButton="servise.requestt" url="requestt/user/create.do?serviseId=${servise.id}" />
+            <acme:columnButton codeButton="servise.requestt" url="requestt/user/create.do?serviseId=${servise.id}"/>
         </security:authorize>
+    </jstl:if>
+
+    <jstl:if test="${servise.inappropriate eq true}">
+        <display:column>
+            <spring:message code="servise.inappropriate.flag" var="inappropriate"/><jstl:out value="${inappropriate}"/>
+        </display:column>
     </jstl:if>
 
 </display:table>
