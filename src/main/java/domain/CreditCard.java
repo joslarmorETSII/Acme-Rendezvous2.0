@@ -21,9 +21,9 @@ public class CreditCard extends DomainEntity {
     private String	holder;
     private String	brand;
     private String	number;
-    private int		expirationMonth;
-    private int		expirationYear;
-    private int		cvv;
+    private Integer		expirationMonth;
+    private Integer		expirationYear;
+    private Integer		cvv;
 
 
     public CreditCard() {
@@ -81,12 +81,13 @@ public class CreditCard extends DomainEntity {
         this.expirationYear = expirationYear;
     }
 
+    @NotNull
     @Range(min = 100, max = 999)
-    public int getCvv() {
+    public Integer getCvv() {
         return this.cvv;
     }
 
-    public void setCvv(final int cvv) {
+    public void setCvv(final Integer cvv) {
         this.cvv = cvv;
     }
 

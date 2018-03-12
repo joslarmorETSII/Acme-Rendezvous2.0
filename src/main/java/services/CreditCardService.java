@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import javax.transaction.Transactional;
 
+import domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -26,6 +27,9 @@ public class CreditCardService {
 
     @Autowired
     private ActorService			actorService;
+
+    @Autowired
+    private UserService			userService;
 
 
     // Constructor
@@ -62,9 +66,12 @@ public class CreditCardService {
     public void delete(final CreditCard creditCard) {
         Assert.notNull(creditCard);
         Assert.isTrue(this.actorService.isUser());
-       // Assert.isTrue(creditCard.getActor().equals(this.actorService.findByPrincipal()));
 
-        this.creditCardRepository.delete(creditCard);
+        User user = userService.findByPrincipal();
+        Assert.isTrue(user.getCreditCard().equals(creditCard));
+
+       user.setCreditCard(null);
+       this.creditCardRepository.delete(creditCard);
     }
 
     public CreditCard findOne(final int creditCardId) {
@@ -85,9 +92,13 @@ public class CreditCardService {
         return result;
     }
 
+    public void flush() {
+        creditCardRepository.flush();
+    }
+
     // Other business methods
-/*
-    public CreditCard findOneByActorId(final int actorId) {
+
+/*    public CreditCard findOneByActorId(final int actorId) {
 
         CreditCard result;
 

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import repositories.ActorRepository;
+import repositories.CreditCardRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
@@ -23,6 +24,8 @@ public class ActorService {
 
     // Supporting services ----------------------------------------------------
 
+    @Autowired
+    private CreditCardRepository creditCardRepository;
 
     // Constructors -----------------------------------------------------------
 
@@ -61,7 +64,6 @@ public class ActorService {
     }
 
     // Other business methods -------------------------------------------------
-
     public Actor findByPrincipal() {
 
         Actor result;
