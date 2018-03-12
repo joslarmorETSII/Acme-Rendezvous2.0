@@ -13,6 +13,8 @@ import utilities.AbstractTest;
 
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 @Transactional
 @ContextConfiguration(locations = {
@@ -62,10 +64,9 @@ public class QuestionTest extends AbstractTest {
 
     @Test
     public void driverQuestionCreateTest() {
-
         final Object testingData[][] = {
                 // Crear una Question estando logueado como user -> true
-                {
+          /*      {
                         "user1", "rendezvous1","Question test?", null
                 },
                 // Crear una Question con texto -> false
@@ -75,6 +76,10 @@ public class QuestionTest extends AbstractTest {
                 // Crear una Question logueado como manager --> false
                 {
                         "manager2", "rendezvous2","Question created by manager test?",IllegalArgumentException.class
+                },*/
+                // Crear una Question con <script> en el texto
+                {
+                        "user1", "rendezvous1","<script>",ConstraintViolationException.class
                 },
                 // Crear una Quesion sin  loguearse -> false
                 {

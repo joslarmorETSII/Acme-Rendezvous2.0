@@ -7,9 +7,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import repositories.RendezvousRepository;
 import utilities.AbstractTest;
 
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -97,7 +99,8 @@ public class RendezvousServiceTest extends AbstractTest {
      */
 
 
-    public void editRendezvousTest(final String username, final String name,String description1,String moment1,String picture1,Double lat1,Double lngi1,Boolean res1,Boolean res2,Boolean res3,String rendezvousBean, final Class<?> expected) {
+    public void editRendezvousTest(final String username, final String name,String description1,String moment1,String picture1,
+                                   Double lat1,Double lngi1,Boolean res1,Boolean res2,Boolean res3,String rendezvousBean, final Class<?> expected) {
         Class<?> caught = null;
 
         try {
@@ -121,8 +124,10 @@ public class RendezvousServiceTest extends AbstractTest {
             result.setForAdults(res3);
 
 
-            Rendezvous r = this.rendezvousService.save(result);
-            r = result;
+            rendezvousService.save(result);
+            rendezvousService.flush();
+
+
             this.unauthenticate();
 
         } catch (final Throwable oops) {
@@ -197,24 +202,24 @@ public class RendezvousServiceTest extends AbstractTest {
 
         final Object testingData[][] = {
                 // Crear un rendezvous estando logueado como user -> true
-        /*       {
-                        "user1", "name1","description1","12/03/2020 12:00","www.picture.com",20.99,13.09,false,false,false,"rendezvous1", null
+              {
+                        "user1", "name1","description1","12/03/2020 12:00","http://www.picture.com",20.99,13.09,false,false,false,"rendezvous1", null
                },
                 // Crear un rendezvous sin estar logueado --> false
                {
-                        null,"name1","description1","12/03/2020 12:00","www.picture.com",20.99,13.09,false,false,false,"rendezvous1", IllegalArgumentException.class
+                        null,"name1","description1","12/03/2020 12:00","http://www.picture.com",20.99,13.09,false,false,false,"rendezvous1", IllegalArgumentException.class
                 },
                 // editar el modo final y pasarlo a true -> true
                {
-                        "user1","name1","description1","12/03/2020 12:00","www.picture.com",20.99,13.09,true,false,false,"rendezvous1", null
+                        "user1","name1","description1","12/03/2020 12:00","http://www.picture.com",20.99,13.09,true,false,false,"rendezvous1", null
                 },
                 // Crear un curso logueado como manager  -> false
                 {
-                        "manager1","name1","description1","12/03/2020 12:00","www.picture.com",20.99,13.09,true,false,false, "rendezvous1",IllegalArgumentException.class
-               },*/
+                        "manager1","name1","description1","12/03/2020 12:00","http://www.picture.com",20.99,13.09,true,false,false, "rendezvous1",IllegalArgumentException.class
+               },
                 // Edit la description con un script -> false // todo: Preguntar al profesor, no se camptura el error de validacion
                 {
-                "user1",null,"<script>","12/03/2020 12:00","www.picture.com",20.99,13.09,true,false,false,"rendezvous1", IllegalArgumentException.class
+                "user1","name1","<script>","12/03/2020 12:00","http://www.picture.com",20.99,13.09,true,false,false,"rendezvous1", ConstraintViolationException.class
             }
 
 

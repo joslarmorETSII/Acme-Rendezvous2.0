@@ -126,7 +126,8 @@ public class QuestionUserController extends AbstractController {
         User user ;
 
         user = userService.findByPrincipal();
-        rendezvousCollection = user.getRendezvouses();
+        //rendezvousCollection = user.getRendezvouses();
+        rendezvousCollection =rendezvousService.rendezvousWithNoquestionAnswered(user.getId());
 
         result = new ModelAndView("question/edit");
         result.addObject("question", question);

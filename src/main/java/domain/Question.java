@@ -46,6 +46,7 @@ public class Question extends DomainEntity {
         return answers;
     }
 
+    @NotNull
     @Valid
     @ManyToOne(optional = false)
     public Rendezvous getRendezvous() {
