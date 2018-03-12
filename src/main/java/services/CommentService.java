@@ -57,7 +57,6 @@ public class CommentService {
         result.setUser(user);
         result.setMoment(new Date(System.currentTimeMillis() - 1000));
         result.setChildrenComments(childrenComments);
-
         user.getComments().add(result);
 
         return result;
@@ -133,6 +132,7 @@ public class CommentService {
 
         res = false;
         principal = this.userService.findByPrincipal();
+        Assert.notNull(principal);
 
         if (comment.getUser().equals(principal))
             res = true;
