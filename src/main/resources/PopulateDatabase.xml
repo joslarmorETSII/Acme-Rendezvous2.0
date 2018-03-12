@@ -300,14 +300,14 @@
         <property name="forAdults" value="false"/>
         <property name="participated">
             <list>
-                <null/>
+                <ref bean="participate3"/>
             </list>
         </property>
         <property name="picture" value="http://blog.tigerbookstore.com/wp-content/uploads/2013/04/study.jpg"/>
 
         <property name="questions">
             <list>
-                <null/>
+                <ref bean="question3"/>
             </list>
         </property>
         <property name="location" ref="gpsCoordinates1"/>
@@ -384,6 +384,16 @@
         <property name="rendezvous" ref="rendezvous2"/>
     </bean>
 
+    <bean id="question3" class="domain.Question">
+        <property name="text" value="Te gusta viajar?"/>
+        <property name="answers">
+            <list>
+                <null/>
+            </list>
+        </property>
+        <property name="rendezvous" ref="rendezvous3"/>
+    </bean>
+
     <!-- Answers -->
 
     <bean id="answer1" class="domain.Answer">
@@ -430,6 +440,7 @@
         <property name="attendant" ref="user1"/>
         <property name="moment" value="2018/02/11 11:11"/>
     </bean>
+
     <!-- Comments -->
 
     <bean id="comment1" class="domain.Comment">
