@@ -45,7 +45,6 @@ public class CreditCardService {
         CreditCard result;
 
         result = new CreditCard();
-        //result.setActor(this.actorService.findByPrincipal());
 
         return result;
     }
