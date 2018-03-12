@@ -6,9 +6,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import repositories.CommentRepository;
 import utilities.AbstractTest;
 
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 
 @Transactional
 @ContextConfiguration(locations = {
@@ -42,7 +44,9 @@ public class CommentServiceTest extends AbstractTest {
             result.setText(text);
             result.setPicture(picture);
 
-            this.commentService.save(result);
+            commentService.save(result);
+            commentService.flush();
+
 
             this.unauthenticate();
 
@@ -112,15 +116,15 @@ public class CommentServiceTest extends AbstractTest {
             final Object testingData[][] = {
                     // Crear un curso estando logueado como academy -> true
                     {
-                            "user1","description1","www.picture.com", null
+                            "user1","description1","http://www.picture.com", null
                     },
                // Crear un curso sin estar logueado --> false
-{
-                        null, "description1","www.picture.com",IllegalArgumentException.class
+                {
+                        null, "description1","http://www.picture.com",IllegalArgumentException.class
                },
                 // Crear un curso logueado como dancer -> false
                 {
-                       "manager1","description1","www.picture.com", IllegalArgumentException.class
+                       "manager1","description1","http://www.picture.com", IllegalArgumentException.class
                },
                // Crear un curso rendezvous con momento en el pasado -> false
              //  {

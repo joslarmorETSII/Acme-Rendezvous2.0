@@ -62,6 +62,8 @@ public class QuestionService {
 
    public Question findOneToEdit(Integer questionId){
         Question question = questionRepository.findOne(questionId);
+        Assert.notNull(question);
+        Assert.isTrue(question.getAnswers().isEmpty());
         checkByPrincipal(question);
         return question;
    }

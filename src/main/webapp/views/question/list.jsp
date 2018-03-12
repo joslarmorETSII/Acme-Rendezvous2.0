@@ -18,8 +18,9 @@
 
 <display:table name="questions" id="row" pagesize="5" class="displaytag" requestURI="question/user/list.do">
 
-    <acme:columnButton url="question/user/edit.do?questionId=${row.id}" codeButton="question.edit"/>
-
+    <jstl:if test="${empty row.answers}">
+        <acme:columnButton url="question/user/edit.do?questionId=${row.id}" codeButton="question.edit"/>
+    </jstl:if>
     <acme:column code="question.text" value="${row.text}"/>
     <acme:columnButton codeButton="question.answers" url="answer/user/list.do?questionId=${row.id}"/>
 

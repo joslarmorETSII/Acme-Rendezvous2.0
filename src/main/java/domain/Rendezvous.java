@@ -33,8 +33,8 @@ public class Rendezvous extends DomainEntity{
     private Boolean deleted;
     private  Boolean forAdults;
 
-    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     @NotBlank
+    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getName() {
         return name;
     }
@@ -51,6 +51,7 @@ public class Rendezvous extends DomainEntity{
     public void setDescription(String description) {
         this.description = description;
     }
+
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
@@ -62,8 +63,8 @@ public class Rendezvous extends DomainEntity{
         this.moment = moment;
     }
 
-    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     @URL
+    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getPicture() {
         return picture;
     }
@@ -194,6 +195,7 @@ public class Rendezvous extends DomainEntity{
     public void setParentRendezvous(Collection<Rendezvous> parentRendezvous) {
         this.parentRendezvous = parentRendezvous;
     }
+
 
     @Valid
     @NotNull

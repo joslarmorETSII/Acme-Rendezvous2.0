@@ -21,6 +21,7 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 
+<jstl:if test="${not empty rendezvousCollection}">
 <form:form action="question/user/edit.do" modelAttribute="question">
 
     <form:hidden path="id"/>
@@ -38,4 +39,9 @@
     <acme:cancel code="question.cancel" url="${cancelUri}"/>
 
 </form:form>
+</jstl:if>
+<jstl:if test="${empty  rendezvousCollection}">
 
+    <spring:message code="general.cant.edit" var="out"/><jstl:out value="${out}"/>
+
+</jstl:if>

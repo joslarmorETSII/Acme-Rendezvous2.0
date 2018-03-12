@@ -157,4 +157,8 @@ public class CommentService {
         this.announcementService.formatDecimal(result);
         return result;
     }
+
+    public void flush() {
+        commentRepository.flush();
+    }
 }

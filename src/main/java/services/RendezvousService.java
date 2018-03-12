@@ -252,4 +252,8 @@ public class RendezvousService  {
     public Collection<Rendezvous> rendezvousWithNoquestionAnswered(int userId) {
         return rendezvousRepository.rendezvousWithNoquestionAnswered(userId);
     }
+
+    public void flush() {
+        rendezvousRepository.flush();
+    }
 }
