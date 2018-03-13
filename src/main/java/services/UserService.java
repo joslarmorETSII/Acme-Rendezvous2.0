@@ -50,7 +50,7 @@ public class UserService {
 
         result = new User();
 
-        result.setBirthday(result.getBirthday());
+//        result.setBirthday(result.getBirthday());
         result.setComments(new ArrayList<Comment>());
         result.setParticipates(new ArrayList<Participate>());
         result.setRendezvouses(new ArrayList<Rendezvous>());
@@ -165,4 +165,7 @@ public class UserService {
         return result;
     }
 
+    public void flush() {
+        userRepository.flush();
+    }
 }
