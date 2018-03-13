@@ -175,16 +175,13 @@ public class ManagerServiceTest extends AbstractTest {
                 {
                         "manager3", "manager3", "manager3", "managerTestName", "managerTestSurname","123-ASD", "+34 123456789", "managerTest@managerTest.com", "addressTest","manager1", null
                 },
-                // Todo vacio --> false
-               {
-                        null, null, null, null, null, null, null, null,null,"manager1", ConstraintViolationException.class
-        },
+
 
                 // Todos los campos completados, excepto la direccion postal -> true
                 //TODO: preguntar al prof sale una excepción del tipo: ObjectOptimisticLockingFailureException
-               // {
-                       // "manager1", "manager1", "manager1", "manager1", "manager1", "193-ASD","+34 123456789", "managerTest@managerTest.com", "","manager1", null
-              //  },
+                {
+                        "manager2", "manager2", "manager2", "manager2", "manager2", "193-ASD","+34 123456789", "managerTest@managerTest.com", "","manager2", null
+               },
                 // Patrón del telefono erroneo -> false
                 {
                                 "managerTest3", "managerTest3", "managerTest3", "managerTestName3", "managerTestSurname3","153-ASD", "635", "managerTest@managerTest.com", "12345","manager1", ConstraintViolationException.class
@@ -196,7 +193,12 @@ public class ManagerServiceTest extends AbstractTest {
 
                 {
                         "", "manager55", "manager55", "managerTestName5", "managerTestSurname5","173-ASD", "+34 123456789", "managerTest@managerTest.com", "addressTest","manager1", ConstraintViolationException.class
-                }
+                },
+
+                // Todo vacio --> false
+                {
+                        null, null, null, null, null, null, null, null,null,"manager1", ConstraintViolationException.class
+                },
 
         };
         for (int i = 0; i < testingData.length; i++)
