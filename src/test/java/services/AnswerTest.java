@@ -97,14 +97,14 @@ public class AnswerTest extends AbstractTest {
 
                 // Crear una answer sin texto -> false
                 {
-                        "user2", "rendezvous3",null,ConstraintViolationException.class
+                        "user2", "answer1","question1",null,ConstraintViolationException.class
                 },
-                // Crear una Question logueado como manager --> false
+                // Crear una Answer logueado como manager --> false
                 {
-                        "manager2", "rendezvous2","Question created by manager test?",IllegalArgumentException.class
+                        "manager2","answer1","question1",IllegalArgumentException.class
                 },
                 // Crear una Question con <script> en el texto
-                {
+               /* {
                         "user2", "rendezvous3","<script>",ConstraintViolationException.class
                 },
                 // Crear una Quesion sin  loguearse -> false
@@ -114,7 +114,7 @@ public class AnswerTest extends AbstractTest {
                 // Crear una Quesion para un rendezvous que tiene participantes  -> false
                 {
                         null, "rendezvous1", "Question anonymous Test", IllegalArgumentException.class
-                }
+                }*/
         };
         for (int i = 0; i < testingData.length; i++)
             answerCreateTest((String) testingData[i][0], (String) testingData[i][1],
