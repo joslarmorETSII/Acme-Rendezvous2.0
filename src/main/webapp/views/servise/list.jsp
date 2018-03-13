@@ -22,33 +22,24 @@
                pagesize="5" class = "displaytag">
 
     <acme:column code="servise.name" value="${servise.name}" />
-
     <acme:column code="servise.description" value="${servise.description}"/>
-
     <spring:message code="servise.picture" var="pic"/>
-
     <display:column title="${pic}"><img src="${servise.picture}" width="130" height="100"></display:column>
 
-<%--
-    <acme:column code="servise.assigned" value ="${servise.assigned}"/>
---%>
-
-
-    <jstl:if test="${manager eq servise.manager}">
-        <security:authorize access="hasRole('MANAGER')">
+    <security:authorize access="hasRole('MANAGER')">
+        <jstl:if test="${manager eq servise.manager}">
             <display:column>
                 <acme:button code="servise.edit" url="servise/manager/edit.do?serviseId=${servise.id}" />
             </display:column>
-        </security:authorize>
-    </jstl:if>
+        </jstl:if>
 
-    <jstl:if test="${servise.assigned eq false && manager eq servise.manager}">
-        <security:authorize access="hasRole('MANAGER')">
-            <display:column>
-                <acme:button url="servise/manager/editDelete.do?serviseId=${servise.id}" code="button.delete" />
-            </display:column>
-        </security:authorize>
-    </jstl:if>
+        <display:column>
+        <jstl:if test="${servise.assigned eq false && manager eq servise.manager}">
+            <acme:button url="servise/manager/editDelete.do?serviseId=${servise.id}" code="button.delete" />
+        </jstl:if>
+        </display:column>
+
+    </security:authorize>
 
 
     <security:authorize access="hasRole('ADMINISTRATOR')">
@@ -57,12 +48,12 @@
         </jstl:if>
     </security:authorize>
 
+    <security:authorize access="hasRole('USER')">
 
     <jstl:if test="${servise.inappropriate eq false}">
-        <security:authorize access="hasRole('USER')">
             <acme:columnButton codeButton="servise.requestt" url="requestt/user/create.do?serviseId=${servise.id}"/>
-        </security:authorize>
     </jstl:if>
+    </security:authorize>
 
     <jstl:if test="${servise.inappropriate eq true}">
         <display:column>

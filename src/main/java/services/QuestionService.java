@@ -52,6 +52,7 @@ public class QuestionService {
    public Question save(Question question){
         checkByPrincipal(question);
         Assert.isTrue(question.getAnswers().isEmpty(),"has answers");
+        Assert.isTrue(question.getRendezvous().getParticipated().size()==1,"The rendezvous has participants");
         return questionRepository.saveAndFlush(question);
    }
 

@@ -52,8 +52,15 @@ public class ServiseController extends AbstractController{
         result.addObject("requestURI","servise/listAll.do");
 
         if(actorService.isManager()){
-            result.addObject("manager",actor);
+            Manager manager = (Manager) actor;
+            result.addObject("manager",manager);
         }
+
+        if(actorService.isUser()){
+            User user = (User)actor;
+            result.addObject("user",user);
+        }
+
         return result;
     }
 }
