@@ -55,6 +55,7 @@ public class User extends Actor {
     }
 
     @Valid
+    @NotNull
     @OneToMany(mappedBy = "user")
     public Collection<Comment> getComments() {
         return comments;
@@ -65,6 +66,7 @@ public class User extends Actor {
     }
 
     @Valid
+    @NotNull
     @OneToMany(mappedBy = "attendant")
     public Collection<Participate> getParticipates() {
         return participates;
@@ -75,6 +77,7 @@ public class User extends Actor {
     }
 
     @Valid
+    @NotNull
     @OneToMany(mappedBy = "creator")
     public Collection<Rendezvous> getRendezvouses() {
         return rendezvouses;

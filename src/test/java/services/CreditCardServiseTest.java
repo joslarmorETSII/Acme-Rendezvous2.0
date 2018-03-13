@@ -151,6 +151,10 @@ public class CreditCardServiseTest extends AbstractTest {
                 {
                         "user1", "<script>", "brand", "4532865767277390", 12, 2020, 100,"creditCard1", ConstraintViolationException.class
                 },
+                // Editar creditCard estando logueado con to do vacio  --> false
+                {
+                        "user1","", "", "", null, null, null,"creditCard1", ConstraintViolationException.class
+                },
 
         };
         for (int i = 0; i < testingData.length; i++)
@@ -177,6 +181,10 @@ public class CreditCardServiseTest extends AbstractTest {
                 // Crear creditCard autenticado como manager -> false
                 {
                         "manager1", "holder", "brand", "4532865767277390", 12, 2022, 500, IllegalArgumentException.class
+                },
+                // Crear creditCard estando logueado con to do vacio  --> false
+                {
+                        "user1","", "", "", null, null, null, ConstraintViolationException.class
                 },
 
         };
