@@ -59,7 +59,7 @@ public class ManagerServiceTest extends AbstractTest {
             Assert.notNull(passwordRepeat);
             Assert.isTrue(password.equals(passwordRepeat));
             Assert.notNull(phone);
-          //  Assert.isTrue(phone.matches("^\\+([3][4])( )(\\d{9})|()$"));
+            Assert.isTrue(phone.matches("^\\+([3][4])( )(\\d{9})|()$"));
             Assert.notNull(vat);
             Assert.notNull(email);
             Assert.notNull(name);
@@ -128,17 +128,17 @@ public class ManagerServiceTest extends AbstractTest {
     //Drivers
     // ===================================================
 
-    //@Test
+    @Test
     public void driverManagerRegisterTest() {
 
         final Object testingData[][] = {
                 // Alguien sin registrar/logueado -> true
-               {/*
+               {
                         "manager3", "manager3", "manager3", "managerTestName", "managerTestSurname","123-ASD", "+34 123456789", "managerTest@managerTest.com", "addressTest", null
                 },
                 // Todo vacio --> false
                {
-                        null, null, null, null, null, null, null, null,null, IllegalArgumentException.class
+                      null, null, null, null, null, null, null, null,null, IllegalArgumentException.class
                },
                 // Las contraseñas no coinciden -> false
                 {
@@ -149,17 +149,15 @@ public class ManagerServiceTest extends AbstractTest {
                         "managerTest2", "managerTest2", "managerTest2", "managerTestName2", "managerTestSurname2", "193-ASD","+34 123456789", "managerTest@managerTest.com", "", null
                 },
                 // Patrón del telefono erroneo -> false
-                {*/
-               /*         "managerTest3", "managerTest3", "managerTest3", "managerTestName3", "managerTestSurname3","153-ASD", "635", "managerTest@managerTest.com", "12345", ConstraintViolationException.class
+                {
+                       "managerTest3", "managerTest3", "managerTest3", "managerTestName3", "managerTestSurname3","153-ASD", "635", "managerTest@managerTest.com", "12345", IllegalArgumentException.class
                 },
                 // Patrón del vat erroneo -> false
-                {*/
+                {
                         "manager400", "manager400", "manager400", "managerName4", "managerSurname4","000+AAA", "+34 123456789", "manager@manager.com", "12345", ConstraintViolationException.class
                 },
 
-                {
-                        "", "manager55", "manager55", "managerTestName5", "managerTestSurname5","173-ASD", "+34 123456789", "managerTest@managerTest.com", "addressTest", ConstraintViolationException.class
-                }
+
 //todo Preguntar al profesor
         };
         for (int i = 0; i < testingData.length; i++)

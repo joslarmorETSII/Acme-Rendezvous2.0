@@ -1,5 +1,6 @@
 package services;
 
+import domain.Actor;
 import domain.Rendezvous;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
@@ -29,6 +30,8 @@ public class RendezvousServiceTest extends AbstractTest {
     @Autowired
     private RendezvousService rendezvousService;
 
+    @Autowired
+    private ActorService    actorService;
     // Tests
     // ====================================================
 
@@ -145,16 +148,19 @@ public class RendezvousServiceTest extends AbstractTest {
      * En este caso de uso un usuario puede borrar un rendezvous existente (Borrado virtual)
      */
 
-    public void deleteRendezvousTest(final String username, final int courseId, final Class<?> expected) {
+    public void deleteRendezvousTest(final String username, String rendezvousBean,Boolean finalMode, final Class<?> expected) {
         Class<?> caught = null;
 
         try {
-         //   final Course course = this.courseService.findOne(courseId);
+            Rendezvous result= rendezvousService.findOne(super.getEntityId(rendezvousBean));
 
             this.authenticate(username);
-
-          //  this.courseService.delete(course);
-
+            Actor actor = actorService.findByPrincipal();
+            if(actorService.isUser()) {
+                this.rendezvousService.delete(result);
+            }else if(actorService.isAdministrator()){
+                this.rendezvousService.deleteAdmin(result);
+            }
             this.unauthenticate();
 
         } catch (final Throwable oops) {
@@ -169,7 +175,7 @@ public class RendezvousServiceTest extends AbstractTest {
     //Drivers
     // ===================================================
 
-    @Test
+    //@Test
     public void driverListRendezvousTest() {
 
         final Object testingData[][] = {
@@ -194,7 +200,7 @@ public class RendezvousServiceTest extends AbstractTest {
         for (int i = 0; i < testingData.length; i++)
             this.listOfRendezvousTest((String) testingData[i][0], (Class<?>) testingData[i][1]);
     }
-    @Test
+    //@Test
     public void driverRendezvousCreateTest() {
         //DateFormat formatter= new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
@@ -244,7 +250,7 @@ public class RendezvousServiceTest extends AbstractTest {
                 {
                         "manager1","name1","description1","12/03/2020 12:00","http://www.picture.com",20.99,13.09,true,false,false, "rendezvous1",IllegalArgumentException.class
                },
-                // Edit la description con un script -> false // todo: Preguntar al profesor, no se camptura el error de validacion
+                // Edit la description con un script -> false
                 {
                 "user1","name1","<script>","12/03/2020 12:00","http://www.picture.com",20.99,13.09,true,false,false,"rendezvous1", ConstraintViolationException.class
             }
@@ -255,6 +261,35 @@ public class RendezvousServiceTest extends AbstractTest {
             this.editRendezvousTest((String) testingData[i][0], (String) testingData[i][1],(String) testingData[i][2],(String)testingData[i][3] , (String)testingData[i][4],(Double) testingData[i][5],(Double) testingData[i][6],(Boolean) testingData[i][7],(Boolean) testingData[i][8],(Boolean) testingData[i][9],(String) testingData[i][10], (Class<?>) testingData[i][11]);
 
     }
+
+
+    @Test
+    public void driverDeleteRendezvousTest() {
+
+        final Object testingData[][] = {
+                // Borrar un rendezvous estando logueado como user -> true
+                {
+                        "user1", "rendezvous1",false, null
+                },
+
+                // Borrar un rendezvous estando logueado como admin -> true
+                {
+                        "administrator", "rendezvous2",false, null
+                },
+                // Borrar un rendezvous sin estar logueado -> false
+                {
+                        null, "rendezvous1",false, IllegalArgumentException.class
+                },
+                // Borrar un rendezvous que no esta en modo final -> false
+                {
+                        "user1","rendezvous2",true, IllegalArgumentException.class
+               },
+
+        };
+        for (int i = 0; i < testingData.length; i++)
+            this.deleteRendezvousTest((String) testingData[i][0], (String) testingData[i][1],(Boolean) testingData[i][2], (Class<?>) testingData[i][3]);
+    }
+
 
 
 }

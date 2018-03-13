@@ -244,7 +244,7 @@
         <property name="name" value="Groupo Francés"/>
         <property name="description" value="Oui"/>
         <property name="moment" value="2018/04/14 11:11"/>
-        <property name="finalMode" value="false"/>
+        <property name="finalMode" value="true"/>
         <property name="deleted" value="false"/>
         <property name="forAdults" value="false"/>
         <property name="participated">
