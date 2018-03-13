@@ -153,24 +153,23 @@ public class UserServiceTest extends AbstractTest {
         Date birthdayIncorrecto = new Date(22/05/2020);
 
         final Object testingData[][] = {
+
                 // Alguien sin registrar/logueado -> true
                 {
                         "user3", "user3", "user3", "userTestName", "userTestSurname", "+34 123456789", "userTest@userTest.com", "addressTest",birthday,"user1", null
+                },
+                // Todos los campos completados, excepto la direccion postal -> true
+                 {
+                        "user2", "user2", "user2", "user2", "user2", "+34 123456789", "userTest@userTest.com", "",birthday,"user2", null
+                  },
+                // Patrón del telefono erroneo -> false
+                {
+                        "userTest3", "userTest3", "userTest3", "userTestName3", "userTestSurname3", "635", "managerTest@managerTest.com", "12345",birthday,"user1", ConstraintViolationException.class
                 },
                 // To do vacio --> false
                 {
                         null, null, null, null, null, null, null, null,null,"user1", ConstraintViolationException.class
                 },
-//                // Todos los campos completados, excepto la direccion postal -> true
-//                //TODO: preguntar al prof sale una excepción del tipo:ObjectOptimisticLockingFailureException
-//                 {
-//                        "user1", "user1", "user1", "user1", "user1", "+34 123456789", "userTest@userTest.com", "",birthday,"user1", null
-//                  },
-                // Patrón del telefono erroneo -> false
-                {
-                        "userTest3", "userTest3", "userTest3", "userTestName3", "userTestSurname3", "635", "managerTest@managerTest.com", "12345",birthday,"user1", ConstraintViolationException.class
-                },
-
 
         };
         for (int i = 0; i < testingData.length; i++)
