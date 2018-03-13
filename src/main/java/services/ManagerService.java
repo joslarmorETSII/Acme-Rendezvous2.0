@@ -54,7 +54,7 @@ public class ManagerService {
     }
 
     public Manager findOne(final int managerId) {
-
+        Assert.notNull(managerId);
         Manager result;
         result = this.managerRepository.findOne(managerId);
         return result;
@@ -167,5 +167,9 @@ public class ManagerService {
 
     public Collection<Manager> managersWithMoreServisesCancelled() {
         return managerRepository.managersWithMoreServisesCancelled();
+    }
+
+    public void flush() {
+        managerRepository.flush();
     }
 }

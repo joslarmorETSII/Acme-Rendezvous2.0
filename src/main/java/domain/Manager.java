@@ -25,7 +25,6 @@ public class Manager extends Actor {
     private  String vat;
 
 
-    @Column(unique = true)
     @NotBlank
     @Pattern(regexp = "^(\\d{3})\\-([A-Z]{3})$")
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)

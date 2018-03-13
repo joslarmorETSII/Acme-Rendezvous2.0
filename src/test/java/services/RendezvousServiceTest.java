@@ -139,10 +139,37 @@ public class RendezvousServiceTest extends AbstractTest {
         this.checkExceptions(expected, caught);
     }
 
+    /*
+     * Delete a rendezvous.
+     *
+     * En este caso de uso un usuario puede borrar un rendezvous existente (Borrado virtual)
+     */
+
+    public void deleteRendezvousTest(final String username, final int courseId, final Class<?> expected) {
+        Class<?> caught = null;
+
+        try {
+         //   final Course course = this.courseService.findOne(courseId);
+
+            this.authenticate(username);
+
+          //  this.courseService.delete(course);
+
+            this.unauthenticate();
+
+        } catch (final Throwable oops) {
+
+            caught = oops.getClass();
+
+        }
+
+        this.checkExceptions(expected, caught);
+    }
+
     //Drivers
     // ===================================================
 
-    //@Test
+    @Test
     public void driverListRendezvousTest() {
 
         final Object testingData[][] = {
@@ -167,7 +194,7 @@ public class RendezvousServiceTest extends AbstractTest {
         for (int i = 0; i < testingData.length; i++)
             this.listOfRendezvousTest((String) testingData[i][0], (Class<?>) testingData[i][1]);
     }
-   // @Test
+    @Test
     public void driverRendezvousCreateTest() {
         //DateFormat formatter= new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
