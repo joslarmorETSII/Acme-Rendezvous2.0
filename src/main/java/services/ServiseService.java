@@ -32,6 +32,9 @@ public class ServiseService {
     @Autowired
     private ManagerService managerService;
 
+    @Autowired
+    private AdministratorService administratorService;
+
 
     // Constructors -----------------------------------------------------------
 
@@ -44,9 +47,9 @@ public class ServiseService {
     public Servise create(){
 
         Servise result = new Servise();
-        Manager manager = (Manager) this.actorService.findByPrincipal();
+        Manager manager =  this.managerService.findByPrincipal();
         Collection<Rendezvous> rendezvouses = new ArrayList<Rendezvous>();
-
+        Assert.notNull(manager);
         result.setInappropriate(false);
         result.setAssigned(false);
         result.setManager(manager);
@@ -61,14 +64,14 @@ public class ServiseService {
 
 
     public Servise save(Servise servise){
-        Manager manager;
+        Manager manager = this.managerService.findByPrincipal();
         Servise result;
 
-        Assert.isTrue(this.actorService.isManager() || actorService.isUser());
+        Assert.isTrue(this.actorService.isManager());
         Assert.notNull(servise);
+        Assert.isTrue(servise.getManager().equals(manager));
 
         if(servise.getId()==0) {
-            manager = (Manager) this.actorService.findByPrincipal();
             result = serviseRepository.save(servise);
             manager.getServises().add(result);
         }else{
@@ -80,7 +83,10 @@ public class ServiseService {
 
     public void delete(Servise servise) {
 
+        Manager manager = managerService.findByPrincipal();
         Assert.isTrue(actorService.isManager());
+        Assert.isTrue(servise.getManager().equals(manager));
+
         //TODO: Si falla eliminar request y rendezvous
         if(servise.getRendezvouses().isEmpty()) {
             this.serviseRepository.delete(servise);
@@ -105,8 +111,13 @@ public class ServiseService {
     public void inappropriateDontRequest(final int serviseId){
 
         Servise servise;
-
         servise = this.serviseRepository.findOne(serviseId);
+
+        Assert.isTrue(this.actorService.isAdministrator());
+
+//        Administrator administrator = this.administratorService.findByPrincipal();
+//        Assert.notNull(administrator);
+
         servise.setInappropriate(true);
         this.serviseRepository.save(servise);
 
@@ -126,4 +137,7 @@ public class ServiseService {
         return result;
     }
 
+    public void flush() {
+        serviseRepository.flush();
+    }
 }

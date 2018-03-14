@@ -70,7 +70,6 @@ public class AnnouncementService {
         checkByPrincipalAdministrator();
         this.announcementRepository.delete(announcement);
     }
-
     public void deleteAnnouncements(Rendezvous rendezvous){
         this.announcementRepository.delete(rendezvous.getAnnouncements());
     }
@@ -132,6 +131,10 @@ public class AnnouncementService {
 
         result = res;
         return result;
+    }
+
+    public void flush() {
+        announcementRepository.flush();
     }
 }
 
