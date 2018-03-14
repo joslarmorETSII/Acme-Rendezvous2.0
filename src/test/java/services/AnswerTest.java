@@ -40,16 +40,20 @@ public class AnswerTest extends AbstractTest {
 
         try {
 
+
             Question question = questionService.findOne(getEntityId(questionBean));
 
 
             this.authenticate(username);
 
             Answer result = answerService.create();
+            result.setAnswer(answer);
             result.setQuestion(question);
-            //result.setRendezvous(rendezvous);
+
+
 
             answerService.save(result);
+            answerService.flush();
             this.unauthenticate();
 
 
@@ -60,27 +64,26 @@ public class AnswerTest extends AbstractTest {
 
     }
 
-
-    public void questionEditTest(String username, String questionBean,String text,  Class<?> expected) {
-        Class<?> caught=null;
-
+    public void listOfAnswerTest(final String username,final Class<?> expected){
+        Class<?> caught = null;
         try {
             this.authenticate(username);
 
-            int questionId = super.getEntityId(questionBean);
-            Question question = questionService.findOne(questionId);
-            question.setText(text);
+            this.answerService.findAll();
 
-            questionService.save(question);
             this.unauthenticate();
 
-
         } catch (final Throwable oops) {
-            caught = oops.getClass();
-        }
-        this.checkExceptions(expected, caught);
 
+            caught = oops.getClass();
+
+        }
+
+        this.checkExceptions(expected, caught);
     }
+
+
+
 
     // Drivers
     // ===================================================
@@ -89,63 +92,61 @@ public class AnswerTest extends AbstractTest {
     public void driverAnswerCreateTest() {
         final Object testingData[][] = {
 
-             //   String username, String answer,String questionBean,  Class<?> expected
-                // Crear una Answer  -> true
+             //   String username, String answer,String answerBean,String questionBean,  Class<?> expected
+                // Editar una Answer  -> true
                 {
                         "user2","answer1","question1",null
                 },
 
                 // Crear una answer sin texto -> false
                 {
-                        "user2", "answer1","question1",null,ConstraintViolationException.class
+                        "user2","","question1",ConstraintViolationException.class
                 },
                 // Crear una Answer logueado como manager --> false
                 {
                         "manager2","answer1","question1",IllegalArgumentException.class
                 },
-                // Crear una Question con <script> en el texto
-               /* {
-                        "user2", "rendezvous3","<script>",ConstraintViolationException.class
-                },
-                // Crear una Quesion sin  loguearse -> false
+                // Crear una Answer con <script> en el texto
                 {
-                        null, "rendezvous1", "Question anonymous Test", IllegalArgumentException.class
+                        "user2","<script>","question1",ConstraintViolationException.class
                 },
-                // Crear una Quesion para un rendezvous que tiene participantes  -> false
+                // Crear una Answer sin  loguearse -> false
                 {
-                        null, "rendezvous1", "Question anonymous Test", IllegalArgumentException.class
-                }*/
+                        null,"answer1", "question1", IllegalArgumentException.class
+                },
+
         };
         for (int i = 0; i < testingData.length; i++)
             answerCreateTest((String) testingData[i][0], (String) testingData[i][1],
                     (String) testingData[i][2],(Class<?>) testingData[i][3]);
 
     }
-    //@Test
-    public void driverListRendezvousTest() {
+
+
+    @Test
+    public void driverListAnswerTest() {
 
         final Object testingData[][] = {
-                // Editar una Question -> true
+                // Alguien sin registrar/logueado -> true
                 {
-                        "user2", "question3", "Question Text?", null
+                        null, null
                 },
-                // Editar una question de otro usuario -> false
+                // Un Usuario -> true
                 {
-                        "user1", "question3", "Question Text?", IllegalArgumentException.class
+                        "user1", null
                 },
-                // Editar una question con un script en el texto ->false
+                // Otro Usuario -> true
                 {
-                        "user2", "question3", "<php>", ConstraintViolationException.class
+                        "user2", null
                 },
-                // Editar una question sin poner el texto -> flase
+                // Un administrador -> true
                 {
-                        "user2", "question3", "", ConstraintViolationException.class
-
+                        "administrator", null
                 }
 
         };
         for (int i = 0; i < testingData.length; i++)
-            this.questionEditTest((String) testingData[i][0],(String)testingData[i][1],(String)testingData[i][2] ,(Class<?>) testingData[i][3]);
+            this.listOfAnswerTest((String) testingData[i][0], (Class<?>) testingData[i][1]);
     }
 
 

@@ -6,6 +6,7 @@ import domain.Rendezvous;
 import domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import repositories.AnswerRepository;
 
 import javax.transaction.Transactional;
@@ -47,8 +48,12 @@ public class AnswerService {
     }
 
     public Answer findOne(Integer answerId){
+
         return answerRepository.findOne(answerId);
     }
+
+
+
 
     public Collection<Answer> findAll(){
         return answerRepository.findAll();
@@ -87,5 +92,9 @@ public class AnswerService {
 
     public Collection<Answer> answersOfUserInRendezvous(Integer rendezvousId,Integer attendantID){
         return answerRepository.answersOfUserInRendezvous(rendezvousId,attendantID);
+    }
+
+    public void flush() {
+        answerRepository.flush();
     }
 }
