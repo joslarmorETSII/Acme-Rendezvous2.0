@@ -40,7 +40,7 @@ public class Comment extends DomainEntity {
         this.moment = moment;
     }
 
-    @SafeHtml
+    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     @NotBlank
     public String getText() {
         return text;
@@ -50,7 +50,7 @@ public class Comment extends DomainEntity {
         this.text = text;
     }
 
-    @SafeHtml
+    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     @URL
     public String getPicture() {
         return picture;
