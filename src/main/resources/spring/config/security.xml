@@ -54,6 +54,7 @@
 		<security:intercept-url pattern="/user/list.do" access="permitAll" />
 		<security:intercept-url pattern="/user/editProfile.do" access="hasRole('USER')" />
 
+
 		<!-- Manager -->
 
 
@@ -65,6 +66,11 @@
 		<!-- Term and Conditions -->
 
 		<security:intercept-url pattern="/termAndCondition/termAndCondition.do" access="permitAll()" />
+
+		<!-- Categories -->
+
+		<security:intercept-url pattern="/category/list.do" access="permitAll()" />
+		<security:intercept-url pattern="/category/administrator/**" access="hasRole('ADMINISTRATOR')" />
 
 
 

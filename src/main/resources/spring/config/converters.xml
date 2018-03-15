@@ -39,7 +39,7 @@
 		<bean class="converters.RequestToStringConverter"/>
 		<bean class="converters.ServiseToStringConverter"/>
 		<bean class="converters.CreditCardToStringConverter"/>
-
+		<bean class="converters.CategoryToStringConverter"/>
 
 
 
@@ -59,6 +59,7 @@
 		<bean class="converters.StringToRequestConverter"/>
 		<bean class="converters.StringToServiseConverter"/>
 		<bean class="converters.StringToCreditCardConverter"/>
+		<bean class="converters.StringToCategoryConverter"/>
 
 
 
