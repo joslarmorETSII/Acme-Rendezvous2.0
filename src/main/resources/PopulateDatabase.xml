@@ -639,6 +639,7 @@
         <property name="manager" ref="manager1"/>
         <property name="assigned" value="false"/>
         <property name="inappropriate" value="false"/>
+        <property name="category"   ref="category1"/>
     </bean>
 
     <bean id="servise2" class="domain.Servise">
@@ -653,6 +654,7 @@
         <property name="manager" ref="manager2"/>
         <property name="assigned" value="false"/>
         <property name="inappropriate" value="false"/>
+        <property name="category"   ref="category2"/>
     </bean>
 
     <!-- Requests -->
@@ -685,6 +687,52 @@
         <property name="expirationMonth" value="12" />
         <property name="expirationYear" value="2017" />
         <property name="cvv" value="232" />
+    </bean>
+
+    <!-- Categories -->
+
+    <bean id="category1" class="domain.Category">
+        <property name="name" value="category1" />
+        <property name="description" value="description1" />
+        <property name="childrenCategories">
+            <list>
+                <ref bean="category2" />
+            </list>
+        </property>
+        <property name="servises">
+            <list>
+                <ref bean="servise1" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="category2" class="domain.Category">
+        <property name="name" value="category2" />
+        <property name="description" value="description2" />
+        <property name="parentCategory" ref="category1" />
+        <property name="childrenCategories">
+            <list>
+                <ref bean="category3" />
+            </list>
+        </property>
+        <property name="servises">
+            <list>
+                <ref bean="servise2" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="category3" class="domain.Category">
+        <property name="name" value="category3" />
+        <property name="description" value="description3" />
+        <property name="childrenCategories">
+            <list>
+            </list>
+        </property>
+        <property name="servises">
+            <list>
+            </list>
+        </property>
     </bean>
 
 </beans>

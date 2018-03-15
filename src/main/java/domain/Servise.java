@@ -1,5 +1,6 @@
 package domain;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
@@ -78,8 +79,7 @@ public class Servise extends DomainEntity {
     // Relationships ----------------------------------------------------------
 
     private Manager manager;
-    //TODO: Nivel b
-    //private Category category;
+    private Category category;
     private Collection<Rendezvous> rendezvouses;
 
     @Valid
@@ -93,17 +93,17 @@ public class Servise extends DomainEntity {
         this.manager = manager;
     }
 
-    //TODO: Nivel b
-//    @Valid
-//    @NotNull
-//    @ManyToOne(optional = false)
-//    public Category getCategory() {
-//        return category;
-//    }
-//
-//    public void setCategory(Category category) {
-//        this.category = category;
-//    }
+
+    @Valid
+    @NotNull
+    @ManyToOne(optional = false)
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     @Valid
     @NotNull
