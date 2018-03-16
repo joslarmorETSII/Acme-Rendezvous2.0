@@ -23,7 +23,7 @@
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="hasRole('ADMINISTRATOR')">
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
-			<ul>
+				<ul>
 					<li class="arrow"></li>
 					<li><a href="administrator/edit.do"><spring:message code="master.page.administrator.edit" /></a></li>
 					<li><a href="comment/administrator/list.do"><spring:message code="master.page.comment.administrator.list" /></a></li>
@@ -32,10 +32,10 @@
 				    <li><a href="servise/administrator/list.do"><spring:message code="master.page.servise.administrator.list" /></a></li>
 					<li><a href="category/administrator/create.do"><spring:message code="master.page.category.create" /></a>
 					<li><a href="category/administrator/edit.do"><spring:message code="master.page.category.edit" /></a>
-				<li><a href="administrator/dashboard.do"><spring:message
-                        code="master.page.administrator.dashboard"/></a></li>
-			</ul>
+					<li><a href="administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard"/></a></li>
+				</ul>
 			</li>
+			<li><a class="fNiv" href="configuration/administrator/edit.do"><spring:message code="master.page.configuration.administrator.edit" /></a></li>
 
 		</security:authorize>
 		
