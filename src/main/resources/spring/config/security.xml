@@ -105,8 +105,6 @@
 		<!--Servise -->
 
 		<security:intercept-url pattern="/servise/manager/**" access="hasRole('MANAGER')" />
-
-
 		<security:intercept-url pattern="/servise/administrator/**" access="hasRole('ADMINISTRATOR')"/>
         <security:intercept-url pattern="/servise/listAll.do" access="isAuthenticated()" />
 
@@ -114,6 +112,9 @@
 		<security:intercept-url pattern="/announcement/**" access="permitAll()" />
 		<security:intercept-url pattern="/announcement/user/**" access="hasRole('USER')" />
 		<security:intercept-url pattern="/announcement/administrator/**" access="hasRole('ADMINISTRATOR')" />
+
+		<!-- Configurations -->
+		<security:intercept-url pattern="/configuration/administrator/**" access="hasRole('ADMINISTRATOR')" />
 
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

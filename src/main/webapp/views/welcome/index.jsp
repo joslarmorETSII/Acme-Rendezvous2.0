@@ -16,12 +16,18 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<div>
+    <img src="${configurationBanner}" alt="${name}" />
+</div>
+
 <jstl:if test="${pageContext.response.locale.language == 'es'}">
-    <p><spring:message code="welcome.greeting.prefix" /><jstl:out value="${spanishWelcome}"></jstl:out><spring:message code="welcome.greeting.suffix" /></p>
+    <jstl:out value="${spanishWelcome}"></jstl:out>
     <p><b><spring:message code="welcome.greeting.current.time" />:&nbsp;</b>${momentEs} </p>
+
 </jstl:if>
 
 <jstl:if test="${pageContext.response.locale.language == 'en'}">
-    <p><spring:message code="welcome.greeting.prefix" /><jstl:out value="${englishWelcome}"></jstl:out><spring:message code="welcome.greeting.suffix" /></p>
+    <jstl:out value="${englishWelcome}"></jstl:out>
     <p><b><spring:message code="welcome.greeting.current.time" />:&nbsp;</b>${momentEn} </p>
+
 </jstl:if>
