@@ -21,6 +21,9 @@ public class ConfigurationService {
 
     // Supporting services ----------------------------------------------------
 
+    @Autowired
+    private ActorService actorService;
+
     // Constructors -----------------------------------------------------------
 
     public ConfigurationService() {
@@ -30,6 +33,7 @@ public class ConfigurationService {
     // Simple CRUD methods ----------------------------------------------------
 
     public Configuration create() {
+        Assert.isTrue(actorService.isAdministrator());
         Configuration configuration = new Configuration();
         return configuration;
     }
@@ -42,6 +46,13 @@ public class ConfigurationService {
         return this.configurationRepository.findOne(id);
     }
 
+    public Configuration findOneToEdit(final int id) {
+        Assert.isTrue(actorService.isAdministrator());
+
+        return this.configurationRepository.findOne(id);
+    }
+
+
     public Configuration save(final Configuration configuration) {
         Assert.notNull(configuration);
         return this.configurationRepository.save(configuration);
@@ -52,6 +63,11 @@ public class ConfigurationService {
     }
 
     // Other business methods -------------------------------------------------
+
+    public void flush() {
+        configurationRepository.flush();
+    }
+
 
 }
 

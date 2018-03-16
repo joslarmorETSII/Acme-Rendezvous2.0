@@ -151,7 +151,6 @@ public class CommentServiceTest extends AbstractTest {
 
     @Test
     public void driverCommentCreateTest() {
-            //DateFormat formatter= new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
             final Object testingData[][] = {
                     // Crear un comentario perfecto -> true
