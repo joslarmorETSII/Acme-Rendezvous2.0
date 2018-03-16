@@ -60,7 +60,7 @@ public class RequesttService {
 
         rendezvous = request.getRendezvous();
         servise = request.getServise();
-        servise.setAssigned(true);              // todo :
+        servise.setAssigned(true);
 
         rendezvous.getServises().add(servise);
         servise.getRendezvouses().add(rendezvous);

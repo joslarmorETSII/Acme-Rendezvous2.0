@@ -31,7 +31,7 @@
     <acme:textbox path="name" code="servise.name"/>
     <acme:textarea path="description" code="servise.description"/>
     <acme:textbox path="picture" code="servise.picture"/>
-
+    <acme:select path="category" code="service.category" items="${categories}" itemLabel="name"/>
 
     <security:authorize access="hasRole('MANAGER')">
         <acme:submit name="save" code="button.save"/>

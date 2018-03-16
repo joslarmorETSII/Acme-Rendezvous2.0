@@ -16,4 +16,9 @@ public interface ServiseRepository extends JpaRepository<Servise, Integer> {
     @Query("select s from Servise s order by s.rendezvouses.size")
     Collection<Servise> topSellingServises();
 
+    //The average, the minimum, the maximum, and the standard deviation of services requested per rendezvous.
+
+    @Query("select avg(r.servises.size), min(r.servises.size), max(r.servises.size), sqrt(sum(r.servises.size * r.servises.size)/count(s) - (avg(r.servises.size) * avg(r.servises.size))) from Rendezvous r, Servise s")
+    Collection<Double> avgMinMaxDevServisesPerRendezvous();
+
 }

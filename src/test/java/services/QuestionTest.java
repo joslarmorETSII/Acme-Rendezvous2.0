@@ -124,7 +124,7 @@ public class QuestionTest extends AbstractTest {
 
     }
     @Test
-    public void driverListRendezvousTest() {
+    public void driverQuestionEditTest() {
 
         final Object testingData[][] = {
                 // Editar una Question -> true

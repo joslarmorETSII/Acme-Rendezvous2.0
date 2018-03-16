@@ -61,6 +61,7 @@ public class CategoryAdministratorController extends AbstractController {
 
 		category = this.categoryService.findOne(categoryId);
 		Assert.notNull(category);
+		Assert.isTrue(category.getServises().isEmpty());
 
 		result = this.createEditModelAndView(category);
 

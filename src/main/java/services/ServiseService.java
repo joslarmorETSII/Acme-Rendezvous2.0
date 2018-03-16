@@ -140,4 +140,8 @@ public class ServiseService {
     public void flush() {
         serviseRepository.flush();
     }
+
+    public Collection<Double> avgMinMaxDevServisesPerRendezvous(){
+        return serviseRepository.avgMinMaxDevServisesPerRendezvous();
+    }
 }

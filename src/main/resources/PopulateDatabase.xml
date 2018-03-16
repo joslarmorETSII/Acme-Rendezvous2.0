@@ -147,6 +147,7 @@
         <property name="participates">
             <list>
                 <ref bean="participate1"/>
+                <ref bean="participate3"/>
             </list>
         </property>
         <property name="answers">
@@ -676,7 +677,7 @@
         <property name="brand" value="visa" />
         <property name="number" value="4539708415602051" />
         <property name="expirationMonth" value="12" />
-        <property name="expirationYear" value="2017" />
+        <property name="expirationYear" value="2018" />
         <property name="cvv" value="243" />
     </bean>
 
@@ -685,7 +686,7 @@
         <property name="brand" value="visa" />
         <property name="number" value="4024007180567801" />
         <property name="expirationMonth" value="12" />
-        <property name="expirationYear" value="2017" />
+        <property name="expirationYear" value="2018" />
         <property name="cvv" value="232" />
     </bean>
 

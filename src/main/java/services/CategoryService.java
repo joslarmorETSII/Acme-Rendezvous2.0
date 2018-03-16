@@ -108,6 +108,7 @@ public class CategoryService {
 
 		Assert.notNull(category);
 		Assert.isTrue(actorService.isAdministrator());
+		Assert.isTrue(category.getServises().isEmpty());
 
 		category.getParentCategory().getChildrenCategories().remove(category);
 
@@ -146,6 +147,11 @@ public class CategoryService {
 		result = this.categoryRepository.findCategoryChildrenId(categoryId);
 		return result;
 	}
+
+	public Collection<Rendezvous> findAllRendezvousByCategoryId2( int categoryId) {
+		return categoryRepository.findAllRendezvousByCategoryId2(categoryId);
+	}
+
 
 //	public Category saveDelete(final Category category) {
 //		Assert.notNull(category);

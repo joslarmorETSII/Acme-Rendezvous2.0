@@ -52,11 +52,16 @@ public class ParticipateUserController extends AbstractController {
         Participate participate;
         User principal = userService.findByPrincipal();
 
-        participate = participateService.create();
         rendezvous = rendezvousService.findOne(rendezvousId);
+
+        Participate test =participateService.participate(principal.getId(), rendezvousId);
+
+        participate = participateService.create();
+        Assert.isTrue(test==null);
         if(rendezvous.getForAdults())
             participateService.checkMayorEdad(principal);
         participate.setRendezvous(rendezvous);
+
         if (rendezvous.getQuestions().size() > 0) {
             QuestionsForm questionsForm = new QuestionsForm();
             questionsForm.setQuestions(rendezvous.getQuestions());
@@ -67,7 +72,7 @@ public class ParticipateUserController extends AbstractController {
             result.addObject("message", message);
         } else {
             participateService.save(participate);
-            rendezvous.getParticipated().add(participate);
+            //rendezvous.getParticipated().add(participate);
             result = new ModelAndView("redirect: ../../rendezvous/listAll.do");
             result.addObject("rendezvous", rendezvousService.findAll());
             result.addObject("user", userService.findByPrincipal());

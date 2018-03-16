@@ -65,15 +65,24 @@ public class ParticipateService {
 
     public Participate save(Participate participate){
         Date currentDate = new Date();
+        Rendezvous rendezvous;
+        Participate res;
+
         Assert.notNull(participate);
         checkByPrincipal(participate);
+        rendezvous = participate.getRendezvous();
+        //Assert.isTrue(!rendezvous.equals(participate.getRendezvous()));
         if(participate.getRendezvous().getForAdults())
             checkMayorEdad(participate.getAttendant());
 
         //Assert.isTrue(currentDate.before(participate.getMoment()));
         participate.setMoment(currentDate);
 
-        return participateRepository.save(participate);
+        res =  participateRepository.save(participate);
+
+        rendezvous.getParticipated().add(participate);
+
+        return res;
     }
 
     public void delete(Participate participate){

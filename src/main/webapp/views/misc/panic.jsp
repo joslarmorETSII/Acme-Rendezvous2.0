@@ -23,7 +23,7 @@
 <p><spring:message code="panic.text" /> <code>${name}</code>.</p>
 
 
-<canvas width="1555" height="500"></canvas>
+<canvas width="1350" height="500"></canvas>
 
 <script>
     if (window.location.href.indexOf("fullcpgrid") > -1) {

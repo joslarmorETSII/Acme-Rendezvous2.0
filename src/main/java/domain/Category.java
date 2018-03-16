@@ -26,7 +26,7 @@ public class Category extends DomainEntity {
     // Attributes -------------------------------------------------------------
 
     private String	name;
-    private String description;
+    private String  description;
 
 
     @NotBlank

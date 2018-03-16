@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+	<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -13,8 +13,10 @@
 	<div>
 		<security:authorize access="hasRole('ADMINISTRATOR')">
 			<display:column>
+				<jstl:if test="${empty row.servises}">
 				<spring:message var="categoryEdit" code="category.edit"/> 
 				<a href="category/administrator/edit.do?categoryId=${row.id}"> ${categoryEdit} </a>
+				</jstl:if>
 			</display:column>
 		</security:authorize>
 		
@@ -40,17 +42,18 @@
 			</jstl:choose>
 		</display:column>
 
-		<spring:message var="categoryServises" code="category.servises"/>
-		<display:column title="${categoryServises}">
-			<spring:message var="categoryServise" code="category.servise"/>
-			<a href="servise/administrator/list-byCategoryId.do?categoryId=${row.id}">${categoryServise}</a>
-		</display:column>
 		
 		<spring:message var="categoryName" code="category.name"/>
 		<display:column property="name" title="${categoryName}" />
 
 		<spring:message var="categoryDescription" code="category.description"/>
 		<display:column property="description" title="${categoryDescription}" />
+
+		<spring:message var="categoryRendezvouses" code="category.categoryRendezvouses"/>
+		<display:column title="${categoryRendezvouses}">
+			<spring:message var="categoryRendezvouses" code="category.categoryRendezvouses"/>
+			<a href="category/rendezvous/list.do?categoryId=${row.id}">${categoryRendezvouses}</a>
+		</display:column>
 	</div>
 	
 </display:table>

@@ -70,6 +70,8 @@
 		<!-- Categories -->
 
 		<security:intercept-url pattern="/category/list.do" access="permitAll()" />
+		<security:intercept-url pattern="/category/rendezvous/list.do" access="permitAll()" />
+
 		<security:intercept-url pattern="/category/administrator/**" access="hasRole('ADMINISTRATOR')" />
 
 

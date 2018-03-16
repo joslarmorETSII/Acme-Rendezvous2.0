@@ -22,4 +22,11 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
 	@Query("select case when (count(son.name) > 0) then true else false end from Category parent join parent.childrenCategories son where (son.name = ?1 and parent.id = ?2) or parent.name = ?1")
 	Boolean existsThisCategoryName(String nameCheck, Integer parentId);
 
+	@Query("select s.rendezvouses from Servise s where s.category.id = ?1")
+	Collection<Rendezvous> findAllRendezvousByCategoryId2(int categoryId);
+
+
+	// Queries Nivel B- 11.1.a
+
+
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
+import services.CategoryService;
 import services.ServiseService;
 
 import javax.validation.Valid;
@@ -25,6 +26,9 @@ public class ServiseManagerController {
 
     @Autowired
     ServiseService serviseService;
+
+    @Autowired
+    CategoryService categoryService;
 
     // Create -------------------------------------------------------
 
@@ -109,6 +113,7 @@ public class ServiseManagerController {
         res.addObject("message", message);
         res.addObject("actionUri", "servise/manager/edit.do");
         res.addObject("cancelUri", "servise/manager/list.do");
+        res.addObject("categories",categoryService.findAll());
 
         return res;
 

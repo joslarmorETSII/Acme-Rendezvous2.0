@@ -119,6 +119,7 @@ public class RequesttUserController  extends AbstractController{
         result.addObject("requesttForm", requesttForm);
         result.addObject("userRendezvous",userRendezvous);
         result.addObject("nothingToDisplay",userRendezvous.size()==0);
+        result.addObject("user",user);
         result.addObject("message", messageCode);
 
         return result;
