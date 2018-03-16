@@ -21,7 +21,7 @@
 
 
 <p><spring:message code="panic.text" /> <code>${name}</code>.</p>
-
+Prueba
 
 <canvas width="1350" height="500"></canvas>
 
