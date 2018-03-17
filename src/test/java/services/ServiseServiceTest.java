@@ -32,7 +32,32 @@ public class ServiseServiceTest extends AbstractTest {
     private CategoryService categoryService;
 
 
+    // Tests ------------------------------------------------------------------
 
+    /*  FUNCTIONAL REQUIREMENT:
+     *
+     *   An actor who is registered as a manager must be able to:
+     * - Manage his or her services, which includes:
+     *      creating them.
+     *
+     * WHAT WILL WE DO?
+     *
+     * En este caso de uso vamos a admisnistrar la creación de un servicio:
+     *
+     * POSITIVE AND NEGATIVE CASES
+     *
+     * Como caso positivo:
+     *
+     * ·Crear un servicio logueado como manager.
+     *
+     * Para forzar el error pueden darse varios casos negativos, como son:
+     *
+     * · Intenta crear un servicio como un usuario autenticado distinto de manager
+     * · Introducir la descripcion y el titulo vacíos
+     * · Introducir un script
+     * · Introducir una url invalida para la picture.
+     * · Introducir el campo de asignado o inapropiado a true.
+     */
     public void serviseCreateTest(final String username, String name, String description, String picture, boolean assigned,boolean inappropriate, String categoryBean, Class<?> expected) {
         Class<?> caught=null;
 
@@ -59,8 +84,29 @@ public class ServiseServiceTest extends AbstractTest {
 
     }
 
+// Tests ------------------------------------------------------------------
 
-    public void serviseSaveStatus(final String username, String name, String description, String picture, String serviseBean, Class<?> expected) {
+    /*  FUNCTIONAL REQUIREMENT:
+     *
+     *   An actor who is registered as a manager must be able to:
+     * - Manage his or her services, which includes:
+     *      updating them.
+     *
+     * En este caso de uso editaremos un servicio y lo guardaremos
+     *
+     * Como caso positivo:
+     * · Editar un servicio como usuario manager el creador
+     *
+     * Como casos negativos:
+     * Para forzar el error pueden darse varios casos, como son:
+     *
+     * · Introducir un rendezvous asignado a un servicio
+     * · Introducir un manager distinto al creador
+     * · Introducir un usuario que no sea manager
+     * · Introducir un script en el titulo
+     * · Introducir un usuario no autenticado
+     */
+    public void serviseEditTest(final String username, String name, String description, String picture, String serviseBean, Class<?> expected) {
 
         Class<?> caught = null;
 
@@ -91,6 +137,67 @@ public class ServiseServiceTest extends AbstractTest {
         this.checkExceptions(expected, caught);
     }
 
+    // Tests ------------------------------------------------------------------
+
+    /*  FUNCTIONAL REQUIREMENT:
+     *
+     *   An actor who is registered as a manager, user or administrator must be able to:
+     * - Manage his or her services, which includes:
+     *      List them.
+     *
+     * En este caso listaremos todos los servicios del sistema
+     *
+     * Como caso positivo:
+     * · Listar los servicios como user
+     * · Listar los servicios como manager
+     * · Listar los servicios como administrador
+     *
+     * Como casos negativos:
+     * Para forzar el error pueden darse varios casos, como son:
+     *
+     * · Listar los servicios sin estar autenticado
+     */
+    public void listOfServiseTest(final String username,final Class<?> expected){
+        Class<?> caught = null;
+
+        try {
+            this.authenticate(username);
+
+            this.serviseService.findAll();
+
+            this.unauthenticate();
+
+        } catch (final Throwable oops) {
+
+            caught = oops.getClass();
+
+        }
+
+        this.checkExceptions(expected, caught);
+    }
+
+    // Tests ------------------------------------------------------------------
+
+    /*  FUNCTIONAL REQUIREMENT:
+     *
+     *   An actor who is registered as a manager must be able to:
+	 * - Manage his or her services, which includes:
+	 *      deleting them as long as they are not required by any rendezvouses.
+     *
+     * En este caso de uso vamos a admisnistrar la eliminación de un servicio
+     *
+     * Como caso positivo:
+     * · Eliminar un servicio logueado como manager que no tiene asignado un rendezvous
+     *
+     * Como casos negativos:
+     * Para forzar el error pueden darse varios casos, como son:
+     *
+     * · Introducir un rendezvous asignado a un servicio
+     * · Introducir un manager distinto al creador
+     * · Introducir un usuario que no sea manager
+     * · Introducir un usuario que no esté autenticado
+     */
+
     public void serviseDelete(final String username, String serviseBean, final Class<?> expected) {
         Class<?> caught = null;
 
@@ -118,6 +225,27 @@ public class ServiseServiceTest extends AbstractTest {
         this.checkExceptions(expected, caught);
     }
 
+
+    // Tests ------------------------------------------------------------------
+
+    /*  FUNCTIONAL REQUIREMENT:
+     *
+     *   An actor who is registered as a administrator must be able to:
+     * - Cancel a service that he or she finds inappropriate. Such services cannot be re-quested for
+     *  any rendezvous. They must be flagged appropriately when listed.
+     *
+     * En este caso de uso vamos a admisnistrar la eliminación de un servicio
+     *
+     * Como caso positivo:
+     * · Marcar un servicio como inapropiado logueado como administrador
+     *
+     * Como casos negativos:
+     * Para forzar el error pueden darse varios casos, como son:
+     *
+     * · Introducir un usuario autenticado como manager
+     * · Introducir un usuario autenticado como user
+     * · Introducir un usuario no autenticado
+     */
     public void serviseInappropriate(final String username, String serviseBean, final Class<?> expected) {
         Class<?> caught = null;
 
@@ -193,8 +321,8 @@ public class ServiseServiceTest extends AbstractTest {
     public void driverServiseEdit() {
 
         final Object testingData[][] = {
-                // Editar credit card de su user y atributos correctos (todos) -> true
-                // Crear una servise estando logueado como manager -> true
+
+                // El usuario del servicio editará este -> true
 
                 {
                         "manager1", "paco", "descripcion1", "http://www.picture.com","servise1", null
@@ -209,30 +337,75 @@ public class ServiseServiceTest extends AbstractTest {
                         "user1", "julio", "descripcion1", "http://www.picture.com", "servise1", IllegalArgumentException.class
                 },
 
+                // Editar un servicio con un srcipt-> false
+                {
+                        "manager1", "<script>", "descripcion1", "http://www.picture.com","servise1", ConstraintViolationException.class
+                },
+
+                // Editar un servicio sin estar autenticado -> false
+                {
+                        null, "julio", "descripcion1", "http://www.picture.com", "servise1", IllegalArgumentException.class
+                },
 
 
         };
         for (int i = 0; i < testingData.length; i++)
-            this.serviseSaveStatus((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4],
+            this.serviseEditTest((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4],
                     (Class<?>) testingData[i][5]);
+    }
+
+    @Test
+    public void driverListServiseTest() {
+
+        final Object testingData[][] = {
+                // Alguien sin registrar/logueado -> true
+                {
+                        "manager1", null
+                },
+                // Alguien sin registrar/logueado -> true
+                {
+                        "user1", null
+                },
+                // Otro Usuario -> true
+                {
+                        "administrator", null
+                },
+                // Un administrador -> true
+                {
+                        null, IllegalArgumentException.class
+                },
+
+        };
+        for (int i = 0; i < testingData.length; i++)
+            this.listOfServiseTest((String) testingData[i][0], (Class<?>) testingData[i][1]);
     }
 
     @Test
     public void driverDeleteServise() {
 
         final Object testingData[][] = {
-                // Borrar una servise logueado como el manager del servicio -> true
+
+                //Borrar servicio no asignado a un rendezvous
                 {
-                        "manager1", "servise1", null
+                        "manager2", "servise3", null
                 },
-                // Borrar una servise logueado como manager que no ha creado el servicio -> false
+
+                // Borrar un servicio con un rendezvous asignado -> false
                 {
-                        "manager2", "servise1", IllegalArgumentException.class
+                        "manager1", "servise1", IllegalArgumentException.class
+                },
+                // Borrar una servise logueado como un manager que no ha creado el servicio -> false
+                {
+                        "manager1", "servise4", IllegalArgumentException.class
                 },
 
                 // Borrar una servise logueado como otro actor que no sea manager -> false
                 {
-                        "user1", "servise1", IllegalArgumentException.class
+                        "user1", "servise4", IllegalArgumentException.class
+                },
+                // Borrar una servise sin estar logueado -> false
+                {
+                        null, "servise1", IllegalArgumentException.class
                 },
 
         };
@@ -248,14 +421,19 @@ public class ServiseServiceTest extends AbstractTest {
                 {
                         "administrator", "servise1", null
                 },
-                // Borrar una servise logueado como manager que no ha creado el servicio -> false
+                // marcar un servise como inapropiado logueado como manager  -> false
                 {
                         "manager2", "servise1", IllegalArgumentException.class
                 },
 
-                // Borrar una servise logueado como otro actor que no sea manager -> false
+                // marcar un servise como inapropiado logueado como user -> false
                 {
                         "user1", "servise1", IllegalArgumentException.class
+                },
+
+                // marcar un servise como inapropiado no autenticado -> false
+                {
+                        null , "servise1", IllegalArgumentException.class
                 },
 
         };

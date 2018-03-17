@@ -88,12 +88,13 @@ public class ServiseService {
         Assert.isTrue(servise.getManager().equals(manager));
 
         //TODO: Si falla eliminar request y rendezvous
-        if(servise.getRendezvouses().isEmpty()) {
-            this.serviseRepository.delete(servise);
-        }
+        Assert.isTrue(servise.getRendezvouses().isEmpty());
+        this.serviseRepository.delete(servise);
+
     }
 
     public Collection<Servise> findAll(){
+        Assert.isTrue(actorService.isManager()|| actorService.isUser() || actorService.isAdministrator());
         return serviseRepository.findAll();
     }
 

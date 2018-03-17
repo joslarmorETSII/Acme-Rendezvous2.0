@@ -638,7 +638,7 @@
             </list>
         </property>
         <property name="manager" ref="manager1"/>
-        <property name="assigned" value="false"/>
+        <property name="assigned" value="true"/>
         <property name="inappropriate" value="false"/>
         <property name="category"   ref="category1"/>
     </bean>
@@ -650,6 +650,36 @@
         <property name="rendezvouses">
             <list>
                 <ref bean="rendezvous2"/>
+            </list>
+        </property>
+        <property name="manager" ref="manager2"/>
+        <property name="assigned" value="true"/>
+        <property name="inappropriate" value="false"/>
+        <property name="category"   ref="category2"/>
+    </bean>
+
+    <bean id="servise3" class="domain.Servise">
+        <property name="name" value="Servise3"/>
+        <property name="description" value="Description3"/>
+        <property name="picture" value="http://www.google.com"/>
+        <property name="rendezvouses">
+            <list>
+                <null></null>
+            </list>
+        </property>
+        <property name="manager" ref="manager2"/>
+        <property name="assigned" value="false"/>
+        <property name="inappropriate" value="false"/>
+        <property name="category"   ref="category2"/>
+    </bean>
+
+    <bean id="servise4" class="domain.Servise">
+        <property name="name" value="Servise4"/>
+        <property name="description" value="Description4"/>
+        <property name="picture" value="http://www.google.com"/>
+        <property name="rendezvouses">
+            <list>
+                <null></null>
             </list>
         </property>
         <property name="manager" ref="manager2"/>

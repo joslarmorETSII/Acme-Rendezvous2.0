@@ -27,6 +27,6 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
 
 	// Queries Nivel B- 11.1.a
-
-
+	//Ratio por categoría
+	//select count(c)*1.0 / (select count(c1)*1.0 from Category c1) from Category c join c.servises s group by s;
 }
