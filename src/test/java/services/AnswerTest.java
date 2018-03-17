@@ -10,8 +10,6 @@ import utilities.AbstractTest;
 
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 @Transactional
 @ContextConfiguration(locations = {

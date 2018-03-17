@@ -1,6 +1,7 @@
 package services;
 
 import controllers.AbstractController;
+import domain.Category;
 import domain.Servise;
 import domain.Servise;
 import domain.Servise;
@@ -27,23 +28,25 @@ public class ServiseServiceTest extends AbstractTest {
     @Autowired
     private ServiseService serviseService;
 
+    @Autowired
+    private CategoryService categoryService;
 
 
-    public void serviseCreateTest(final String username, String name, String description, String picture, boolean assigned,boolean inappropriate, Class<?> expected) {
+
+    public void serviseCreateTest(final String username, String name, String description, String picture, boolean assigned,boolean inappropriate, String categoryBean, Class<?> expected) {
         Class<?> caught=null;
 
         try {
             this.authenticate(username);
 
+            Category category;
             Servise result = this.serviseService.create();
+            category = categoryService.findOne(super.getEntityId(categoryBean));
 
             result.setName(name);
             result.setDescription(description);
             result.setPicture(picture);
-
-            Assert.isTrue(assigned == false);
-            Assert.isTrue(inappropriate == false);
-
+            result.setCategory(category);
 
             serviseService.save(result);
             serviseService.flush();
@@ -151,38 +154,38 @@ public class ServiseServiceTest extends AbstractTest {
                 // Crear una servise estando logueado como manager -> true
 
                 {
-                    "manager1", "paco", "descripcion1", "http://www.picture.com", false, false, null
+                    "manager1", "paco", "descripcion1", "http://www.picture.com", false, false, "category1", null
                 },
-                // Crear una servise estando logueado como user -> false
+                 //Crear una servise estando logueado como user -> false
                 {
-                    "user1", "paco", "descripcion1", "http://www.picture.com", false, false, IllegalArgumentException.class
+                    "user1", "paco", "descripcion1", "http://www.picture.com", false, false, "null", IllegalArgumentException.class
                 },
 
-//                // Crear una servise siendo el nombre y la descripción vacías -> false
+               // Crear una servise siendo el nombre y la descripción vacías -> false
                 {
-                    "manager1", "", "","http://www.picture.com", false, false, ConstraintViolationException.class
+                    "manager1", "", "","http://www.picture.com", false, false, "category1", ConstraintViolationException.class
                 },
                  // Crear una servise pasando un script en la descripcion -> false
                 {
-                    "manager2", "paco", "<script>", "http://www.picture.com", false, false, ConstraintViolationException.class
+                    "manager2", "paco", "<script>", "http://www.picture.com", false, false, "category1", ConstraintViolationException.class
                 },
-//                // Crear un servise con una picture no valida-> false
+                // Crear un servise con una picture no valida-> false
                 {
-                    "manager2", "paco", "description1", "w.picture.com", false, false, ConstraintViolationException.class
-                },
-                // Crear un servise asignado no valida-> false
-                {
-                    "manager2", "paco", "description1", "http://www.picture.com", true, false, IllegalArgumentException.class
+                    "manager2", "paco", "description1", "w.picture.com", false, false, "category1", ConstraintViolationException.class
                 },
                 // Crear un servise asignado no valida-> false
                 {
-                        "manager2", "paco", "description1", "http://www.picture.com", false, true, IllegalArgumentException.class
+                    "manager2", "paco", "description1", "http://www.picture.com", true, false, "category1", ConstraintViolationException.class
+                },
+                // Crear un servise asignado no valida-> false
+                {
+                    "manager2", "paco", "description1", "http://www.picture.com", false, true, "category1", ConstraintViolationException.class
                 },
         };
         for (int i = 0; i < testingData.length; i++)
             serviseCreateTest((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2],
                     (String) testingData[i][3], (boolean) testingData[i][4], (boolean) testingData[i][5],
-                    (Class<?>) testingData[i][6]);
+                    (String)testingData[i][6], (Class<?>) testingData[i][7]);
 
     }
 
