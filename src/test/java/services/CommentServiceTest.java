@@ -124,7 +124,7 @@ public class CommentServiceTest extends AbstractTest {
     }
 
     @Test
-    public void driverListRendezvousTest() {
+    public void driverListCommentTest() {
 
         final Object testingData[][] = {
                 // Alguien sin registrar/logueado -> true
@@ -142,6 +142,10 @@ public class CommentServiceTest extends AbstractTest {
                 // Un administrador -> true
                 {
                         "administrator", null
+                },
+                // Un manager -> true
+                {
+                        "manager1", null
                 }
 
         };

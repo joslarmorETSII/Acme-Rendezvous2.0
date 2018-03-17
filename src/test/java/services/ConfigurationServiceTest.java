@@ -57,15 +57,15 @@ public class ConfigurationServiceTest extends AbstractTest {
             final Object testingData[][] = {
                     // Crear una configuration por defecto -> true
                     {
-                        "administrator","nombre del negocio","http://www.banner.com", "englishWelcome", "spanishWelcome","configuration1", null
+                            "administrator","nombre del negocio","http://www.banner.com", "englishWelcome", "spanishWelcome","configuration1", null
                     },
                     // Crear una configuration por defecto sin estar logueado -> false
                     {
-                        null,"nombre del negocio","http://www.banner.com", "englishWelcome", "spanishWelcome","configuration1", IllegalArgumentException.class
+                            null,"nombre del negocio","http://www.banner.com", "englishWelcome", "spanishWelcome","configuration1", IllegalArgumentException.class
                     },
                     // Crear una configuration por defecto siendo manager-> false
                     {
-                        "manager1","nombre del negocio","http://www.banner.com", "englishWelcome", "spanishWelcome","configuration1", IllegalArgumentException.class
+                            "manager1","nombre del negocio","http://www.banner.com", "englishWelcome", "spanishWelcome","configuration1", IllegalArgumentException.class
                     },
                     // Crear una configuration por defecto con el name vacio -> false
                     {
@@ -86,6 +86,14 @@ public class ConfigurationServiceTest extends AbstractTest {
                     // Crear una configuration por defecto con el englishWelcome con <script> -> false
                     {
                             "administrator","nombre del negocio","http://www.banner.com", "<script>", "spanishWelcome","configuration1", ConstraintViolationException.class
+                    },
+                    // Crear una configuration por defecto con el username como user1 -> false
+                    {
+                            "user1","nombre del negocio","http://www.banner.com", "<script>", "spanishWelcome","configuration1", IllegalArgumentException.class
+                    },
+                    // Crear una configuration por defecto con el campo name como <php> -> false
+                    {
+                            "administrator","<php>","http://www.banner.com", "<script>", "spanishWelcome","configuration1", ConstraintViolationException.class
                     }
 
             };
