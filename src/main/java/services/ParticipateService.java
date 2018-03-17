@@ -71,7 +71,6 @@ public class ParticipateService {
         Assert.notNull(participate);
         checkByPrincipal(participate);
         rendezvous = participate.getRendezvous();
-        //Assert.isTrue(!rendezvous.equals(participate.getRendezvous()));
         if(participate.getRendezvous().getForAdults())
             checkMayorEdad(participate.getAttendant());
 
@@ -145,5 +144,16 @@ public class ParticipateService {
         Assert.isTrue(aux > anosDieciocho,"Debe ser mayor de edad");
     }
 
+    public Participate create2(Integer rendezvousId){
+        Participate participate;
+        User principal;
 
+        principal = userService.findByPrincipal();
+        participate = participate(principal.getId(), rendezvousId);
+        Assert.isNull(participate);
+        participate = new Participate();
+        participate.setAttendant(principal);
+
+        return participate;
+    }
 }

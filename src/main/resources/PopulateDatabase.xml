@@ -692,12 +692,27 @@
 
     <!-- Categories -->
 
-    <bean id="category1" class="domain.Category">
-        <property name="name" value="category1" />
+    <bean id="category" class="domain.Category">
+        <property name="name" value="CATEGORY" />
         <property name="description" value="description1" />
         <property name="childrenCategories">
             <list>
+                <ref bean="category1" />
+            </list>
+        </property>
+        <property name="servises">
+            <list>
+            </list>
+        </property>
+    </bean>
+    <bean id="category1" class="domain.Category">
+        <property name="name" value="category1" />
+        <property name="description" value="description1" />
+        <property name="parentCategory" ref="category"/>
+        <property name="childrenCategories">
+            <list>
                 <ref bean="category2" />
+                <ref bean="category3"/>
             </list>
         </property>
         <property name="servises">
@@ -726,6 +741,7 @@
     <bean id="category3" class="domain.Category">
         <property name="name" value="category3" />
         <property name="description" value="description3" />
+        <property name="parentCategory" ref="category1" />
         <property name="childrenCategories">
             <list>
             </list>

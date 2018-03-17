@@ -16,7 +16,7 @@ import javax.validation.ConstraintViolationException;
         "classpath:spring/junit.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
-public class AnswerTest extends AbstractTest {
+public class AnswerServiceTest extends AbstractTest {
 
     // The SUT ---------------------------------
     @Autowired
