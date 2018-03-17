@@ -60,7 +60,7 @@ public class CategoryService {
 	public Category findOne(final int categoryId) {
 
 		Assert.notNull(categoryId);
-		final Category res = this.categoryRepository.findOne(categoryId);
+		Category res = this.categoryRepository.findOne(categoryId);
 		return res;
 
 	}
@@ -81,6 +81,7 @@ public class CategoryService {
 		Assert.isTrue(actorService.isAdministrator());
 		Assert.notNull(category);
 		Assert.isTrue(!category.getName().equals(category.getParentCategory().getName()));
+		Assert.isTrue(category.getServises().isEmpty());
 
 		parentId = category.getParentCategory().getId();
 
@@ -89,7 +90,7 @@ public class CategoryService {
 			saved = this.categoryRepository.save(category);
 			saved.getParentCategory().getChildrenCategories().add(saved);
 		} else {
-			final String oldName = this.categoryRepository.findOne(category.getId()).getName();
+			String oldName = findOne(category.getId()).getName();
 
 			if (category.getName().equals(oldName)) {
 				saved = this.categoryRepository.save(category);
@@ -150,6 +151,15 @@ public class CategoryService {
 
 	public Collection<Rendezvous> findAllRendezvousByCategoryId2( int categoryId) {
 		return categoryRepository.findAllRendezvousByCategoryId2(categoryId);
+	}
+
+    public Category findOneToEdit(int entityId) {
+		Assert.isTrue(actorService.isAdministrator());
+		return findOne(entityId);
+    }
+
+	public void flush() {
+		categoryRepository.flush();
 	}
 
 

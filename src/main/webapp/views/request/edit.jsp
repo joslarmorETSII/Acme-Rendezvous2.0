@@ -33,13 +33,6 @@
         <legend><b><spring:message code="creditCard.legend" var="legend"/><jstl:out value="${legend}"/>
             :&nbsp;</b></legend>
 
- <%--       <acme:textbox path="creditCard.holder" code="creditCard.holder" />
-        <acme:textbox path="creditCard.brand" code="creditCard.brand"/>
-        <acme:textbox path="creditCard.number" code="creditCard.number"/>
-        <acme:textbox path="creditCard.expirationMonth" code="creditCard.expirationMonth" placeHolder="XX"/>
-        <acme:textbox path="creditCard.expirationYear" code="creditCard.expirationYear" placeHolder="XXXX"/>
-        <acme:textbox path="creditCard.cvv" code="creditCard.cvv"/>
---%>
 
         <form:label path="creditCard.holder"><spring:message code="creditCard.holder" /></form:label>
         <form:input path="creditCard.holder" id="holderId"/>

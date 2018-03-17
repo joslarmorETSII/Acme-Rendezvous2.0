@@ -23,8 +23,8 @@
 <p><spring:message code="panic.text" /> <code>${name}</code>.</p>
 
 
-<canvas width="1350" height="500"></canvas>
 
+<canvas width="1300" height="500"> </canvas>
 <script>
     if (window.location.href.indexOf("fullcpgrid") > -1) {
         document.addEventListener('DOMContentLoaded', function() {
@@ -205,7 +205,7 @@
                     }
                     if (axis) {
                         const s = size / 10;
-                        ict.fillStyle = "#000";
+                        ict.fillStyle = "#FFF";
                         ict.fillRect(size * 0.5 - s, size * 0.5 - s, s * 2, s * 2);
                         ict.fillRect(size * 0.5 - s + dist, size * 0.5 - s, s * 2, s * 2);
                     }
@@ -305,7 +305,7 @@
         const run = () => {
         requestAnimationFrame(run);
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#222";
+        ctx.fillStyle = "#FFF";
         ctx.fillRect(0, 0, canvas.width, canvas.height * 0.15);
         ctx.fillRect(0, canvas.height * 0.85, canvas.width, canvas.height * 0.15);
         for (const dancer of dancers) {

@@ -35,7 +35,7 @@ public class ParticipateServiceTest extends AbstractTest {
 
             this.authenticate(username);
 
-            Participate result = participateService.create();
+            Participate result = participateService.create2(rendezvousId);
             result.setRendezvous(rendezvous);
 
             participateService.save(result);
@@ -68,6 +68,11 @@ public class ParticipateServiceTest extends AbstractTest {
                 // Participar en un rendezvous por segunda vez ->false
                 {
                         "user2", "rendezvous3", IllegalArgumentException.class
+                },
+                // Participar en un rendezvous estando logueado como Manager ->false
+
+                {
+                        "manager", "rendezvous2", IllegalArgumentException.class
                 }
 
         };

@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat;
         "classpath:spring/junit.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
-public class QuestionTest extends AbstractTest {
+public class QuestionServiceTest extends AbstractTest {
 
     // The SUT ---------------------------------
     @Autowired

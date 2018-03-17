@@ -34,7 +34,7 @@ public class CategoryController extends AbstractController{
 		Collection<Category> categories = null;
 
 		if (categoryId == null)
-			categories = this.categoryService.findAll().iterator().next().getChildrenCategories();
+			categories = this.categoryService.findAll();
 		else
 			categories = this.categoryService.findCategoryChildrenId(categoryId);
 
