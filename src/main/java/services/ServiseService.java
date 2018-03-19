@@ -102,9 +102,9 @@ public class ServiseService {
 
     public Servise findOneToEdit(final int serviseId) {
         Servise res = this.serviseRepository.findOne(serviseId);
-        Manager manager = res.getManager();
+        Manager manager = managerService.findByPrincipal();
 
-        Assert.isTrue(manager.equals(managerService.findByPrincipal()));
+        Assert.isTrue(manager.equals(res.getManager()));
 
         return res;
     }

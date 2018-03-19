@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import services.ActorService;
 import services.CategoryService;
+import services.ManagerService;
 import services.ServiseService;
 
 import javax.validation.Valid;
@@ -22,13 +22,13 @@ public class ServiseManagerController {
     //Services -------------------------------------------------------
 
     @Autowired
-    ActorService actorService;
+    private ManagerService managerService;
 
     @Autowired
-    ServiseService serviseService;
+    private ServiseService serviseService;
 
     @Autowired
-    CategoryService categoryService;
+    private CategoryService categoryService;
 
     // Create -------------------------------------------------------
 
@@ -48,7 +48,8 @@ public class ServiseManagerController {
     public ModelAndView list() {
         ModelAndView result;
 
-        Manager manager = (Manager) this.actorService.findByPrincipal();
+        Manager manager = managerService.findByPrincipal();
+        Assert.notNull(manager);
 
         result = new ModelAndView("servise/list");
         result.addObject("servises", manager.getServises());
@@ -86,14 +87,14 @@ public class ServiseManagerController {
         }
         return result;
     }
+    //Todo: Controlar hacking
     @RequestMapping(value = "/editDelete", method = RequestMethod.GET)
     public ModelAndView editDelete(@RequestParam  int serviseId) {
         final ModelAndView result;
         Servise servise;
         servise = this.serviseService.findOneToEdit(serviseId);
         this.serviseService.delete(servise);
-        result = new ModelAndView("redirect: list.do");
-        result.addObject("manager",(Manager)actorService.findByPrincipal());
+        result = list();
         return result;
     }
 
@@ -107,8 +108,7 @@ public class ServiseManagerController {
     private ModelAndView createEditModelAndView(final Servise servise, final String message) {
 
         final ModelAndView res = new ModelAndView("servise/edit");
-        Manager manager;
-        manager = (Manager)actorService.findByPrincipal();
+
         res.addObject("servise", servise);
         res.addObject("message", message);
         res.addObject("actionUri", "servise/manager/edit.do");

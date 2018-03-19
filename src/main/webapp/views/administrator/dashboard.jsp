@@ -198,3 +198,16 @@
     </display:table>
 </fieldset>
 
+<jstl:if test="${!empty avgMinMaxDevServisesPerRendezvous}">
+    <fieldset>
+        <div>
+            <b><spring:message code="dashboard.avgMinMaxDevServisesPerRendezvous" /></b>
+            <br />
+            <h4><jstl:out value=" AVG: "/><jstl:out value="${avgMinMaxDevServisesPerRendezvous[0][0]}"/> <br /></h4>
+            <h4><jstl:out value=" MIN: "/><jstl:out value="${avgMinMaxDevServisesPerRendezvous[0][1]}"/> <br /> </h4>
+            <h4><jstl:out value=" MAX: "/><jstl:out value="${avgMinMaxDevServisesPerRendezvous[0][2]}"/> <br /></h4>
+            <h4><jstl:out value=" STDDEV: "/><jstl:out value="${avgMinMaxDevServisesPerRendezvous[0][3]}"/> <br /></h4>
+        </div>
+    </fieldset>
+</jstl:if>
+

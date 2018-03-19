@@ -155,6 +155,7 @@
                 <ref bean="answer1"/>
             </list>
         </property>
+        <property name="creditCard" ref="creditCard2"/>
 
     </bean>
 

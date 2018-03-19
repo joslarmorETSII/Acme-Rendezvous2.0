@@ -1,6 +1,5 @@
 package domain;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
