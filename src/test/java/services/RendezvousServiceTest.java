@@ -34,8 +34,23 @@ public class RendezvousServiceTest extends AbstractTest {
     private ActorService    actorService;
     // Tests
     // ====================================================
+    /*  FUNCTIONAL REQUIREMENT:
+        1. List the rendezvouses in the system and navigate to the profiles of the correspond-ing creators and attendants.
 
-   // comprobamos que cualquiera puede listar las academias que existen en nuestra aplicación
+   /*  To check the list of a rendezvous in our system, the system must check the different users and unautification users
+    *
+    *  En este test, se comprueba el Listar de los rendezvous.
+    *  Para ello simulamos el logueo de distintos usuarios tanto autentificados como no autentificados
+    *
+    * Como casos positivos:
+
+    * Simular el logueo como user1.
+    * Simular el logueo como use2.
+    * Simular el logueo como admin.
+    * Poner a null el campo de usuario
+
+
+  */
 
     public void listOfRendezvousTest(final String username,final Class<?> expected){
         Class<?> caught = null;
@@ -57,7 +72,26 @@ public class RendezvousServiceTest extends AbstractTest {
 
    /* Create a new rendezvous.
 
-              En este caso de uso un usuario puede crear un rendezvous.*/
+              En este caso de uso un usuario puede crear un rendezvous.
+
+    /*  FUNCTIONAL REQUIREMENT:
+            * An actor who is authenticated as a user must be able to:
+            1. Create a rendezvous, which he’s implicitly assumed to attend. Note that a user may edit his or her rendezvouses as long as they aren’t saved them in final mode. Once a rendezvous is saved in final mode, it cannot be edited or deleted by the creator.
+             *  To check the create of an answers in our system, the system must check the different attribute of the entity.
+    *
+    *  En este test, se comprueba el crear un rendezvous.
+    *  Para ello  simulamos el logueo de distintos usuario autentificados y crear rendezvouses.
+    *
+    * Como casos positivos:
+
+    * .Simular el logueo como user1, rellenar correctamente todos los campos.
+
+    * Para forzar el error pueden darse varios casos negativos, como son:
+
+    * .Simular el logueo como manager.
+    * .Poner el campo de momento en el pasado
+    * .Poner el usuario a null.
+    */
 
     @SuppressWarnings("deprecation")
     public void rendezvousCreateTest(final String username, final String name,String description1,String moment1,String picture1,Double lat1,Double lngi1,Boolean res1,Boolean res2,Boolean res3, final Class<?> expected) {
@@ -99,7 +133,27 @@ public class RendezvousServiceTest extends AbstractTest {
      * Edit a new rendezvous.
      *
      * En este caso de uso un usuario puede editar un rendezvous existente.
-     */
+
+     /*  FUNCTIONAL REQUIREMENT:
+            * An actor who is authenticated as a user must be able to:
+            1. Update or delete the rendezvouses that he or she’s created. Deletion is virtual, that is: the information is not removed from the database, but the rendezvous cannot be updated. Deleted rendezvouses are flagged as such when they are displayed.
+
+    *  En este test, se comprueba el editar un rendezvous existente.
+    *  Para ello  simulamos el logueo de distintos usuario autentificados e editar un rendezvouse.
+    *
+    * Como casos positivos:
+
+    * .Simular el logueo como user1, rellenar correctamente todos los campos.
+
+    * Para forzar el error pueden darse varios casos negativos, como son:
+
+        * .Poner el usuario a null.
+        * .Poner modo final a true.
+        * .Logueo como manager.
+        * .Meter un script en description
+    */
+
+
 
 
     public void editRendezvousTest(final String username, final String name,String description1,String moment1,String picture1,
@@ -146,7 +200,28 @@ public class RendezvousServiceTest extends AbstractTest {
      * Delete a rendezvous.
      *
      * En este caso de uso un usuario puede borrar un rendezvous existente (Borrado virtual)
-     */
+     *
+     *  /*  FUNCTIONAL REQUIREMENT:
+            * An actor who is authenticated as a user must be able to:
+            1. Update or delete the rendezvouses that he or she’s created. Deletion is virtual, that is: the information is not removed from the database, but the rendezvous cannot be updated. Deleted rendezvouses are flagged as such when they are displayed.
+            An actor who is authenticated as an administrator must be able to:
+            2. Remove a rendezvous that he or she thinks is inappropriate.
+
+
+    *  En este test, se comprueba borrar un rendezvous existente.
+    *  Para ello  simulamos el logueo de distintos usuario autentificados (admin y user)
+    *
+    * Como casos positivos:
+
+    * .Simular el logueo como user1, rellenar correctamente todos los campos.
+    * .Simular el logueo como admin,rellenar correctamente todos los campos.
+
+    * Para forzar el error pueden darse varios casos negativos, como son:
+
+        * .Poner el usuario a null.
+        * .Poner modo final a true.
+    */
+
 
     public void deleteRendezvousTest(final String username, String rendezvousBean,Boolean finalMode, final Class<?> expected) {
         Class<?> caught = null;
@@ -213,7 +288,7 @@ public class RendezvousServiceTest extends AbstractTest {
     {
         null,"name1","description1","12/03/2020 12:00","www.picture.com",20.99,13.09,false,false,false, IllegalArgumentException.class
     },
-    // Crear un curso logueado como manager  -> false
+    // Crear un rendezvous logueado como manager  -> false
     {
         "manager1","name1","description1","12/03/2020 12:00","www.picture.com",20.99,13.09,false,false,false, IllegalArgumentException.class
     },
@@ -234,19 +309,19 @@ public class RendezvousServiceTest extends AbstractTest {
     public void driverEditRendezvousTest() {
 
         final Object testingData[][] = {
-                // Crear un rendezvous estando logueado como user -> true
+                // Editar un rendezvous estando logueado como user -> true
               {
                         "user1", "name1","description1","12/03/2020 12:00","http://www.picture.com",20.99,13.09,false,false,false,"rendezvous1", null
                },
-                // Crear un rendezvous sin estar logueado --> false
+                // Editar un rendezvous sin estar logueado --> false
                {
                         null,"name1","description1","12/03/2020 12:00","http://www.picture.com",20.99,13.09,false,false,false,"rendezvous1", IllegalArgumentException.class
                 },
-                // editar el modo final y pasarlo a true -> true
+                // Editar el modo final y pasarlo a true -> true
                {
                         "user1","name1","description1","12/03/2020 12:00","http://www.picture.com",20.99,13.09,true,false,false,"rendezvous1", null
                 },
-                // Crear un curso logueado como manager  -> false
+                // Editar un rendezvous logueado como manager  -> false
                 {
                         "manager1","name1","description1","12/03/2020 12:00","http://www.picture.com",20.99,13.09,true,false,false, "rendezvous1",IllegalArgumentException.class
                },

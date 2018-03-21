@@ -37,6 +37,7 @@ public class PopulateDatabase {
 		Map<String, DomainEntity> entityMap;
 		List<Entry<String, DomainEntity>> sortedEntities;
 
+
 		EclipseConsole.fix();
 		LogManager.getLogger("org.hibernate").setLevel(Level.OFF);
 		databaseUtil = null;

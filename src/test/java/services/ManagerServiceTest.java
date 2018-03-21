@@ -33,18 +33,33 @@ public class ManagerServiceTest extends AbstractTest {
     // Tests
     // ====================================================
 
-    /*
-     * To check the validity of a new manager in our system, the system must check the vat,
-     * the passwords, the name, the surname, the phone, the email and the postal address.
-     *
-     * En este test, se comprueba el registro de un nuevo manager/a.
-     * Para ello introducimos valores correctos e incorrectos para observa el comportamiento de la aplicación.
-     */
+    /*  FUNCTIONAL REQUIREMENT:
+     *  An actor who is not authenticated must be able to:
+          -Register to the system as a manager.
 
-    /*
-     * Register a new manager.
+     *  WHAT WILL WE DO?
+
+     *  To check the validity of a new manager in our system, the system must check the vat,
+     *  the passwords, the name, the surname, the phone, the email and the postal address.
      *
-     * En este caso de uso simularemos el registro de un candidato.
+     *  En este test, se comprueba el registro de un nuevo manager/a.
+     *  Para ello introducimos valores correctos e incorrectos para observa el comportamiento de la aplicación.
+     *
+     * Como caso positivo:
+     *
+     * Registrar un manager con todos los campos correctos.
+     * Registrar un manager con un campo no obligatorio (adress) vacio.
+
+     * Para forzar el error pueden darse varios casos negativos, como son:
+     *
+     * · Intenta registrar un manager con todos los campos nulos
+     * · Intenta registrar un manager con contraseñas que no coinciden
+     * · Introducir un vat invalida (que no coincide con el patron).
+     * · Introducir un telefono que no coincide con el patron invalida .
+
+     *  Register a new manager.
+     *
+     *  En este caso de uso simularemos el registro de un candidato.
      */
 
     public void managerRegisterTest(final String username, final String password, final String passwordRepeat, final String name, final String surname,final String vat, final String phone, final String email, final String postalAddress, final Class<?> expected) {
@@ -91,6 +106,27 @@ public class ManagerServiceTest extends AbstractTest {
      * Edit a manager.
      *
      * En este caso de uso editamos los datos de una manager registrado.
+     *
+     *   WHAT WILL WE DO?
+
+     *  To check the validity of an edit the profil of a manager in our system, the system must check the vat,
+     *  the passwords, the name, the surname, the phone, the email and the postal address.
+     *
+     *  En este test, se comprueba el edit del perfil de un  manager/a.
+     *  Para ello introducimos valores correctos e incorrectos para observa el comportamiento de la aplicación.
+     *
+     * Como caso positivo:
+     *
+     * Editar un manager con todos los campos correctos.
+     * Editar un manager con un campo no obligatorio (adress) vacio.
+
+     * Para forzar el error pueden darse varios casos negativos, como son:
+     *
+     * · Intenta editar el perfil de un manager con todos los campos nulos
+     * · Intenta editar el perfil de un manager con contraseñas que no coinciden
+     * · Introducir un vat invalida (que no coincide con el patron).
+     * · Introducir un telefono que no coincide con el patron invalida .
+     * . Introducir todos los datos menos el nombre de usuario
      */
 
     public void managerEditTest(final String username, final String password, final String passwordRepeat, final String name, final String surname,final String vat, final String phone, final String email, final String postalAddress,String managerBean, final Class<?> expected) {
@@ -136,7 +172,7 @@ public class ManagerServiceTest extends AbstractTest {
                {
                         "manager3", "manager3", "manager3", "managerTestName", "managerTestSurname","123-ASD", "+34 123456789", "managerTest@managerTest.com", "addressTest", null
                 },
-                // Todo vacio --> false
+                // todos los valores estan a null -> false
                {
                       null, null, null, null, null, null, null, null,null, IllegalArgumentException.class
                },
@@ -158,7 +194,7 @@ public class ManagerServiceTest extends AbstractTest {
                 },
 
 
-//todo Preguntar al profesor
+
         };
         for (int i = 0; i < testingData.length; i++)
             this.managerRegisterTest((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (String) testingData[i][5], (String) testingData[i][6],
@@ -178,24 +214,23 @@ public class ManagerServiceTest extends AbstractTest {
 
 
                 // Todos los campos completados, excepto la direccion postal -> true
-                //TODO: preguntar al prof sale una excepción del tipo: ObjectOptimisticLockingFailureException
                 {
                         "manager2", "manager2", "manager2", "manager2", "manager2", "193-ASD","+34 123456789", "managerTest@managerTest.com", "","manager2", null
                },
                 // Patrón del telefono erroneo -> false
                 {
-                                "managerTest3", "managerTest3", "managerTest3", "managerTestName3", "managerTestSurname3","153-ASD", "635", "managerTest@managerTest.com", "12345","manager1", ConstraintViolationException.class
+                    "managerTest3", "managerTest3", "managerTest3", "managerTestName3", "managerTestSurname3","153-ASD", "635", "managerTest@managerTest.com", "12345","manager1", ConstraintViolationException.class
                 },
-                         // Patrón del vat erroneo -> false
+                // Patrón del vat erroneo -> false
                 {
                         "manager400", "manager400", "manager400", "managerName4", "managerSurname4","000+AAA", "+34 123456789", "manager@manager.com", "12345","manager1", ConstraintViolationException.class
                 },
-
+                // No poner el nombre de usuario
                 {
                         "", "manager55", "manager55", "managerTestName5", "managerTestSurname5","173-ASD", "+34 123456789", "managerTest@managerTest.com", "addressTest","manager1", ConstraintViolationException.class
                 },
 
-                // Todo vacio --> false
+                // Todos los campos estan a null
                 {
                         null, null, null, null, null, null, null, null,null,"manager1", ConstraintViolationException.class
                 },
