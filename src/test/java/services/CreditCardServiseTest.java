@@ -2,15 +2,11 @@ package services;
 
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
-
-import domain.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.util.Assert;
-
 import utilities.AbstractTest;
 import domain.CreditCard;
 
@@ -22,14 +18,31 @@ public class CreditCardServiseTest extends AbstractTest {
     @Autowired
     private CreditCardService	creditCardService;
 
-    @Autowired
-    private ActorService		actorService;
-
-    @Autowired
-    private UserService userService;
-
-
     // Tests ------------------------------------------------------------------
+
+    /*  FUNCTIONAL REQUIREMENT:
+     *
+     *   An actor who is authenticated as a user must be able to:
+     * - He or she must specify a valid credit card in every request for a service.
+     *
+     * WHAT WILL WE DO?
+     *
+     * En este caso de uso un usuario va a crear una creditCard:
+     *
+     * POSITIVE AND NEGATIVE CASES
+     *
+     * Como caso positivo:
+     *
+     * · Editar credit card de su user y atributos correctos (todos).
+     *
+     * Para forzar el error pueden darse varios casos negativos, como son:
+     *
+     * · Editar credit card con administrador autentificado.
+     * . Editar credit card sin autentificar.
+     * . Editar credit card con atributos incorrectos.
+     * . Editar credit card con un script.
+     * . Editar creditCard estando logueado con to do vacio.
+     */
 
     public void creditCardEdit(final String username, final String holder, final String brand,
                                final String number, final Integer expirationMonth, final Integer expirationYear,
@@ -67,6 +80,29 @@ public class CreditCardServiseTest extends AbstractTest {
         this.checkExceptions(expected, caught);
     }
 
+    /*  FUNCTIONAL REQUIREMENT:
+     *
+     *   An actor who is authenticated as a user must be able to:
+     * - He or she edit a valid credit card.
+     *
+     * WHAT WILL WE DO?
+     *
+     * En este caso de uso un usuario va a crear una creditCard:
+     *
+     * POSITIVE AND NEGATIVE CASES
+     *
+     * Como caso positivo:
+     *
+     * · Crear creditCard con atributos válidos.
+     *
+     * Para forzar el error pueden darse varios casos negativos, como son:
+     *
+     * · Crear creditCard sin autentificar.
+     * · Crear creditCard con atributos inválidos.
+     * · Crear creditCard autenticado como manager.
+     * . Crear creditCard estando logueado con todos los campos vacio.
+     */
+
     public void creditCardCreate(final String username, final String holder, final String brand, final String number, final Integer expirationMonth, final Integer expirationYear, final Integer cvv, final Class<?> expected) {
 
         Class<?> caught = null;
@@ -98,6 +134,28 @@ public class CreditCardServiseTest extends AbstractTest {
 
         this.checkExceptions(expected, caught);
     }
+
+    /*  FUNCTIONAL REQUIREMENT:
+     *
+     *   An actor who is authenticated as a user must be able to:
+     * - He or she must specify a valid credit card in every request for a service.
+     *
+     * WHAT WILL WE DO?
+     *
+     * En este caso de uso un usuario va a crear una creditCard:
+     *
+     * POSITIVE AND NEGATIVE CASES
+     *
+     * Como caso positivo:
+     *
+     * · Borrar una creditCard estando logueado como usuario con su creditCard.
+     *
+     * Para forzar el error pueden darse varios casos negativos, como son:
+     *
+     * · Borrar una creditCard logueado como usuario sin ser su creditCard.
+     * · Borrar una creditCard sin estar logueado.
+     * · Borrar una creditCard logueado como manager.
+     */
 
     public void creditCardDelete(final String username, String creditCardBean, final Class<?> expected) {
         Class<?> caught = null;
@@ -182,7 +240,7 @@ public class CreditCardServiseTest extends AbstractTest {
                 {
                         "manager1", "holder", "brand", "4532865767277390", 12, 2022, 500, IllegalArgumentException.class
                 },
-                // Crear creditCard estando logueado con to do vacio  --> false
+                // Crear creditCard estando logueado con todos los campos vacio  --> false
                 {
                         "user1","", "", "", null, null, null, ConstraintViolationException.class
                 },

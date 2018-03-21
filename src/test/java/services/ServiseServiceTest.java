@@ -42,7 +42,7 @@ public class ServiseServiceTest extends AbstractTest {
      *
      * WHAT WILL WE DO?
      *
-     * En este caso de uso vamos a admisnistrar la creación de un servicio:
+     * En este caso de uso vamos a administrar la creación de un servicio:
      *
      * POSITIVE AND NEGATIVE CASES
      *
