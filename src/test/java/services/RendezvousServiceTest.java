@@ -24,16 +24,19 @@ import java.util.Date;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class RendezvousServiceTest extends AbstractTest {
 
-    // The SUT
-    // ====================================================
+
 
     @Autowired
     private RendezvousService rendezvousService;
 
     @Autowired
     private ActorService    actorService;
+
+
     // Tests
     // ====================================================
+
+
     /*  FUNCTIONAL REQUIREMENT:
         1. List the rendezvouses in the system and navigate to the profiles of the correspond-ing creators and attendants.
 

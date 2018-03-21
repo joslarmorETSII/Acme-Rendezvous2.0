@@ -29,6 +29,29 @@ public class CommentServiceTest extends AbstractTest {
     @Autowired
     private RendezvousService   rendezvousService;
 
+    /*  FUNCTIONAL REQUIREMENT:
+     *
+     *   An actor who is authenticated as a user must be able to:
+     * - Comment on the rendezvouses that he or she has RSVPd..
+     *
+     * WHAT WILL WE DO?
+     *
+     * En este caso de uso un usuario va a crear una comentario sobre un rendezvous:
+     *
+     * POSITIVE AND NEGATIVE CASES
+     *
+     * Como caso positivo:
+     *
+     * · Crear comentario con atributos válidos.
+     *
+     * Para forzar el error pueden darse varios casos negativos, como son:
+     *
+     * · Crear comentario sin autentificar.
+     * · Crear comentario con texto vacio.
+     * · Crear comentario con url vacia.
+     * · Crear comentario autenticado como manager.
+     * . Crear comentario sin estar logueado.
+     */
 
     public void commentCreateTest(String username,String text,String picture,String rendezVousBean, final Class<?> expected) {
         Class<?> caught = null;
@@ -57,6 +80,19 @@ public class CommentServiceTest extends AbstractTest {
         this.checkExceptions(expected, caught);
     }
 
+    /*  Test to list a comments of a rendezvous
+     *
+
+     *
+     * En este caso listaremos los comentarios de un rendezvous
+     *
+     * Como caso positivo:
+     * · Listar los comentarios ervicios como user
+     * · Listar los comentarios como manager
+     * · Listar los comentarios como administrador
+     * · Listar los servicios sin estar autenticado
+     */
+
     public void listOfCommentTest(final String username,final Class<?> expected){
         Class<?> caught = null;
 
@@ -75,6 +111,29 @@ public class CommentServiceTest extends AbstractTest {
 
         this.checkExceptions(expected, caught);
     }
+
+    /*
+     * Test to edit a comment
+     * WHAT WILL WE DO?
+     *
+     * En este caso de uso un usuario va a editar un comentario existente:
+     *
+     * POSITIVE AND NEGATIVE CASES
+     *
+     * Como caso positivo:
+     *
+     * · Editar comentario con atributos válidos.
+     *
+     * Para forzar el error pueden darse varios casos negativos, como son:
+     *
+     * · Editar comentario sin autentificar.
+     * · Editar comentario con texto vacio.
+     * · Editar comentario con foto vacia.
+     * · Editar comentario autenticado como manager.
+     * . Editar comentario sin estar logueado.
+     * .Ediatr comentario no existente.
+     * .logueo como user1 y modificar un comentario de user2
+     */
 
     public void editCommentTest(String username,String text,String picture,String commnetBean, final Class<?> expected){
         Class<?> caught = null;
@@ -101,6 +160,29 @@ public class CommentServiceTest extends AbstractTest {
 
         this.checkExceptions(expected, caught);
     }
+
+    /*  FUNCTIONAL REQUIREMENT:
+     *
+     *   An actor who is authenticated as an administrator must be able to::
+     * - Remove a comment that he or she thinks is inappropriate..
+     *
+     * WHAT WILL WE DO?
+     *
+     * En este caso de uso el admin va a borrar un comentario:
+     *
+     * POSITIVE AND NEGATIVE CASES
+     *
+     * Como caso positivo:
+     *
+     * · Borrar un comentario estando logueado como admin .
+     *
+     * Para forzar el error pueden darse varios casos negativos, como son:
+     *
+     * · Borrar una comentario logueado como usuario
+     * · Borrar una comentario sin estar logueado.
+     * · Borrar una comentario logueado como manager.
+     */
+
 
     public void deleteCommentTest(final String username, String commentBean, final Class<?> expected) {
         Class<?> caught = null;

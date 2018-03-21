@@ -30,6 +30,35 @@ public class AnnouncementServiceTest extends AbstractTest{
     @Autowired
     RendezvousService rendezvousService;
 
+    // Tests
+    // ====================================================
+
+    /*  FUNCTIONAL REQUIREMENT:
+     *
+        * An actor who is authenticated as a user must be able to:
+            . Create an announcement regarding one of the rendezvouses that he or she’s creat-ed previously.
+     *
+     * WHAT WILL WE DO?
+     *
+     * En este caso de uso un usuario va a crear una announcement sobre un rendezvous:
+     *
+     * POSITIVE AND NEGATIVE CASES
+     *
+     * Como caso positivo:
+     *
+     * · Crear announcement con atributos válidos.
+     *
+     * Para forzar el error pueden darse varios casos negativos, como son:
+     *
+
+     * · Crear announcement con titulo vacio.
+     *  . Crear announcement metiendo un script.
+     * · Crear announcement con descripcion vacia.
+     * · Crear announcement autenticado como manager.
+     * . Loguearse como user1 y crear announcement de un rendezvous que no ha creado el
+
+     */
+
     public void announcementCreateTest(final String username, String title, String description, String rendezvousBean, Class<?> expected) {
         Class<?> caught=null;
 
@@ -54,6 +83,27 @@ public class AnnouncementServiceTest extends AbstractTest{
         this.checkExceptions(expected, caught);
 
     }
+
+     /*  Test to Edit an announcement
+
+     *
+     * WHAT WILL WE DO?
+     *
+     * En este caso de uso un usuario va a editr un announcement de un rendezvous:
+     *
+     * POSITIVE AND NEGATIVE CASES
+     *
+     * Como caso positivo:
+     *
+     * · Editar announcement siendo logueado como usuario
+     *
+     * Para forzar el error pueden darse varios casos negativos, como son:
+     *
+
+     * · Editar un announcement siendo logueado como manager
+
+
+     */
 
     public void announcementEdit(final String username, String announcementBean, Class<?> expected) {
 
@@ -80,6 +130,27 @@ public class AnnouncementServiceTest extends AbstractTest{
 
         this.checkExceptions(expected, caught);
     }
+
+    /*  FUNCTIONAL REQUIREMENT:
+     *
+       * An actor who is authenticated as an administrator must be able to:
+            1. Remove an announcement that he or she thinks is inappropriate.
+     *
+     * WHAT WILL WE DO?
+     *
+     * En este caso de uso el admin va a borrar un anuncio:
+     *
+     * POSITIVE AND NEGATIVE CASES
+     *
+     * Como caso positivo:
+     *
+     * · Borrar un anuncio estando logueado como admin .
+     *
+     * Para forzar el error pueden darse varios casos negativos, como son:
+     *
+     * · Borrar una anuncio logueado como usuario
+     * · Borrar una anuncio logueado como manager.
+     */
 
     public void announcementDelete(final String username, String announcementBean, final Class<?> expected) {
         Class<?> caught = null;
