@@ -20,18 +20,23 @@
 
 <display:table id="servise" name="servises" requestURI="${requestURI}"
                pagesize="5" class = "displaytag">
+    <display:column>
+    <security:authorize access="hasRole('MANAGER')">
+        <jstl:if test="${manager eq servise.manager}">
+
+                <acme:button code="servise.edit" url="servise/manager/edit.do?serviseId=${servise.id}" />
+
+        </jstl:if>
+    </security:authorize>
+    </display:column>
+
 
     <acme:column code="servise.name" value="${servise.name}" />
     <acme:column code="servise.description" value="${servise.description}"/>
     <spring:message code="servise.picture" var="pic"/>
     <display:column title="${pic}"><img src="${servise.picture}" width="130" height="100"></display:column>
 
-    <security:authorize access="hasRole('MANAGER')">
-        <jstl:if test="${manager eq servise.manager}">
-            <display:column>
-                <acme:button code="servise.edit" url="servise/manager/edit.do?serviseId=${servise.id}" />
-            </display:column>
-        </jstl:if>
+
 
         <display:column>
         <jstl:if test="${servise.assigned eq false && manager eq servise.manager}">
@@ -39,7 +44,7 @@
         </jstl:if>
         </display:column>
 
-    </security:authorize>
+
 
 
     <security:authorize access="hasRole('ADMINISTRATOR')">
