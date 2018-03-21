@@ -29,6 +29,32 @@ public class UserServiceTest extends AbstractTest {
     @Autowired
     private UserService userService;
 
+
+    /*  FUNCTIONAL REQUIREMENT:
+     *
+     *   An actor who is not authenticated must be able to:
+     * - Register to the system as a user creating them.
+     *
+     * WHAT WILL WE DO?
+     *
+     * En este caso de uso vamos a admisnistrar la creación de un usuario:
+     *
+     * POSITIVE AND NEGATIVE CASES
+     *
+     * Como caso positivo:
+     *
+     * · Crear un usuario sin estar logueado ni registrado.
+     * . Todos los campos completados, excepto la direccion postal.
+     *
+     * Para forzar el error pueden darse varios casos negativos, como son:
+     *
+     * · Introducir todos los campos como null.
+     * · Las contraseñas no coinciden.
+     * · Patrón del telefono erroneo.
+     * . Todos los campos correctos excepto cumpleaños.
+     * . Todos los campos completados, introduciendo un <script> en el nombre -> false
+     */
+
     public void userRegisterTest(final String username, final String password, final String passwordRepeat, final String name, final String surname, final String phone, final String email, final String postalAddress, final Date birthday, final Class<?> expected) {
         Class<?> caught = null;
 
@@ -69,6 +95,28 @@ public class UserServiceTest extends AbstractTest {
 
         this.checkExceptions(expected, caught);
     }
+
+    /*  FUNCTIONAL REQUIREMENT:
+     *
+     *   An actor who is authenticated must be able to:
+     * - Edit your profile in the system.
+     *
+     * WHAT WILL WE DO?
+     *
+     * En este caso de uso vamos a editar el perfil de un usuario:
+     *
+     * POSITIVE AND NEGATIVE CASES
+     *
+     * Como caso positivo:
+     *
+     * · Crear un usuario sin estar logueado ni registrado.
+     * . Todos los campos completados, excepto la direccion postal.
+     *
+     * Para forzar el error pueden darse varios casos negativos, como son:
+     *
+     * · Introducir todos los campos como null.
+     * · Patrón del telefono erroneo.
+     */
 
     public void userEditTest(final String username, final String password, final String passwordRepeat,
                              final String name, final String surname, final String phone, final String email,
@@ -119,7 +167,7 @@ public class UserServiceTest extends AbstractTest {
                 {
                         "user3", "user3", "user3", "userTestName", "userTestSurname", "+34 123456789", "userTest@userTest.com", "addressUser", birthday,  null
                 },
-                // Todo vacio --> false
+                // Todos los campos como null --> false
                 {
                         null, null, null, null, null, null, null, null,null, IllegalArgumentException.class
                 },
@@ -138,7 +186,11 @@ public class UserServiceTest extends AbstractTest {
                 // Todos los campos correctos excepto cumpleaños-> false
                 {
                         "userTest5", "userTest5", "userTest5", "userTestName5", "userTestSurname5", "57635", "userTest@userTest.com", "12345", birthdayIncorrecto, IllegalArgumentException.class
-                }
+                },
+                // Todos los campos completados, introduciendo un <script> en el nombre -> false
+                {
+                        "<script>", "userTest3", "userTest3", "userTestName3", "userTestSurname3","+34 123456789", "userTest@userTest.com", "", birthday, ConstraintViolationException.class
+                },
 
         };
         for (int i = 0; i < testingData.length; i++)
@@ -166,7 +218,7 @@ public class UserServiceTest extends AbstractTest {
                 {
                         "userTest3", "userTest3", "userTest3", "userTestName3", "userTestSurname3", "635", "managerTest@managerTest.com", "12345",birthday,"user1", ConstraintViolationException.class
                 },
-                // To do vacio --> false
+                // Todos los campos como null --> false
                 {
                         null, null, null, null, null, null, null, null,null,"user1", ConstraintViolationException.class
                 },
