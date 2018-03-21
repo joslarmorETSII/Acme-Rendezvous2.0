@@ -20,10 +20,15 @@
 		<put-attribute name="title" value="List categories" />
 		<put-attribute name="body" value="/views/category/list.jsp" />
 	</definition>
-	
-	<definition name="category/edit" extends="master.page">	
+
+	<definition name="category/edit" extends="master.page">
 		<put-attribute name="title" value="Edit categories" />
 		<put-attribute name="body" value="/views/category/edit.jsp" />
+	</definition>
+
+	<definition name="category/listRendezvous" extends="master.page">
+		<put-attribute name="title" value="List of rendezvous" />
+		<put-attribute name="body" value="/views/category/listRendezvous.jsp" />
 	</definition>
 
 </tiles-definitions>

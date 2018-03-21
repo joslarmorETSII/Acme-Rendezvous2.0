@@ -18,7 +18,7 @@
 
 <hr />
 
-<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> Acme-Rendezvous2.0 Co., Inc.</b>
+<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> ${name}</b>
 
 <div id="botonMostrarBarra" style="display: block;">
     <input type="button" value="<spring:message code="master.page.mostrarBarraCookies" />"

@@ -86,7 +86,7 @@ public class ServiceControllerTest extends AbstractTest{
     @Test(expected = NestedServletException.class)
     public void editNegative() throws Exception {
         mvc.perform(get("/servise/manager/edit").param("serviseId","315"))
-        .andExpect(status().isBadRequest());
+        .andExpect(status().isUnauthorized());
     }
 
 

@@ -3,6 +3,7 @@ package controllers;
 
 import java.util.Collection;
 
+import domain.Rendezvous;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.CategoryService;
 import domain.Category;
+import services.RendezvousService;
 
 @Controller
 @RequestMapping("/category")
@@ -43,6 +45,22 @@ public class CategoryController extends AbstractController{
 
 		return result;
 	}
+
+
+	@RequestMapping(value = "/listRendezvous", method = RequestMethod.GET)
+	public ModelAndView listRendezvous(@RequestParam Integer categoryId) {
+
+		ModelAndView result ;
+		Collection<Rendezvous> rendezvouses ;
+
+		rendezvouses = this.categoryService.findAllRendezvousByCategoryId2(categoryId);
+
+		result = new ModelAndView("category/listRendezvous");
+		result.addObject("rendezvouses", rendezvouses);
+
+		return result;
+	}
+
 
 	// Creation  --------------------------------------------------------------
 

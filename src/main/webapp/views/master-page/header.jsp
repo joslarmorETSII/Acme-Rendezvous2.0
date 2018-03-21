@@ -58,7 +58,7 @@
 			<ul>
 				<li class="arrow"></li>
 				<li><a href="servise/manager/list.do"><spring:message code="master.page.servise.manager.list" /></a></li>
-				<li><a href="manager/editProfile.do"><spring:message code="master.page.manager.edit" /></a></li>
+				<li><a href="manage/editProfile.do"><spring:message code="master.page.manager.edit" /></a></li>
             </ul>
 </security:authorize>
 		
@@ -67,7 +67,7 @@
 			<li><a class="fNiv" href="announcement/listAll.do"><spring:message code="master.page.announcement.listAll" /></a></li>
 			<li><a class="fNiv" href="rendezvous/listAll-2.do"><spring:message code="master.page.rendezvous.listAll-2" /></a></li>
 			<li><a class="fNiv" href="user/register.do"><spring:message code="master.page.user.create" /></a>
-			<li><a class="fNiv" href="manager/register.do"><spring:message code="master.page.manager.create" /></a>
+			<li><a class="fNiv" href="manage/register.do"><spring:message code="master.page.manager.create" /></a>
 			<li><a class="fNiv" href="category/list.do"><spring:message code="master.page.category.list" /></a>
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 		</security:authorize>
@@ -85,7 +85,13 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
+					<security:authorize access="hasRole('USER')">
+					<li><a href="j_spring_security_logout" onclick="clearCookies()"><spring:message code="master.page.logout" /> </a></li>
+					</security:authorize>
+
+					<security:authorize access="hasAnyRole('MANAGER','ADMINISTRATOR')">
+						<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
+					</security:authorize>
 				</ul>
 			</li>
 		</security:authorize>
@@ -96,3 +102,25 @@
 	<a href="?language=en">en</a> | <a href="?language=es">es</a>
 </div>
 
+<script type="text/javascript">
+
+    function clearCookies()
+    {
+        deleteCookie("holderId");
+        deleteCookie("brandId");
+        deleteCookie("numberId");
+        deleteCookie("expirationMonthId");
+        deleteCookie("expirationYearId");
+        deleteCookie("cvvId");
+        alert('Your cookie has been deleted for your security!');
+    }</script>
+
+<script type="text/javascript">
+
+    var expired = new Date(); // less 24 hours
+
+    deleteCookie = function(name) {
+        document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    };
+
+</script>

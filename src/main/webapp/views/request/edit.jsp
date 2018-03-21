@@ -21,7 +21,7 @@
 <jstl:if test="${nothingToDisplay }">Opps!! no rendezvous to assosiat</jstl:if>
 
 <jstl:if test="${nothingToDisplay eq false}">
-<form:form action="requestt/user/edit.do" modelAttribute="requesttForm" onsubmit="return storeValues(this)" name="myForm">
+<form:form action="requestt/user/edit.do" modelAttribute="requesttForm" name="myForm">
 
     <form:hidden path="servise"/>
 
@@ -35,7 +35,7 @@
 
 
         <form:label path="creditCard.holder"><spring:message code="creditCard.holder" /></form:label>
-        <form:input path="creditCard.holder" id="holderId"/>
+        <form:input path="creditCard.holder" id="holderId" alt="${sessionScope.holderId}"/>
         <form:errors path="creditCard.holder" cssClass="error" />
         <br/>
 
@@ -50,7 +50,7 @@
         <br/>
 
         <form:label path="creditCard.expirationMonth"><spring:message code="creditCard.expirationMonth" /></form:label>
-        <form:input path="creditCard.expirationMonth" id="expirationMonthId"/>
+        <form:input path="creditCard.expirationMonth" id="expirationMonthId" alt=""/>
         <form:errors path="creditCard.expirationMonth" cssClass="error" />
         <br/>
 
@@ -74,31 +74,6 @@
 
 </form:form>
 </jstl:if>
-
-
-
-<script type="text/javascript">
-    function storeValues(myForm)
-    {
-        setCookie("holderId", myForm.holderId.value);
-        setCookie("brandId", myForm.brandId.value);
-        setCookie("numberId", myForm.numberId.value);
-        setCookie("expirationMonthId", myForm.expirationMonthId.value);
-        setCookie("expirationYearId", myForm.expirationYearId.value);
-        setCookie("cvvId", myForm.cvvId.value);
-
-        return true;
-    }</script>
-
-<script type="text/javascript">
-    var today = new Date();
-    var expiry = new Date(today.getTime() + 30 * 24 * 3600 * 1000); // plus 30 days
-
-    function setCookie(name, value)
-    {
-        document.cookie=name + "=" + escape(value) + "; path=/; expires=" + expiry.toGMTString();
-    }
-</script>
 
 <script type="text/javascript">
 

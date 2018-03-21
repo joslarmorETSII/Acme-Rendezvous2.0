@@ -50,10 +50,12 @@
 		<display:column property="description" title="${categoryDescription}" />
 
 		<spring:message var="categoryRendezvouses" code="category.categoryRendezvouses"/>
+		<security:authorize access="isAnonymous()">
 		<display:column title="${categoryRendezvouses}">
 			<spring:message var="categoryRendezvouses" code="category.categoryRendezvouses"/>
-			<a href="category/rendezvous/list.do?categoryId=${row.id}">${categoryRendezvouses}</a>
+			<a href="category/listRendezvous.do?categoryId=${row.id}">${categoryRendezvouses}</a>
 		</display:column>
+		</security:authorize>
 	</div>
 	
 </display:table>

@@ -25,5 +25,11 @@
 		<put-attribute name="title" value="Editar categorias" />
 		<put-attribute name="body" value="/views/category/edit.jsp" />
 	</definition>
-	
+
+	<definition name="category/listRendezvous" extends="master.page">
+		<put-attribute name="title" value="Listado de rendezvouses " />
+		<put-attribute name="body" value="/views/category/listRendezvous.jsp" />
+	</definition>
+
+
 </tiles-definitions>

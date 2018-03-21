@@ -14,12 +14,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import domain.Configuration;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import services.ConfigurationService;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/welcome")
@@ -38,7 +42,7 @@ public class WelcomeController extends AbstractController {
 	// Index ------------------------------------------------------------------		
 
 	@RequestMapping(value = "/index")
-	public ModelAndView index(@RequestParam(required = false, defaultValue = "John Doe") final String name) {
+	public ModelAndView index(@RequestParam(required = false, defaultValue = "John Doe") final String name, HttpServletRequest request) {
 		ModelAndView result;
 		Configuration configuration = this.configurationService.findAll().iterator().next();
 		SimpleDateFormat formatterEs;
@@ -51,8 +55,11 @@ public class WelcomeController extends AbstractController {
 		formatterEn = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 		momentEn = formatterEn.format(new Date());
 
+
+		HttpSession session = request.getSession();
+		session.setAttribute("name",configuration.getName());
+
 		result = new ModelAndView("welcome/index");
-		result.addObject("name", configuration.getName());
 		result.addObject("englishWelcome", configuration.getEnglishWelcome());
 		result.addObject("spanishWelcome", configuration.getSpanishWelcome());
 		result.addObject("configurationBanner", configuration.getBanner());

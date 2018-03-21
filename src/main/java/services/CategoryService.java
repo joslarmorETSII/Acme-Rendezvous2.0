@@ -130,7 +130,7 @@ public class CategoryService {
 
 		Collection<Rendezvous> result;
 
-		Assert.isTrue(actorService.isAdministrator());
+		//Assert.isTrue(actorService.isAdministrator());
 		Assert.notNull(categoryId);
 
 		result = this.categoryRepository.findAllRendezvousByCategoryId(categoryId);
