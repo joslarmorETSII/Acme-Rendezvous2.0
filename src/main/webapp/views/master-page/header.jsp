@@ -44,7 +44,8 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="user/editProfile.do"><spring:message code="master.page.user.edit" /></a></li>
-                    <li><a href="rendezvous/user/list.do"><spring:message code="master.page.customer.rendezvous.list" /></a></li>
+					<li><a href="/creditCard/edit.do"><spring:message code="master.page.user.creditCard" /></a></li>
+					<li><a href="rendezvous/user/list.do"><spring:message code="master.page.customer.rendezvous.list" /></a></li>
                     <li><a href="comment/user/list.do"><spring:message code="master.page.user.comment.list" /></a></li>
 					<li><a href="announcement/user/list.do"><spring:message code="master.page.user.announcement.list" /></a></li>
                 </ul>
@@ -57,8 +58,10 @@
 		<li><a class="fNiv"><spring:message	code="master.page.manager" /></a>
 			<ul>
 				<li class="arrow"></li>
-				<li><a href="servise/manager/list.do"><spring:message code="master.page.servise.manager.list" /></a></li>
 				<li><a href="manage/editProfile.do"><spring:message code="master.page.manager.edit" /></a></li>
+				<li><a href="servise/manager/list.do"><spring:message code="master.page.servise.manager.list" /></a></li>
+				<li><a href="/requestt/manager/list.do"><spring:message code="master.page.requestt.manager.list" /></a></li>
+
             </ul>
 </security:authorize>
 		

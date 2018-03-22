@@ -21,5 +21,10 @@
 		<put-attribute name="body" value="/views/request/edit.jsp" />
 	</definition>
 
+	<definition name="request/list" extends="master.page">
+		<put-attribute name="title" value="list of request" />
+		<put-attribute name="body" value="/views/request/list.jsp" />
+	</definition>
+
 
 </tiles-definitions>

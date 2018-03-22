@@ -14,7 +14,6 @@ import security.LoginService;
 import security.UserAccount;
 
 import javax.transaction.Transactional;
-import java.text.CollationElementIterator;
 import java.util.ArrayList;
 import java.util.Collection;
 

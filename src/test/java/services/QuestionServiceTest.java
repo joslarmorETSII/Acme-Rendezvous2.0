@@ -2,8 +2,6 @@ package services;
 
 import domain.Question;
 import domain.Rendezvous;
-import domain.Requestt;
-import domain.Servise;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +11,6 @@ import utilities.AbstractTest;
 
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 @Transactional
 @ContextConfiguration(locations = {

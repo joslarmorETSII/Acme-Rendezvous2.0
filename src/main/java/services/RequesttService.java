@@ -99,4 +99,8 @@ public class RequesttService {
 
         return result;
     }
+    public Collection<Requestt> requestsByManagerId(int managerId){
+        return requestRepository.requestsByManagerId(managerId);
+    }
+
 }

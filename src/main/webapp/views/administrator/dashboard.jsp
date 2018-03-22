@@ -211,3 +211,25 @@
     </fieldset>
 </jstl:if>
 
+<fieldset>
+    <b><spring:message code="dashboard.bestSellingServises"/></b>
+    <display:table name="bestSellingServises"  id="row" pagesize="5" class="displaytag" keepStatus="true"
+                   requestURI="administrator/dashboard.do">
+
+        <spring:message code="servise.name" var="name"/>
+        <display:column property="name" title="${name}"/>
+        <spring:message code="servise.description" var="description"/>
+        <display:column property="description" title="${description}"/>
+        <spring:message code="servise.picture" var="picture"/>
+        <display:column property="picture" title="${picture}"/>
+        <spring:message code="servise.manager" var="manag"/>
+        <display:column property="manager.name" title="${manag}"/>
+
+    </display:table>
+</fieldset>
+
+<fieldset>
+        <b><spring:message code="dashboard.avgServisesInEachCategory"/></b>
+        <br/>
+        <h4><jstl:out value="${avgServisesInEachCategory}"/> <br/></h4>
+</fieldset>

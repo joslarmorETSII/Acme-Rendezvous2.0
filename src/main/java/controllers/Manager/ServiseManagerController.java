@@ -1,5 +1,6 @@
 package controllers.Manager;
 
+import controllers.AbstractController;
 import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/servise/manager")
-public class ServiseManagerController {
+public class ServiseManagerController extends AbstractController {
 
     //Services -------------------------------------------------------
 
@@ -65,9 +66,11 @@ public class ServiseManagerController {
     public ModelAndView edit(@RequestParam int serviseId){
         ModelAndView result;
         Servise servise;
-
+        Assert.notNull(serviseId);
         servise = serviseService.findOneToEdit(serviseId);
+
         result = createEditModelAndView(servise);
+
         return result;
     }
 
@@ -82,17 +85,15 @@ public class ServiseManagerController {
                 result = new ModelAndView("redirect: list.do");
 
             }catch (Throwable oops){
-                result = createEditModelAndView(servise,"servise.save.error");
+                result = createEditModelAndView(serviseService.create(),"servise.save.error");
             }
         }
         return result;
     }
-    //Todo: Controlar hacking
-    @RequestMapping(value = "/editDelete", method = RequestMethod.GET)
-    public ModelAndView editDelete(@RequestParam  int serviseId) {
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST,params = "delete")
+    public ModelAndView editDelete(Servise servise) {
         final ModelAndView result;
-        Servise servise;
-        servise = this.serviseService.findOneToEdit(serviseId);
         this.serviseService.delete(servise);
         result = list();
         return result;
@@ -101,19 +102,22 @@ public class ServiseManagerController {
     // Ancillary methods
 
     private ModelAndView createEditModelAndView(final Servise servise) {
+        ModelAndView result;
 
-        return this.createEditModelAndView(servise, null);
+        result =this.createEditModelAndView(servise, null);
+
+        return result;
     }
 
-    private ModelAndView createEditModelAndView(final Servise servise, final String message) {
+    private ModelAndView createEditModelAndView(Servise servise, String messageCode) {
+        ModelAndView res;
 
-        final ModelAndView res = new ModelAndView("servise/edit");
-
+        res = new ModelAndView("servise/edit");
         res.addObject("servise", servise);
-        res.addObject("message", message);
         res.addObject("actionUri", "servise/manager/edit.do");
         res.addObject("cancelUri", "servise/manager/list.do");
         res.addObject("categories",categoryService.findAll());
+        res.addObject("message", messageCode);
 
         return res;
 

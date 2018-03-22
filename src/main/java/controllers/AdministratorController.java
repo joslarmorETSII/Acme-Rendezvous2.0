@@ -153,6 +153,8 @@ public class AdministratorController extends AbstractController {
         result.addObject("managersWithMoreServisesThanAvg",managersWithMoreServisesThanAvg);
         result.addObject("managersWithMoreServisesCancelled",managersWithMoreServisesCancelled);
         result.addObject("avgMinMaxDevServisesPerRendezvous",serviseService.avgMinMaxDevServisesPerRendezvous());
+        result.addObject("bestSellingServises",serviseService.bestSellingServises());
+        result.addObject("avgServisesInEachCategory",serviseService.avgServisesInEachCategory());
 
         return result;
     }

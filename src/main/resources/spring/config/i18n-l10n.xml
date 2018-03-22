@@ -36,6 +36,8 @@
 		<value>/views/manager/messages</value>
 		<value>/views/category/messages</value>
 		<value>/views/configuration/messages</value>
+		<value>/views/creditCard/messages</value>
+
 
 
 	</util:list>

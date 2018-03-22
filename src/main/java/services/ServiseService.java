@@ -86,8 +86,8 @@ public class ServiseService {
         Manager manager = managerService.findByPrincipal();
         Assert.isTrue(actorService.isManager());
         Assert.isTrue(servise.getManager().equals(manager));
+        Assert.isTrue(!servise.getInappropriate());
 
-        //TODO: Si falla eliminar request y rendezvous
         Assert.isTrue(servise.getRendezvouses().isEmpty());
         this.serviseRepository.delete(servise);
 
@@ -101,9 +101,13 @@ public class ServiseService {
     // Other business methods -------------------------------------------------
 
     public Servise findOneToEdit(final int serviseId) {
-        Servise res = this.serviseRepository.findOne(serviseId);
-        Manager manager = managerService.findByPrincipal();
+        Servise res;
+        Manager manager;
+
+        res = serviseRepository.findOne(serviseId);
+        manager = managerService.findByPrincipal();
         Assert.notNull(manager);
+        Assert.notNull(res);
         Assert.isTrue(manager.equals(res.getManager()));
 
         return res;
@@ -116,8 +120,6 @@ public class ServiseService {
 
         Assert.isTrue(this.actorService.isAdministrator());
 
-//        Administrator administrator = this.administratorService.findByPrincipal();
-//        Assert.notNull(administrator);
 
         servise.setInappropriate(true);
         this.serviseRepository.save(servise);
@@ -144,5 +146,12 @@ public class ServiseService {
 
     public Collection<Double> avgMinMaxDevServisesPerRendezvous(){
         return serviseRepository.avgMinMaxDevServisesPerRendezvous();
+    }
+    public Collection<Servise> bestSellingServises(){
+        return serviseRepository.bestSellingServises();
+    }
+
+    public Double avgServisesInEachCategory() {
+        return serviseRepository.avgServisesInEachCategory();
     }
 }

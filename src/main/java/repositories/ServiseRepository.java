@@ -21,4 +21,9 @@ public interface ServiseRepository extends JpaRepository<Servise, Integer> {
     @Query("select avg(r.servises.size), min(r.servises.size), max(r.servises.size), sqrt(sum(r.servises.size * r.servises.size)/count(s) - (avg(r.servises.size) * avg(r.servises.size))) from Rendezvous r, Servise s")
     Collection<Double> avgMinMaxDevServisesPerRendezvous();
 
+    @Query(" select s from Servise s where s.rendezvouses.size >= (select max(s.rendezvouses.size) from Servise s)")
+    Collection<Servise> bestSellingServises();
+
+    @Query("select avg(c.servises.size) from Category c")
+    Double avgServisesInEachCategory();
 }

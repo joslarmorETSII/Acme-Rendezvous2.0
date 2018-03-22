@@ -41,7 +41,6 @@ public class CreditCardService {
 
     public CreditCard create() {
 
-        Assert.isTrue(this.actorService.isUser());
         CreditCard result;
 
         result = new CreditCard();
@@ -64,12 +63,12 @@ public class CreditCardService {
 
     public void delete(final CreditCard creditCard) {
         Assert.notNull(creditCard);
-        Assert.isTrue(this.actorService.isUser());
 
         User user = userService.findByPrincipal();
         Assert.isTrue(user.getCreditCard().equals(creditCard));
 
        user.setCreditCard(null);
+       userService.save(user);
        this.creditCardRepository.delete(creditCard);
     }
 

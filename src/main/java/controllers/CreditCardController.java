@@ -1,8 +1,9 @@
-/*
+
 package controllers;
 
 import javax.validation.Valid;
 
+import domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -14,6 +15,7 @@ import services.ActorService;
 import services.CreditCardService;
 import domain.Actor;
 import domain.CreditCard;
+import services.UserService;
 
 @Controller
 @RequestMapping("/creditCard")
@@ -22,8 +24,9 @@ public class CreditCardController extends AbstractController {
     @Autowired
     private CreditCardService	creditCardService;
 
+
     @Autowired
-    private ActorService		actorService;
+    private UserService userService;
 
 
     public CreditCardController() {
@@ -38,9 +41,7 @@ public class CreditCardController extends AbstractController {
         ModelAndView res;
         CreditCard creditCard;
 
-        final Actor actor = this.actorService.findByPrincipal();
         creditCard = this.creditCardService.create();
-        creditCard.setActor(actor);
 
         res = this.createEditModelAndView(creditCard);
 
@@ -52,23 +53,18 @@ public class CreditCardController extends AbstractController {
     @RequestMapping("/edit")
     public ModelAndView edit() {
 
-        CreditCard creditCard;
         ModelAndView res;
+        User user;
+        CreditCard creditCard;
 
-        final Actor actor = this.actorService.findByPrincipal();
 
-        creditCard = this.creditCardService.findOneByActorId(actor.getId());
+        user = userService.findByPrincipal();
+        creditCard = user.getCreditCard();
+        if(creditCard==null)
+            creditCard=creditCardService.create();
+        res = new ModelAndView("creditCard/edit");
+        res.addObject("creditCard", creditCard);
 
-        if (creditCard == null)
-
-            res = new ModelAndView("redirect:/creditCard/create.do");
-
-        else {
-
-            res = new ModelAndView("creditCard/edit");
-            res.addObject("creditCard", creditCard);
-
-        }
 
         return res;
     }
@@ -79,13 +75,21 @@ public class CreditCardController extends AbstractController {
     public ModelAndView save(@Valid final CreditCard creditCard, final BindingResult binding) {
 
         ModelAndView res;
+        User user;
+        CreditCard creditCard1;
 
         if (binding.hasErrors())
             res = this.createEditModelAndView(creditCard);
         else
             try {
 
-                this.creditCardService.save(creditCard);
+                user = userService.findByPrincipal();
+                creditCard1 = user.getCreditCard();
+                if(creditCard1!=null)
+                    creditCardService.delete(creditCard1);
+                user.setCreditCard(creditCardService.save(creditCard));
+                userService.save(user);
+
                 res = new ModelAndView("redirect:/welcome/index.do");
 
             } catch (final Throwable oops) {
@@ -97,13 +101,13 @@ public class CreditCardController extends AbstractController {
     // Delete
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-    public ModelAndView delete(@Valid final CreditCard creditCard, final BindingResult binding) {
+    public ModelAndView delete(CreditCard creditCard) {
 
         ModelAndView res;
 
         try {
             this.creditCardService.delete(creditCard);
-            res = new ModelAndView("redirect:create.do");
+            res = new ModelAndView("redirect:/welcome/index.do");
         } catch (final Throwable oops) {
             res = this.createEditModelAndView(creditCard, "creditCard.commit.error");
         }
@@ -132,4 +136,4 @@ public class CreditCardController extends AbstractController {
         return res;
     }
 }
-*/
+

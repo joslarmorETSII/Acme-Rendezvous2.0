@@ -1,7 +1,6 @@
 package services;
 
 import domain.Category;
-import domain.Manager;
 import domain.Servise;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +11,6 @@ import utilities.AbstractTest;
 
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
-import java.util.Collection;
 
 @Transactional
 @ContextConfiguration(locations = {"classpath:spring/datasource.xml",
@@ -142,6 +140,7 @@ public class CasoDeUsoEditService extends AbstractTest{
                 {
                         "manager1", "", "", "","servise1","category1", ConstraintViolationException.class
                 },
+
 
         };
         for (int i = 0; i < testingData.length; i++)

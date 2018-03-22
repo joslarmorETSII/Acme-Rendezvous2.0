@@ -37,16 +37,6 @@
     <display:column title="${pic}"><img src="${servise.picture}" width="130" height="100"></display:column>
 
 
-
-        <display:column>
-        <jstl:if test="${servise.assigned eq false && manager eq servise.manager}">
-            <acme:button url="servise/manager/editDelete.do?serviseId=${servise.id}" code="button.delete" />
-        </jstl:if>
-        </display:column>
-
-
-
-
     <security:authorize access="hasRole('ADMINISTRATOR')">
         <jstl:if test="${servise.inappropriate eq false}">
              <acme:columnButton url="servise/administrator/edit.do?serviseId=${servise.id}" codeButton="servise.inappropriate"/>

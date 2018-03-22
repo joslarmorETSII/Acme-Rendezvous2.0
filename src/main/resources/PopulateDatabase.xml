@@ -689,6 +689,21 @@
         <property name="category"   ref="category2"/>
     </bean>
 
+    <bean id="servise5" class="domain.Servise">
+        <property name="name" value="Servise5"/>
+        <property name="description" value="Description5"/>
+        <property name="picture" value="http://www.google.com"/>
+        <property name="rendezvouses">
+            <list>
+                <null></null>
+            </list>
+        </property>
+        <property name="manager" ref="manager1"/>
+        <property name="assigned" value="false"/>
+        <property name="inappropriate" value="true"/>
+        <property name="category"   ref="category2"/>
+    </bean>
+
     <!-- Requests -->
 
     <bean id="request1" class="domain.Requestt">
