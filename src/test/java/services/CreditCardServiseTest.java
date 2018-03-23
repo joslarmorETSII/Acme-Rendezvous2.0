@@ -142,7 +142,7 @@ public class CreditCardServiseTest extends AbstractTest {
      *
      * WHAT WILL WE DO?
      *
-     * En este caso de uso un usuario va a crear una creditCard:
+     * En este caso de uso un usuario va a borrar una creditCard:
      *
      * POSITIVE AND NEGATIVE CASES
      *

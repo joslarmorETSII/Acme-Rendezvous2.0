@@ -172,6 +172,7 @@ public class ServiseServiceTest extends AbstractTest {
 
         } catch (final Throwable oops) {
 
+
             caught = oops.getClass();
 
         }

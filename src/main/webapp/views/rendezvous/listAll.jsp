@@ -61,7 +61,12 @@
     <acme:columnButton url="rendezvous/display.do?rendezvousId=${row.id}" codeButton="rendezvous.display"/>
 
     <security:authorize access="hasRole('ADMINISTRATOR')">
-        <acme:columnButton url="rendezvous/administrator/edit.do?rendezvousId=${row.id}"  codeButton="rendezvous.delete" />
+
+        <display:column>
+        <jstl:if test="${ empty row.servises}">
+          <a href ="rendezvous/administrator/edit.do?rendezvousId=${row.id}"><spring:message code="rendezvous.delete"/></a>
+    </jstl:if>
+        </display:column>
     </security:authorize>
 
     <security:authorize access="hasRole('USER')">
