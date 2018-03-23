@@ -87,7 +87,11 @@ public class ServiseServiceTest extends AbstractTest {
      * - Manage his or her services, which includes:
      *      updating them.
      *
+     * WHAT WILL WE DO?
+     *
      * En este caso de uso editaremos un servicio y lo guardaremos
+     *
+     * POSITIVE AND NEGATIVE CASES
      *
      * Como caso positivo:
      * · Editar un servicio como usuario manager el creador
@@ -140,7 +144,11 @@ public class ServiseServiceTest extends AbstractTest {
      * - Manage his or her services, which includes:
      *      List them.
      *
+     * WHAT WILL WE DO?
+     *
      * En este caso listaremos todos los servicios del sistema
+     *
+     * POSITIVE AND NEGATIVE CASES:
      *
      * Como caso positivo:
      * · Listar los servicios como user
@@ -179,7 +187,11 @@ public class ServiseServiceTest extends AbstractTest {
 	 * - Manage his or her services, which includes:
 	 *      deleting them as long as they are not required by any rendezvouses.
      *
+     * WHAT WILL WE DO?
+     *
      * En este caso de uso vamos a admisnistrar la eliminación de un servicio
+     *
+     * POSITIVE AND NEGATIVE CASES:
      *
      * Como caso positivo:
      * · Eliminar un servicio logueado como manager que no tiene asignado un rendezvous
@@ -228,6 +240,8 @@ public class ServiseServiceTest extends AbstractTest {
      *   An actor who is registered as a administrator must be able to:
      * - Cancel a service that he or she finds inappropriate. Such services cannot be re-quested for
      *  any rendezvous. They must be flagged appropriately when listed.
+     *
+     * WHAT WILL WE DO?
      *
      * En este caso de uso vamos a admisnistrar la eliminación de un servicio
      *

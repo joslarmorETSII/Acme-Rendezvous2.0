@@ -1,9 +1,6 @@
 package services;
 
-import domain.Administrator;
-import domain.Announcement;
-import domain.Rendezvous;
-import domain.User;
+import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +23,9 @@ public class AnnouncementService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ActorService actorService;
 
     @Autowired
     private AdministratorService adminService;
@@ -105,6 +105,7 @@ public class AnnouncementService {
 
     public Collection<Announcement> announcementFindByParticipated(int userId){
         Collection<Announcement> result;
+        Assert.isTrue(actorService.isUser());
         result = this.announcementRepository.announcementFindByParticipated(userId);
         return result;
     }

@@ -28,37 +28,37 @@ public class AnnouncementServiceTest extends AbstractTest{
     UserService userService;
 
     @Autowired
+    ActorService    actorService;
+
+    @Autowired
     RendezvousService rendezvousService;
 
-    // Tests
-    // ====================================================
 
     /*  FUNCTIONAL REQUIREMENT:
      *
-        * An actor who is authenticated as a user must be able to:
-            . Create an announcement regarding one of the rendezvouses that he or she’s creat-ed previously.
+     *   An actor who is authenticated as a user must be able to:
+     * - Create an announcement regarding one of the rendezvouses that he or she’s created previously.
      *
      * WHAT WILL WE DO?
      *
-     * En este caso de uso un usuario va a crear una announcement sobre un rendezvous:
+     * En este caso de uso vamos a crear un anuncio teniendo en cuenta que sólo se puede crear
+     * un anuncio sobre un rendezvous que haya creado el usuario
      *
      * POSITIVE AND NEGATIVE CASES
      *
      * Como caso positivo:
      *
-     * · Crear announcement con atributos válidos.
+     * ·Introducir un usuario y un rendezvous que el haya creado
      *
-     * Para forzar el error pueden darse varios casos negativos, como son:
+     *   Para forzar el error pueden darse varios casos negativos, como son:
      *
-
-     * · Crear announcement con titulo vacio.
-     *  . Crear announcement metiendo un script.
-     * · Crear announcement con descripcion vacia.
-     * · Crear announcement autenticado como manager.
-     * . Loguearse como user1 y crear announcement de un rendezvous que no ha creado el
-
+     * · Introducir un rendezvous con un usuario que no lo ha creado
+     * · Introducir un usuario como manager
+     * · Introducir un titulo vacío
+     * · Introducir una descripción vacía
+     * · Introducir un script en la descripción
+     * · Introducir un script en el título
      */
-
     public void announcementCreateTest(final String username, String title, String description, String rendezvousBean, Class<?> expected) {
         Class<?> caught=null;
 
@@ -85,7 +85,6 @@ public class AnnouncementServiceTest extends AbstractTest{
     }
 
      /*  Test to Edit an announcement
-
      *
      * WHAT WILL WE DO?
      *
@@ -119,6 +118,85 @@ public class AnnouncementServiceTest extends AbstractTest{
 
             this.announcementService.save(announcement);
             announcementService.flush();
+
+            this.unauthenticate();
+
+        } catch (final Throwable oops) {
+
+            caught = oops.getClass();
+
+        }
+
+        this.checkExceptions(expected, caught);
+    }
+
+    /*  FUNCTIONAL REQUIREMENT:
+     *
+     *   An actor who is not authenticated must be able to:
+     * - List the announcements that are associated with each rendezvous.
+     *
+     * WHAT WILL WE DO?
+     *
+     * En este caso de uso vamos a listar los anuncios por rendezvous, un anuncio siempre tiene asociado un rendezvous:
+     *
+     * POSITIVE AND NEGATIVE CASES
+     *
+     * Como caso positivo:
+     *
+     * ·Listar los anuncios no estando autenticado.
+     * .Listar los anuncios logueado como user.
+     * .Listar los anuncios logueado como administrador.
+     * .Listar los anuncios logueado como manager.
+     */
+    public void listOfAnnouncementTest(final String username,final Class<?> expected){
+        Class<?> caught = null;
+
+        try {
+            this.authenticate(username);
+
+            this.announcementService.findAll();
+
+            this.unauthenticate();
+
+        } catch (final Throwable oops) {
+
+            caught = oops.getClass();
+
+        }
+
+        this.checkExceptions(expected, caught);
+    }
+
+    /*  FUNCTIONAL REQUIREMENT:
+     *
+     *   An actor who is authenticated as a user must be able to:
+     * Display a stream of announcements that have been posted to the rendezvouses
+     * that he or she’s RSVPd. The announcements must be listed chronologically in descending order.
+     *
+     * WHAT WILL WE DO?
+     *
+     * En este caso de uso vamos a listar los anuncios de los rendezvous donde el usuario haya participado
+     *
+     * POSITIVE AND NEGATIVE CASES
+     *
+     * Como caso positivo:
+     *
+     * ·Introducir un usuario
+     *
+     *   Para forzar el error pueden darse varios casos negativos, como son:
+     *
+     * · Introducir un usuario como manager
+     * · Introducir un usuario como admisnistrador
+     * · Introducir un usuario no autenticado
+     */
+    public void displayOfAnnouncementTest(final String username, final Class<?> expected){
+        Class<?> caught = null;
+
+        try {
+            this.authenticate(username);
+                Actor actor;
+                actor = actorService.findOne(super.getEntityId(username));
+                this.announcementService.announcementFindByParticipated(actor.getId());
 
             this.unauthenticate();
 
@@ -182,7 +260,7 @@ public class AnnouncementServiceTest extends AbstractTest{
     //Drivers
     //===================================================
 
-    //@Test
+    @Test
     public void driverAnnouncementCreateTest() {
 
         final Object testingData[][] = {
@@ -240,6 +318,54 @@ public class AnnouncementServiceTest extends AbstractTest{
         for (int i = 0; i < testingData.length; i++)
             announcementEdit((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
 
+    }
+
+    @Test
+    public void driverListAnnouncementTest() {
+
+        final Object testingData[][] = {
+                // Sin estar autenticado muestra los anuncios por rendezvous -> true
+                {
+                        null, null
+                },
+                // User puede listar los anuncios -> true
+                {
+                        "user1", null
+                },
+                // Administrador puede listar los anuncios para borrarlo -> true
+                {
+                        "administrator", null
+                },
+                // Un manager puede listar los anuncios -> true
+                {
+                        "manager1", null
+                },
+
+        };
+        for (int i = 0; i < testingData.length; i++)
+            this.listOfAnnouncementTest((String) testingData[i][0], (Class<?>) testingData[i][1]);
+    }
+
+    @Test
+    public void driverDisplayAnnouncementTest() {
+
+        final Object testingData[][] = {
+                // Autenticado como user y mostrar los anuncios de los rendezvous donde ha participado -> true
+                {
+                        "user1", null
+                },
+                // Autenticado como manager -> false
+                {
+                        "manager1", IllegalArgumentException.class
+                },
+                // Autenticado como administrador -> false
+                {
+                        "admin", IllegalArgumentException.class
+                },
+
+        };
+        for (int i = 0; i < testingData.length; i++)
+            this.displayOfAnnouncementTest((String) testingData[i][0], (Class<?>) testingData[i][1]);
     }
 
     @Test

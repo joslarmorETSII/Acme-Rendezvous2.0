@@ -11,6 +11,9 @@ import java.util.Collection;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(indexes = {
+        @Index(columnList = "inappropriate"), @Index(columnList = "category_id")
+})
 public class Servise extends DomainEntity {
 
     // Constructors -----------------------------------------------------------
