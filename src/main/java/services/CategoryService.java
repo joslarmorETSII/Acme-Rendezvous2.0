@@ -162,6 +162,10 @@ public class CategoryService {
 		categoryRepository.flush();
 	}
 
+    public Category findCategoryRaiz() {
+		return categoryRepository.findCategoryRaiz();
+    }
+
 
 //	public Category saveDelete(final Category category) {
 //		Assert.notNull(category);

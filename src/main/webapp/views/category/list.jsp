@@ -37,7 +37,6 @@
 				</jstl:when>
 				<jstl:otherwise>
 					${row.parentCategory.name}
-					${row.parentCategory.description}
 				</jstl:otherwise>
 			</jstl:choose>
 		</display:column>

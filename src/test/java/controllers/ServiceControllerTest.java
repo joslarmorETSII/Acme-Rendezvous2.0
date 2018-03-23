@@ -2,6 +2,7 @@ package controllers;
 
 import controllers.Manager.ServiseManagerController;
 import domain.Manager;
+import domain.Servise;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +24,7 @@ import javax.transaction.Transactional;
 
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -76,35 +78,31 @@ public class ServiceControllerTest extends AbstractTest{
     @Test
     public void editPositive() throws Exception {
         authenticate("manager1");
-        mvc.perform(get("/servise/manager/edit").param("serviseId","315")).
+        int serviceId = super.getEntityId("servise1");
+        mvc.perform(get("/servise/manager/edit").param("serviseId",String.valueOf(serviceId))).
                 andExpect(status().isOk()).andExpect(forwardedUrl("servise/edit")).
                 andExpect(model().attribute("categories",categoryService.findAll()));
         unauthenticate();
     }
 
-    // Editing a Service without being logged in
-    @Test(expected = NestedServletException.class)
-    public void editNegative() throws Exception {
-        mvc.perform(get("/servise/manager/edit").param("serviseId","315"))
-        .andExpect(status().isUnauthorized());
-    }
-
-
-    // Deleting a Service
+    // Editing a Service of another manager
     @Test
-    public void deletePositive() throws Exception {
+    public void editNegative() throws Exception {
         authenticate("manager2");
-        mvc.perform(get("/servise/manager/editDelete").param("serviseId","317"))
-        .andExpect(forwardedUrl("servise/list"));
+        int serviceId = super.getEntityId("servise1");
+        mvc.perform(get("/servise/manager/edit").param("serviseId",String.valueOf(serviceId)))
+        .andExpect(forwardedUrl("misc/panic"));
         unauthenticate();
     }
 
-    // Deleting a Service being authenticated as a User
-    @Test(expected = NestedServletException.class)
+
+    // Accessing a url that does not exist authentication as user
+    @Test
     public void deleteNegative() throws Exception {
         authenticate("user1");
-        mvc.perform(get("/servise/manager/editDelete").param("serviseId","317"))
-                .andExpect(status().isUnauthorized());
+        int serviceId = super.getEntityId("servise2");
+        mvc.perform(get("/servise/manager/editDelete").param("serviseId",String.valueOf(serviceId)))
+                .andExpect(status().isNotFound());
         unauthenticate();
     }
 }

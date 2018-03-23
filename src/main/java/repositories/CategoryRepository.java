@@ -25,8 +25,11 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
 	@Query("select s.rendezvouses from Servise s where s.category.id = ?1")
 	Collection<Rendezvous> findAllRendezvousByCategoryId2(int categoryId);
 
+	@Query("select c from Category c where c.name='CATEGORY'")
+    Category findCategoryRaiz();
 
-	// Queries Nivel B- 11.1.a
+
+    // Queries Nivel B- 11.1.a
 	//Ratio por categoría
 	//select count(c)*1.0 / (select count(c1)*1.0 from Category c1) from Category c join c.servises s group by s;
 }

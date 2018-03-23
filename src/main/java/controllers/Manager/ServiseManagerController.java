@@ -15,6 +15,7 @@ import services.ManagerService;
 import services.ServiseService;
 
 import javax.validation.Valid;
+import java.util.Collection;
 
 @Controller
 @RequestMapping("/servise/manager")
@@ -118,12 +119,15 @@ public class ServiseManagerController extends AbstractController {
 
     private ModelAndView createEditModelAndView(Servise servise, String messageCode) {
         ModelAndView res;
+        Collection<Category> categories;
 
+        categories = categoryService.findAll();
+        categories.remove(categoryService.findCategoryRaiz());
         res = new ModelAndView("servise/edit");
         res.addObject("servise", servise);
         res.addObject("actionUri", "servise/manager/edit.do");
         res.addObject("cancelUri", "servise/manager/list.do");
-        res.addObject("categories",categoryService.findAll());
+        res.addObject("categories",categories);
         res.addObject("message", messageCode);
 
         return res;
