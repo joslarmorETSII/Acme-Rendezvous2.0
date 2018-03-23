@@ -86,7 +86,6 @@ public class ServiseService {
         Manager manager = managerService.findByPrincipal();
         Assert.isTrue(actorService.isManager());
         Assert.isTrue(servise.getManager().equals(manager));
-        Assert.isTrue(!servise.getInappropriate());
 
         Assert.isTrue(servise.getRendezvouses().isEmpty());
         this.serviseRepository.delete(servise);

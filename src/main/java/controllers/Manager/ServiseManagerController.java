@@ -91,13 +91,20 @@ public class ServiseManagerController extends AbstractController {
         return result;
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST,params = "delete")
-    public ModelAndView editDelete(Servise servise) {
-        final ModelAndView result;
-        this.serviseService.delete(servise);
-        result = list();
-        return result;
+    @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+    public ModelAndView delete(Servise servise) {
+
+        ModelAndView res;
+
+        try {
+            this.serviseService.delete(servise);
+            res = new ModelAndView("redirect:/welcome/index.do");
+        } catch (final Throwable oops) {
+            res = this.createEditModelAndView(servise, "servise.commit.error");
+        }
+        return res;
     }
+
 
     // Ancillary methods
 
