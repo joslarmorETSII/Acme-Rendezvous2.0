@@ -81,7 +81,8 @@ public class ServiceControllerTest extends AbstractTest{
         int serviceId = super.getEntityId("servise1");
         mvc.perform(get("/servise/manager/edit").param("serviseId",String.valueOf(serviceId))).
                 andExpect(status().isOk()).andExpect(forwardedUrl("servise/edit")).
-                andExpect(model().attribute("categories",categoryService.findAll()));
+                andExpect(model().attribute("actionUri","servise/manager/edit.do"))
+        .andExpect(model().attribute("cancelUri","servise/manager/list.do"));
         unauthenticate();
     }
 
