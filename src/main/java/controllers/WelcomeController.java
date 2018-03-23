@@ -57,7 +57,7 @@ public class WelcomeController extends AbstractController {
 
 
 		HttpSession session = request.getSession();
-		session.setAttribute("name",configuration.getName());
+		session.setAttribute("nameOfbusiness",configuration.getName());
 
 		result = new ModelAndView("welcome/index");
 		result.addObject("englishWelcome", configuration.getEnglishWelcome());

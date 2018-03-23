@@ -18,7 +18,7 @@
 
 <hr />
 
-<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> ${name}</b>
+<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> ${nameOfbusiness}</b>
 
 <div id="botonMostrarBarra" style="display: block;">
     <input type="button" value="<spring:message code="master.page.mostrarBarraCookies" />"

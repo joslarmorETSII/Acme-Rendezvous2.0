@@ -9,6 +9,8 @@
 <body style="text-align: justify;">
 	<p><spring:message code="welcome.cookies.p1" /></p>
 	<p><spring:message code="welcome.cookies.p2" /></p>
+	<p><spring:message code="welcome.cookies.p3" /></p>
+	<p><spring:message code="welcome.cookies.p4" /></p>
 </body>
 <br>
 <br>
