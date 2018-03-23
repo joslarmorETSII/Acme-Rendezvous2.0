@@ -31,7 +31,6 @@
 					<li><a href="rendezvous/administrator/listAll.do"><spring:message code="master.page.rendezvous.administrator.list" /></a></li>
 				    <li><a href="servise/administrator/list.do"><spring:message code="master.page.servise.administrator.list" /></a></li>
 					<li><a href="category/administrator/create.do"><spring:message code="master.page.category.create" /></a>
-					<li><a href="category/administrator/edit.do"><spring:message code="master.page.category.edit" /></a>
 					<li><a href="administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard"/></a></li>
 				</ul>
 			</li>
